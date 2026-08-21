@@ -21,13 +21,18 @@ $posts_query = new WP_Query(
 	<section class="page-hero page-hero--blog">
 		<div class="page-hero__overlay"></div>
 		<div class="content-shell content-shell--wide page-hero__content">
-			<p class="eyebrow"><?php esc_html_e( 'Pensamento e tradição', 'bronzepodcast' ); ?></p>
-			<h1><?php esc_html_e( 'Blog', 'bronzepodcast' ); ?></h1>
+			<p class="eyebrow"><?php esc_html_e( 'Caderno Bronze', 'bronzepodcast' ); ?></p>
+			<h1><?php esc_html_e( 'Ideias para guardar. Textos para voltar.', 'bronzepodcast' ); ?></h1>
+			<p class="page-hero__lede"><?php esc_html_e( 'Fé, tradição, cultura e Portugal — com espaço para pensar antes de responder.', 'bronzepodcast' ); ?></p>
 		</div>
 	</section>
 
 	<section class="section-pad">
 		<div class="content-shell content-shell--wide">
+			<div class="archive-intro">
+				<p class="eyebrow"><?php esc_html_e( 'Arquivo editorial', 'bronzepodcast' ); ?></p>
+				<p><?php esc_html_e( 'Ensaios, notas e reflexões para ler sem pressa.', 'bronzepodcast' ); ?></p>
+			</div>
 			<?php if ( $posts_query->have_posts() ) : ?>
 				<div class="post-grid">
 					<?php

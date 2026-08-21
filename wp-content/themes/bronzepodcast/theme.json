@@ -4,46 +4,46 @@
   "settings": {
     "appearanceTools": true,
     "layout": {
-      "contentSize": "760px",
-      "wideSize": "1224px"
+      "contentSize": "800px",
+      "wideSize": "1280px"
     },
     "color": {
       "defaultPalette": false,
       "palette": [
-        { "slug": "ink", "color": "#1d1e20", "name": "Tinta" },
-        { "slug": "paper", "color": "#faf7f5", "name": "Papel" },
+        { "slug": "ink", "color": "#111417", "name": "Tinta" },
+        { "slug": "paper", "color": "#f1ede6", "name": "Papel" },
         { "slug": "white", "color": "#ffffff", "name": "Branco" },
-        { "slug": "bronze-coral", "color": "#cc5b52", "name": "Coral Bronze" },
-        { "slug": "blue", "color": "#1b395a", "name": "Azul" }
+        { "slug": "bronze", "color": "#c77b55", "name": "Bronze" },
+        { "slug": "blue", "color": "#17374b", "name": "Azul profundo" }
       ]
     },
     "typography": {
       "fluid": true,
       "fontFamilies": [
-        { "slug": "display", "name": "Junge", "fontFamily": "Junge, Georgia, serif" },
-        { "slug": "sans", "name": "Montserrat", "fontFamily": "Montserrat, Arial, sans-serif" }
+        { "slug": "display", "name": "Cormorant Garamond", "fontFamily": "'Cormorant Garamond', Georgia, serif" },
+        { "slug": "sans", "name": "Manrope", "fontFamily": "Manrope, Arial, sans-serif" }
       ]
     }
   },
   "styles": {
     "color": {
-      "background": "#1d1e20",
-      "text": "#faf7f5"
+      "background": "#111417",
+      "text": "#f1ede6"
     },
     "typography": {
-      "fontFamily": "Montserrat, Arial, sans-serif",
+      "fontFamily": "Manrope, Arial, sans-serif",
       "lineHeight": "1.7"
     },
     "elements": {
       "heading": {
         "typography": {
-          "fontFamily": "Junge, Georgia, serif",
-          "fontWeight": "400",
-          "lineHeight": "1.15"
+          "fontFamily": "'Cormorant Garamond', Georgia, serif",
+          "fontWeight": "500",
+          "lineHeight": "1"
         }
       },
       "link": {
-        "color": { "text": "#faf7f5" }
+        "color": { "text": "#f1ede6" }
       }
     }
   }

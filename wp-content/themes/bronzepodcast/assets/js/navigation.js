@@ -24,6 +24,13 @@
     if (event.key === 'Escape') closeMenu();
   });
 
+  const updateHeader = () => {
+    header.classList.toggle('site-header--scrolled', window.scrollY > 24);
+  };
+
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
+
   const newsletter = document.querySelector('[data-newsletter-form]');
   if (newsletter) {
     newsletter.addEventListener('submit', (event) => event.preventDefault());

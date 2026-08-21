@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '0.2.0' );
+define( 'BRONZEPODCAST_VERSION', '0.3.0' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -63,7 +63,7 @@ add_action( 'after_setup_theme', 'bronzepodcast_setup' );
 function bronzepodcast_assets() {
 	wp_enqueue_style(
 		'bronzepodcast-fonts',
-		'https://fonts.googleapis.com/css2?family=Junge&family=Montserrat:wght@400;500;600;700&display=swap',
+		'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap',
 		array(),
 		null
 	);
@@ -135,7 +135,7 @@ function bronzepodcast_cart_link() {
 	}
 	?>
 	<a class="site-cart" href="<?php echo esc_url( wc_get_cart_url() ); ?>" aria-label="<?php esc_attr_e( 'Ver carrinho', 'bronzepodcast' ); ?>">
-		<span aria-hidden="true">◌</span>
+		<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M3 4h2l1.7 9.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 7H6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/><circle cx="9" cy="19" r="1.4" fill="currentColor"/><circle cx="18" cy="19" r="1.4" fill="currentColor"/></svg>
 		<span class="site-cart__count"><?php echo esc_html( bronzepodcast_cart_count() ); ?></span>
 	</a>
 	<?php
@@ -158,6 +158,22 @@ function bronzepodcast_woocommerce_wrappers() {
 	add_action( 'woocommerce_after_main_content', 'bronzepodcast_wrapper_end', 10 );
 }
 add_action( 'after_setup_theme', 'bronzepodcast_woocommerce_wrappers' );
+
+/**
+ * O tema fornece um cabeçalho editorial próprio para a página principal da loja.
+ * Evita a repetição do título que o WooCommerce adiciona por omissão.
+ *
+ * @param bool $show_title Indica se o WooCommerce deve mostrar o título.
+ * @return bool
+ */
+function bronzepodcast_woocommerce_page_title( $show_title ) {
+	if ( function_exists( 'is_shop' ) && is_shop() ) {
+		return false;
+	}
+
+	return $show_title;
+}
+add_filter( 'woocommerce_show_page_title', 'bronzepodcast_woocommerce_page_title' );
 
 function bronzepodcast_wrapper_start() {
 	echo '<main id="primary" class="site-main shop-main"><div class="content-shell content-shell--wide">';

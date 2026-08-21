@@ -52,8 +52,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</nav>
 
 		<div class="site-actions">
-			<a href="https://x.com/bronzpodcast" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">X</a>
-			<a href="https://www.youtube.com/@bronzepodcast/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YT</a>
+			<a class="site-actions__listen" href="<?php echo esc_url( home_url( '/podcast/' ) ); ?>">
+				<span class="site-actions__pulse" aria-hidden="true"></span>
+				<?php esc_html_e( 'Ouvir', 'bronzepodcast' ); ?>
+			</a>
 			<?php bronzepodcast_cart_link(); ?>
 		</div>
 	</div>
