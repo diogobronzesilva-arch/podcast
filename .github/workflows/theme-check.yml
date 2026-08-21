@@ -1,0 +1,40 @@
+name: Verificar tema WordPress
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  theme-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter código
+        uses: actions/checkout@v4
+
+      - name: Preparar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
+      - name: Validar ficheiros PHP
+        run: find wp-content/themes/bronzepodcast -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Confirmar ficheiros obrigatórios
+        run: |
+          test -s wp-content/themes/bronzepodcast/style.css
+          test -s wp-content/themes/bronzepodcast/index.php
+          test -s wp-content/themes/bronzepodcast/functions.php
+
+      - name: Criar pacote instalável
+        run: |
+          cd wp-content/themes
+          zip -rq "$GITHUB_WORKSPACE/bronzepodcast-theme.zip" bronzepodcast
+
+      - name: Guardar pacote
+        uses: actions/upload-artifact@v4
+        with:
+          name: bronzepodcast-theme
+          path: bronzepodcast-theme.zip
