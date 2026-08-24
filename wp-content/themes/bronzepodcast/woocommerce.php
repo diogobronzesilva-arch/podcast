@@ -12,8 +12,7 @@ if ( function_exists( 'is_shop' ) && is_shop() ) :
 	<section class="page-hero page-hero--store">
 		<div class="page-hero__overlay"></div>
 		<div class="content-shell content-shell--wide page-hero__content">
-			<p class="eyebrow"><?php esc_html_e( 'Loja Bronze', 'bronzepodcast' ); ?></p>
-			<h1><?php esc_html_e( 'A loja do Bronze.', 'bronzepodcast' ); ?></h1>
+			<h1><?php esc_html_e( 'Loja', 'bronzepodcast' ); ?></h1>
 			<p class="page-hero__lede"><?php esc_html_e( 'Livros, terços e artigos religiosos escolhidos para a vida de oração, a formação e a casa.', 'bronzepodcast' ); ?></p>
 		</div>
 	</section>

@@ -12,7 +12,6 @@ $status = isset( $_GET['estado'] ) ? sanitize_key( wp_unslash( $_GET['estado'] )
 <main id="primary" class="site-main section-pad contact-page">
 	<div class="content-shell content-shell--wide contact-layout">
 		<section class="contact-intro">
-			<p class="eyebrow"><?php esc_html_e( 'Contacto direto', 'bronzepodcast' ); ?></p>
 			<h1><?php esc_html_e( 'Agradeço Feedback.', 'bronzepodcast' ); ?></h1>
 			<p><?php esc_html_e( 'Para questões sobre o Podcast, imprensa, encomendas ou para continuar uma conversa começada num episódio.', 'bronzepodcast' ); ?></p>
 			<a class="contact-email" href="mailto:info@bronzepodcast.com">info@bronzepodcast.com</a>

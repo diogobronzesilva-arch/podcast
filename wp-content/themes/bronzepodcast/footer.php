@@ -12,7 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <footer class="site-footer">
 	<div class="content-shell content-shell--wide site-footer__grid">
 		<section class="newsletter" aria-labelledby="newsletter-title">
-			<p class="eyebrow"><?php esc_html_e( 'Acompanhar', 'bronzepodcast' ); ?></p>
 			<h2 id="newsletter-title"><?php esc_html_e( 'O Bronze continua fora daqui.', 'bronzepodcast' ); ?></h2>
 			<p class="newsletter__lede"><?php esc_html_e( 'Os episódios aparecem primeiro no YouTube. No Spotify, ficam prontos para ouvir no caminho, em casa ou quando for preciso parar um pouco.', 'bronzepodcast' ); ?></p>
 			<div class="footer-platform-actions">

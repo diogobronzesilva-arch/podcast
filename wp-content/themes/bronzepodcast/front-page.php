@@ -10,39 +10,23 @@ get_header();
 <main id="primary" class="site-main home-main">
 	<section class="hero">
 		<div class="hero__overlay"></div>
-		<div class="hero__halo" aria-hidden="true"></div>
 		<div class="content-shell content-shell--wide hero__content">
 			<div class="hero__copy">
-				<p class="eyebrow"><?php esc_html_e( 'Desde 2020', 'bronzepodcast' ); ?></p>
-				<h1><?php esc_html_e( 'Bronze Podcast.', 'bronzepodcast' ); ?></h1>
+				<h1><?php esc_html_e( 'Bronze Podcast', 'bronzepodcast' ); ?></h1>
 				<p class="hero__intro"><?php esc_html_e( 'Um espaço de conversa sobre a Fé Católica, a tradição e Portugal. Feito para quem quer pensar sem barulho e viver com mais firmeza.', 'bronzepodcast' ); ?></p>
 				<div class="hero__actions">
 					<a class="button button--accent" href="<?php echo esc_url( home_url( '/podcast/' ) ); ?>"><?php esc_html_e( 'Ver episódios', 'bronzepodcast' ); ?><span aria-hidden="true">↗</span></a>
-					<a class="button button--ghost" href="<?php echo esc_url( home_url( '/sobre/' ) ); ?>"><?php esc_html_e( 'Conhecer o Bronze', 'bronzepodcast' ); ?></a>
+					<a class="button button--ghost" href="<?php echo esc_url( home_url( '/sobre/' ) ); ?>"><?php esc_html_e( 'Conhecer o projeto', 'bronzepodcast' ); ?></a>
 				</div>
 			</div>
-			<aside class="hero__note" aria-label="Manifesto Bronze Podcast">
-				<span class="hero__note-index">01</span>
-				<p><?php esc_html_e( 'Só Cristo pode acalmar a tormenta, na Igreja e no mundo.', 'bronzepodcast' ); ?></p>
-				<span class="hero__note-signature">AMDG</span>
-			</aside>
 		</div>
 	</section>
-
-	<div class="signal-strip" aria-label="Bronze Podcast em resumo">
-		<div class="content-shell content-shell--wide signal-strip__inner">
-			<p><strong><?php esc_html_e( 'Desde 2020', 'bronzepodcast' ); ?></strong><span><?php esc_html_e( 'Conversas sem pressa', 'bronzepodcast' ); ?></span></p>
-			<p><strong><?php esc_html_e( 'YouTube + Spotify', 'bronzepodcast' ); ?></strong><span><?php esc_html_e( 'Vídeo para ver, áudio para levar', 'bronzepodcast' ); ?></span></p>
-			<p><strong><?php esc_html_e( 'Portugal', 'bronzepodcast' ); ?></strong><span><?php esc_html_e( 'Fé, família e Nação', 'bronzepodcast' ); ?></span></p>
-		</div>
-	</div>
 
 	<section class="episodes section-pad" aria-labelledby="episodes-title">
 		<div class="content-shell content-shell--wide">
 			<div class="section-heading section-heading--split">
 				<div>
-					<p class="eyebrow"><?php esc_html_e( 'Podcast', 'bronzepodcast' ); ?></p>
-					<h2 id="episodes-title"><?php esc_html_e( 'O que saiu agora.', 'bronzepodcast' ); ?></h2>
+					<h2 id="episodes-title"><?php esc_html_e( 'Podcast', 'bronzepodcast' ); ?></h2>
 				</div>
 				<p class="section-heading__lede"><?php esc_html_e( 'Episódios recentes do canal, para ver ou ouvir no teu ritmo.', 'bronzepodcast' ); ?></p>
 			</div>
@@ -67,8 +51,7 @@ get_header();
 		<div class="content-shell content-shell--wide">
 			<div class="section-heading section-heading--split">
 				<div>
-					<p class="eyebrow"><?php esc_html_e( 'Loja', 'bronzepodcast' ); ?></p>
-					<h2 id="store-title"><?php esc_html_e( 'Coisas que vale a pena guardar.', 'bronzepodcast' ); ?></h2>
+					<h2 id="store-title"><?php esc_html_e( 'Loja', 'bronzepodcast' ); ?></h2>
 				</div>
 				<a class="text-link" href="<?php echo esc_url( bronzepodcast_store_url() ); ?>"><?php esc_html_e( 'Ver a loja', 'bronzepodcast' ); ?> <span>↗</span></a>
 			</div>
@@ -88,7 +71,6 @@ get_header();
 	<section class="manifesto section-pad">
 		<div class="content-shell content-shell--wide manifesto__inner">
 			<div>
-				<p class="eyebrow"><?php esc_html_e( 'O manifesto', 'bronzepodcast' ); ?></p>
 				<h2><?php esc_html_e( 'Não se pode separar a Fé da Nação.', 'bronzepodcast' ); ?></h2>
 			</div>
 			<div class="manifesto__copy">

@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '0.5.1' );
+define( 'BRONZEPODCAST_VERSION', '0.5.2' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -197,7 +197,6 @@ function bronzepodcast_store_context() {
 	?>
 	<section class="store-context content-shell content-shell--wide" aria-labelledby="store-context-title">
 		<div>
-			<p class="eyebrow"><?php esc_html_e( 'Antes de encomendar', 'bronzepodcast' ); ?></p>
 			<h2 id="store-context-title"><?php esc_html_e( 'Escolher com tempo.', 'bronzepodcast' ); ?></h2>
 		</div>
 		<div class="store-context__copy">

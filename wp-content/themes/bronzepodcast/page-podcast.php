@@ -11,8 +11,7 @@ get_header();
 	<section class="page-hero page-hero--podcast">
 		<div class="page-hero__overlay"></div>
 		<div class="content-shell content-shell--wide page-hero__content">
-			<p class="eyebrow"><?php esc_html_e( 'Bronze Podcast · No ar', 'bronzepodcast' ); ?></p>
-			<h1><?php esc_html_e( 'O Bronze, em vídeo e áudio.', 'bronzepodcast' ); ?></h1>
+			<h1><?php esc_html_e( 'O podcast em vídeo e áudio.', 'bronzepodcast' ); ?></h1>
 			<p class="page-hero__lede"><?php esc_html_e( 'No YouTube para ver a conversa por inteiro. No Spotify para a continuares onde estiveres.', 'bronzepodcast' ); ?></p>
 		</div>
 	</section>

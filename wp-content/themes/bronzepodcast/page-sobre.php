@@ -11,7 +11,7 @@ get_header();
 	<section class="page-hero page-hero--about">
 		<div class="page-hero__overlay"></div>
 		<div class="content-shell content-shell--wide page-hero__content">
-			<p class="eyebrow"><?php esc_html_e( 'Manifesto · Desde 2020', 'bronzepodcast' ); ?></p>
+			<p class="eyebrow"><?php esc_html_e( 'Manifesto', 'bronzepodcast' ); ?></p>
 			<h1><?php esc_html_e( 'Fé, nação e combate espiritual.', 'bronzepodcast' ); ?></h1>
 			<p class="page-hero__lede"><?php esc_html_e( 'Criei este Podcast em 2020 com um objectivo simples: divulgar a Fé Católica Tradicional.', 'bronzepodcast' ); ?></p>
 		</div>
