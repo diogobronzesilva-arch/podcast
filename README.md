@@ -42,6 +42,7 @@ O inventário completo dos endereços públicos já encontrados está em [`docs/
 
 - [`docs/release-workflow.md`](docs/release-workflow.md): fonte oficial, testes, staging, backup, publicação e rollback.
 - [`docs/voz-e-copy.md`](docs/voz-e-copy.md): princípios de voz e decisões de copy para todas as páginas.
+- [`docs/roadmap.md`](docs/roadmap.md): sequência de trabalho e condições para a abertura pública.
 
 ## Próximas etapas
 

@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="content-shell content-shell--wide site-footer__grid">
 		<section class="newsletter" aria-labelledby="newsletter-title">
 			<p class="eyebrow"><?php esc_html_e( 'Carta Bronze', 'bronzepodcast' ); ?></p>
-			<h2 id="newsletter-title"><?php esc_html_e( 'Receba notícias do Bronze Podcast.', 'bronzepodcast' ); ?></h2>
-			<p class="newsletter__lede"><?php esc_html_e( 'Novos episódios, artigos e novidades da loja. Apenas quando houver alguma coisa para partilhar.', 'bronzepodcast' ); ?></p>
+			<h2 id="newsletter-title"><?php esc_html_e( 'Subscreva a Newsletter.', 'bronzepodcast' ); ?></h2>
+			<p class="newsletter__lede"><?php esc_html_e( 'Novos episódios, artigos e novidades da loja.', 'bronzepodcast' ); ?></p>
 			<form class="newsletter__form" action="#" method="post" data-newsletter-form>
 				<label for="newsletter-email"><?php esc_html_e( 'Endereço de email', 'bronzepodcast' ); ?></label>
 				<div class="newsletter__controls">

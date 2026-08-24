@@ -15,10 +15,10 @@ get_header();
 			<div class="hero__copy">
 				<p class="eyebrow"><?php esc_html_e( 'Fé · Tradição · Portugal', 'bronzepodcast' ); ?></p>
 				<h1><?php esc_html_e( 'Um Podcast Católico.', 'bronzepodcast' ); ?></h1>
-				<p class="hero__intro"><?php esc_html_e( 'Criei o Bronze Podcast em 2020 com um objectivo simples: divulgar a Fé Católica Tradicional e, convosco, compreender melhor o tempo em que vivemos.', 'bronzepodcast' ); ?></p>
+				<p class="hero__intro"><?php esc_html_e( 'Criei este Podcast em 2020, com o objectivo de divulgar a Fé Católica Tradicional.', 'bronzepodcast' ); ?></p>
 				<div class="hero__actions">
 					<a class="button button--accent" href="<?php echo esc_url( home_url( '/podcast/' ) ); ?>"><?php esc_html_e( 'Ouvir os episódios', 'bronzepodcast' ); ?><span aria-hidden="true">↗</span></a>
-					<a class="button button--ghost" href="<?php echo esc_url( home_url( '/sobre/' ) ); ?>"><?php esc_html_e( 'Porque existe este projecto', 'bronzepodcast' ); ?></a>
+					<a class="button button--ghost" href="<?php echo esc_url( home_url( '/sobre/' ) ); ?>"><?php esc_html_e( 'Ler o manifesto', 'bronzepodcast' ); ?></a>
 				</div>
 			</div>
 			<aside class="hero__note" aria-label="Manifesto Bronze Podcast">
@@ -31,8 +31,8 @@ get_header();
 
 	<div class="signal-strip" aria-label="Bronze Podcast em resumo">
 		<div class="content-shell content-shell--wide signal-strip__inner">
-			<p><strong><?php esc_html_e( 'Desde 2020', 'bronzepodcast' ); ?></strong><span><?php esc_html_e( 'Fé Católica Tradicional', 'bronzepodcast' ); ?></span></p>
-			<p><strong><?php esc_html_e( 'Podcast + Artigos', 'bronzepodcast' ); ?></strong><span><?php esc_html_e( 'Para ouvir, ler e pensar', 'bronzepodcast' ); ?></span></p>
+			<p><strong><?php esc_html_e( 'Desde 2020', 'bronzepodcast' ); ?></strong><span><?php esc_html_e( 'Um Podcast Católico', 'bronzepodcast' ); ?></span></p>
+			<p><strong><?php esc_html_e( 'Podcast + Artigos', 'bronzepodcast' ); ?></strong><span><?php esc_html_e( 'Para ouvir, ler e conhecer', 'bronzepodcast' ); ?></span></p>
 			<p><strong><?php esc_html_e( 'Portugal', 'bronzepodcast' ); ?></strong><span><?php esc_html_e( 'Fé, família e Nação', 'bronzepodcast' ); ?></span></p>
 		</div>
 	</div>
@@ -41,10 +41,10 @@ get_header();
 		<div class="content-shell content-shell--wide">
 			<div class="section-heading section-heading--split">
 				<div>
-					<p class="eyebrow"><?php esc_html_e( 'Em destaque', 'bronzepodcast' ); ?></p>
+					<p class="eyebrow"><?php esc_html_e( 'Podcast', 'bronzepodcast' ); ?></p>
 					<h2 id="episodes-title"><?php esc_html_e( 'Últimos episódios.', 'bronzepodcast' ); ?></h2>
 				</div>
-				<p class="section-heading__lede"><?php esc_html_e( 'Conversas sobre a Igreja, a Fé e a vida dos Católicos no mundo de hoje.', 'bronzepodcast' ); ?></p>
+				<p class="section-heading__lede"><?php esc_html_e( 'O que tenho publicado mais recentemente.', 'bronzepodcast' ); ?></p>
 			</div>
 			<div class="episode-grid">
 				<article class="episode-card">
@@ -67,10 +67,10 @@ get_header();
 		<div class="content-shell content-shell--wide">
 			<div class="section-heading section-heading--split">
 				<div>
-					<p class="eyebrow"><?php esc_html_e( 'Loja Bronze', 'bronzepodcast' ); ?></p>
-					<h2 id="store-title"><?php esc_html_e( 'A Loja do Bronze Podcast.', 'bronzepodcast' ); ?></h2>
+					<p class="eyebrow"><?php esc_html_e( 'Loja', 'bronzepodcast' ); ?></p>
+					<h2 id="store-title"><?php esc_html_e( 'Alguns artigos da loja.', 'bronzepodcast' ); ?></h2>
 				</div>
-				<a class="text-link" href="<?php echo esc_url( bronzepodcast_store_url() ); ?>"><?php esc_html_e( 'Conhecer a loja', 'bronzepodcast' ); ?> <span>↗</span></a>
+				<a class="text-link" href="<?php echo esc_url( bronzepodcast_store_url() ); ?>"><?php esc_html_e( 'Ver a loja', 'bronzepodcast' ); ?> <span>↗</span></a>
 			</div>
 
 			<?php if ( class_exists( 'WooCommerce' ) && function_exists( 'wc_get_products' ) && wc_get_products( array( 'limit' => 1, 'status' => 'publish', 'return' => 'ids' ) ) ) : ?>
@@ -88,12 +88,12 @@ get_header();
 	<section class="manifesto section-pad">
 		<div class="content-shell content-shell--wide manifesto__inner">
 			<div>
-				<p class="eyebrow"><?php esc_html_e( 'O que nos move', 'bronzepodcast' ); ?></p>
+				<p class="eyebrow"><?php esc_html_e( 'O manifesto', 'bronzepodcast' ); ?></p>
 				<h2><?php esc_html_e( 'Não se pode separar a Fé da Nação.', 'bronzepodcast' ); ?></h2>
 			</div>
 			<div class="manifesto__copy">
 				<p><?php esc_html_e( 'A Revolução Cultural está aí. Tudo arrasta, tudo destrói. Cabe a cada baptizado fazer a sua parte e ser fiel no pouco.', 'bronzepodcast' ); ?></p>
-				<a class="button button--outline" href="<?php echo esc_url( home_url( '/sobre/' ) ); ?>"><?php esc_html_e( 'Ler porque comecei', 'bronzepodcast' ); ?><span aria-hidden="true">→</span></a>
+				<a class="button button--outline" href="<?php echo esc_url( home_url( '/sobre/' ) ); ?>"><?php esc_html_e( 'Ler o manifesto', 'bronzepodcast' ); ?><span aria-hidden="true">→</span></a>
 			</div>
 		</div>
 	</section>

@@ -6,6 +6,8 @@ O copy da versão 0.3.0 estava demasiado próximo de uma linguagem de marca gen�
 
 Nos textos originais, Diogo escreve na primeira pessoa, fala directamente com quem lê, faz perguntas difíceis e não esconde a posição católica tradicional do projecto. A linguagem alterna convicção com humildade: afirma com clareza, mas também admite limites pessoais e convida o leitor a pensar.
 
+Há dois registos complementares a preservar. Nos textos pessoais, a voz é confessional, reflectida e próxima: parte de uma experiência concreta e fala com quem acompanha o projecto. Nos textos sobre Fé, Igreja, cultura ou política, a voz é mais argumentativa: apresenta uma tese, nomeia os factos e desenvolve-a sem neutralidade fingida. A página inicial deve ser sóbria e quase informativa; não deve tentar resumir toda a profundidade dos artigos num slogan.
+
 ## Princípios de voz
 
 1. **Falar como uma pessoa, não como uma marca.** Preferir “Criei”, “penso”, “escrevo” e “convosco” quando o texto é pessoal.
@@ -15,13 +17,15 @@ Nos textos originais, Diogo escreve na primeira pessoa, fala directamente com qu
 5. **Manter humildade cristã.** A voz pode ser firme sem se apresentar como autoridade absoluta.
 6. **Escrever em português de Portugal.** Manter formas usadas pelo autor como “projecto”, “objectivo” e “baptizado”.
 7. **Evitar linguagem de agência.** Reduzir expressões como “experiência”, “feito para permanecer”, “continue a conversa”, “sem ruído” e “com significado” quando não dizem nada concreto.
+8. **Começar pelo concreto.** Um episódio, um texto, uma oração, um livro ou uma pergunta real são melhores pontos de partida do que uma promessa abstracta.
+9. **Não uniformizar a voz.** Uma nota pessoal pode dizer “eu”; um ensaio pode assumir uma posição clara. O que os une é a fidelidade ao assunto, não o mesmo tom em todas as páginas.
 
 ## Frases de referência
 
 - “Só Cristo pode acalmar a tormenta, na Igreja e no mundo.”
 - “Não se pode separar a Fé da Nação.”
 
-Estas frases funcionam porque são claras, assumidas e impossíveis de confundir com o copy de outro projecto.
+Estas frases funcionam porque são claras, assumidas e impossíveis de confundir com o copy de outro projecto. Os títulos curtos do site original — “Um Podcast Católico”, “Últimos episódios” e “Alguns artigos da loja” — são também uma boa referência para a página inicial.
 
 ## Aplicação por página
 

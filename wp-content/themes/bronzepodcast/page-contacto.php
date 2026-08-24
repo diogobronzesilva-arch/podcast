@@ -14,7 +14,7 @@ $status = isset( $_GET['estado'] ) ? sanitize_key( wp_unslash( $_GET['estado'] )
 		<section class="contact-intro">
 			<p class="eyebrow"><?php esc_html_e( 'Contacto direto', 'bronzepodcast' ); ?></p>
 			<h1><?php esc_html_e( 'Escreva-me.', 'bronzepodcast' ); ?></h1>
-			<p><?php esc_html_e( 'Para questões sobre o Podcast, imprensa, encomendas ou apenas para continuar uma conversa começada num episódio.', 'bronzepodcast' ); ?></p>
+			<p><?php esc_html_e( 'Para questões sobre o Podcast, imprensa, encomendas ou para continuar uma conversa começada num episódio.', 'bronzepodcast' ); ?></p>
 			<a class="contact-email" href="mailto:info@bronzepodcast.com">info@bronzepodcast.com</a>
 			<div class="contact-topics" aria-label="<?php esc_attr_e( 'Assuntos de contacto', 'bronzepodcast' ); ?>">
 				<span><?php esc_html_e( 'Podcast', 'bronzepodcast' ); ?></span>
