@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '0.5.0' );
+define( 'BRONZEPODCAST_VERSION', '0.5.1' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';

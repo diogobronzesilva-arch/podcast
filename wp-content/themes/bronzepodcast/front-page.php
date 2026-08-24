@@ -74,7 +74,7 @@ get_header();
 			</div>
 
 			<?php if ( class_exists( 'WooCommerce' ) && function_exists( 'wc_get_products' ) && wc_get_products( array( 'limit' => 1, 'status' => 'publish', 'return' => 'ids' ) ) ) : ?>
-				<?php echo do_shortcode( '[products limit="6" columns="3" orderby="date" order="DESC" visibility="visible"]' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php echo do_shortcode( '[products limit="6" columns="3" category="tercos-de-combate" orderby="date" order="DESC" visibility="visible"]' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<?php else : ?>
 				<div class="collection-preview" aria-label="<?php esc_attr_e( 'Coleções em preparação', 'bronzepodcast' ); ?>">
 					<article><span>01</span><h3><?php esc_html_e( 'Terços de combate', 'bronzepodcast' ); ?></h3><p><?php esc_html_e( 'Para rezar e levar todos os dias.', 'bronzepodcast' ); ?></p></article>
