@@ -12,17 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 <footer class="site-footer">
 	<div class="content-shell content-shell--wide site-footer__grid">
 		<section class="newsletter" aria-labelledby="newsletter-title">
-			<p class="eyebrow"><?php esc_html_e( 'Carta Bronze', 'bronzepodcast' ); ?></p>
-			<h2 id="newsletter-title"><?php esc_html_e( 'Subscreva a Newsletter.', 'bronzepodcast' ); ?></h2>
-			<p class="newsletter__lede"><?php esc_html_e( 'Novos episódios, artigos e novidades da loja.', 'bronzepodcast' ); ?></p>
-			<form class="newsletter__form" action="#" method="post" data-newsletter-form>
-				<label for="newsletter-email"><?php esc_html_e( 'Endereço de email', 'bronzepodcast' ); ?></label>
-				<div class="newsletter__controls">
-					<input id="newsletter-email" type="email" name="email" autocomplete="email" placeholder="<?php esc_attr_e( 'O seu melhor email', 'bronzepodcast' ); ?>" required>
-					<button type="submit"><?php esc_html_e( 'Subscrever', 'bronzepodcast' ); ?> <span aria-hidden="true">→</span></button>
-				</div>
-				<p class="newsletter__note"><?php esc_html_e( 'A subscrição será ligada antes da abertura pública.', 'bronzepodcast' ); ?></p>
-			</form>
+			<p class="eyebrow"><?php esc_html_e( 'Acompanhar', 'bronzepodcast' ); ?></p>
+			<h2 id="newsletter-title"><?php esc_html_e( 'O Bronze continua fora daqui.', 'bronzepodcast' ); ?></h2>
+			<p class="newsletter__lede"><?php esc_html_e( 'Os episódios aparecem primeiro no YouTube. No Spotify, ficam prontos para ouvir no caminho, em casa ou quando for preciso parar um pouco.', 'bronzepodcast' ); ?></p>
+			<div class="footer-platform-actions">
+				<a class="button button--accent" href="https://www.youtube.com/@bronzepodcast" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Abrir YouTube', 'bronzepodcast' ); ?> <span aria-hidden="true">↗</span></a>
+				<a class="button button--outline" href="https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Ouvir no Spotify', 'bronzepodcast' ); ?> <span aria-hidden="true">↗</span></a>
+			</div>
 		</section>
 
 		<div class="site-footer__contact">

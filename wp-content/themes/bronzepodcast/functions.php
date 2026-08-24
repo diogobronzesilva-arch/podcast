@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '0.4.3' );
+define( 'BRONZEPODCAST_VERSION', '0.5.0' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -149,6 +149,112 @@ function bronzepodcast_cart_fragments( $fragments ) {
 	return $fragments;
 }
 add_filter( 'woocommerce_add_to_cart_fragments', 'bronzepodcast_cart_fragments' );
+
+/**
+ * Mostra caminhos claros para as coleções. Além de ajudar quem chega à loja,
+ * dá às páginas de categoria ligações internas estáveis e contextuais.
+ */
+function bronzepodcast_store_collections() {
+	if ( ! function_exists( 'is_shop' ) || ! is_shop() ) {
+		return;
+	}
+
+	$categories = get_terms(
+		array(
+			'taxonomy'   => 'product_cat',
+			'hide_empty' => true,
+			'parent'     => 0,
+			'orderby'    => 'name',
+			'order'      => 'ASC',
+		)
+	);
+
+	if ( empty( $categories ) || is_wp_error( $categories ) ) {
+		return;
+	}
+
+	echo '<nav class="store-collections content-shell content-shell--wide" aria-label="' . esc_attr__( 'Coleções da loja', 'bronzepodcast' ) . '">';
+	echo '<span class="store-collections__label">' . esc_html__( 'Explorar por coleção', 'bronzepodcast' ) . '</span>';
+	echo '<div class="store-collections__links">';
+	foreach ( $categories as $category ) {
+		$link = get_term_link( $category );
+		if ( ! is_wp_error( $link ) ) {
+			printf( '<a href="%1$s">%2$s</a>', esc_url( $link ), esc_html( $category->name ) );
+		}
+	}
+	echo '</div></nav>';
+}
+add_action( 'woocommerce_before_main_content', 'bronzepodcast_store_collections', 5 );
+
+/**
+ * Informação de decisão para a loja: o checkout fica separado da descoberta
+ * do catálogo e não promete políticas que ainda não estejam configuradas.
+ */
+function bronzepodcast_store_context() {
+	if ( ! function_exists( 'is_shop' ) || ! is_shop() ) {
+		return;
+	}
+	?>
+	<section class="store-context content-shell content-shell--wide" aria-labelledby="store-context-title">
+		<div>
+			<p class="eyebrow"><?php esc_html_e( 'Antes de encomendar', 'bronzepodcast' ); ?></p>
+			<h2 id="store-context-title"><?php esc_html_e( 'Escolher com tempo.', 'bronzepodcast' ); ?></h2>
+		</div>
+		<div class="store-context__copy">
+			<p><?php esc_html_e( 'Cada artigo tem a sua descrição, disponibilidade e variantes. Se tiveres uma dúvida sobre uma encomenda, escreve antes de comprar: é preferível esclarecer bem do que apressar uma escolha.', 'bronzepodcast' ); ?></p>
+			<a class="text-link" href="<?php echo esc_url( home_url( '/contacto/' ) ); ?>"><?php esc_html_e( 'Falar sobre uma encomenda', 'bronzepodcast' ); ?> <span aria-hidden="true">↗</span></a>
+		</div>
+	</section>
+	<?php
+}
+add_action( 'woocommerce_after_main_content', 'bronzepodcast_store_context', 11 );
+
+/**
+ * Descrição e dados de entidade legíveis por motores de pesquisa e sistemas
+ * de resposta. O conteúdo mantém-se específico ao Bronze e não depende de
+ * palavras-chave repetidas.
+ */
+function bronzepodcast_seo_head() {
+	if ( is_admin() ) {
+		return;
+	}
+
+	$description = 'Bronze Podcast: conversas sobre fé católica, tradição e Portugal. Episódios em vídeo e áudio, e uma loja de livros, terços e artigos religiosos.';
+	if ( function_exists( 'is_shop' ) && is_shop() ) {
+		$description = 'Loja do Bronze Podcast: livros, terços e artigos religiosos escolhidos para a vida de oração, a formação e a casa.';
+	} elseif ( is_page( 'podcast' ) ) {
+		$description = 'Ouve e vê o Bronze Podcast no YouTube e Spotify: conversas sobre fé católica, tradição e Portugal.';
+	} elseif ( is_page( 'sobre' ) ) {
+		$description = 'Conhece o Bronze Podcast, criado por Diogo Bronze Silva em 2020 para conversar sobre fé católica, tradição e Portugal.';
+	}
+
+	echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
+	$data = array(
+		'@context' => 'https://schema.org',
+		'@graph'   => array(
+			array(
+				'@type'       => 'Organization',
+				'@id'          => home_url( '/#organization' ),
+				'name'         => 'Bronze Podcast',
+				'url'          => home_url( '/' ),
+				'logo'         => get_template_directory_uri() . '/assets/images/logo.png',
+				'email'        => 'info@bronzepodcast.com',
+				'sameAs'       => array( 'https://www.youtube.com/@bronzepodcast', 'https://www.instagram.com/bronzepodcast/', 'https://x.com/bronzpodcast' ),
+			),
+			array(
+				'@type'        => 'PodcastSeries',
+				'@id'           => home_url( '/podcast/#podcast' ),
+				'name'          => 'Bronze Podcast',
+				'url'           => home_url( '/podcast/' ),
+				'description'   => 'Conversas sobre fé católica, tradição e Portugal.',
+				'inLanguage'    => 'pt-PT',
+				'author'        => array( '@type' => 'Person', 'name' => 'Diogo Bronze Silva' ),
+			),
+		),
+	);
+	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
+}
+add_action( 'wp_head', 'bronzepodcast_seo_head', 2 );
 
 function bronzepodcast_woocommerce_wrappers() {
 	remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
