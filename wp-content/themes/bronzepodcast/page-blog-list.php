@@ -21,17 +21,17 @@ $posts_query = new WP_Query(
 	<section class="page-hero page-hero--blog">
 		<div class="page-hero__overlay"></div>
 		<div class="content-shell content-shell--wide page-hero__content">
-			<p class="eyebrow"><?php esc_html_e( 'Caderno Bronze', 'bronzepodcast' ); ?></p>
-			<h1><?php esc_html_e( 'Ideias para guardar. Textos para voltar.', 'bronzepodcast' ); ?></h1>
-			<p class="page-hero__lede"><?php esc_html_e( 'Fé, tradição, cultura e Portugal — com espaço para pensar antes de responder.', 'bronzepodcast' ); ?></p>
+			<p class="eyebrow"><?php esc_html_e( 'Artigos', 'bronzepodcast' ); ?></p>
+			<h1><?php esc_html_e( 'Textos sobre a Fé e o tempo em que vivemos.', 'bronzepodcast' ); ?></h1>
+			<p class="page-hero__lede"><?php esc_html_e( 'Reflexões sobre a Igreja, Portugal, a família e a ordem cristã.', 'bronzepodcast' ); ?></p>
 		</div>
 	</section>
 
 	<section class="section-pad">
 		<div class="content-shell content-shell--wide">
 			<div class="archive-intro">
-				<p class="eyebrow"><?php esc_html_e( 'Arquivo editorial', 'bronzepodcast' ); ?></p>
-				<p><?php esc_html_e( 'Ensaios, notas e reflexões para ler sem pressa.', 'bronzepodcast' ); ?></p>
+				<p class="eyebrow"><?php esc_html_e( 'Artigos e reflexões', 'bronzepodcast' ); ?></p>
+				<p><?php esc_html_e( 'Escrevo para ordenar ideias, aprofundar temas do Podcast e continuar a conversa convosco.', 'bronzepodcast' ); ?></p>
 			</div>
 			<?php if ( $posts_query->have_posts() ) : ?>
 				<div class="post-grid">

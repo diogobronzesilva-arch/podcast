@@ -12,16 +12,16 @@ get_header();
 		<div class="page-hero__overlay"></div>
 		<div class="content-shell content-shell--wide page-hero__content">
 			<p class="eyebrow"><?php esc_html_e( 'Loja Bronze', 'bronzepodcast' ); ?></p>
-			<h1><?php esc_html_e( 'Objetos que contam uma história.', 'bronzepodcast' ); ?></h1>
-			<p class="page-hero__lede"><?php esc_html_e( 'Artigos escolhidos pela sua beleza, tradição e significado.', 'bronzepodcast' ); ?></p>
+			<h1><?php esc_html_e( 'A Loja do Bronze Podcast.', 'bronzepodcast' ); ?></h1>
+			<p class="page-hero__lede"><?php esc_html_e( 'Livros, devoções e artigos religiosos escolhidos pelo que são e pelo bem que podem fazer.', 'bronzepodcast' ); ?></p>
 		</div>
 	</section>
 
 	<section class="section-pad">
 		<div class="content-shell content-shell--wide">
 			<div class="store-promises" aria-label="<?php esc_attr_e( 'Compromissos da Loja Bronze', 'bronzepodcast' ); ?>">
-				<span><?php esc_html_e( 'Seleção cuidada', 'bronzepodcast' ); ?></span>
-				<span><?php esc_html_e( 'Tradição com propósito', 'bronzepodcast' ); ?></span>
+				<span><?php esc_html_e( 'Escolha cuidada', 'bronzepodcast' ); ?></span>
+				<span><?php esc_html_e( 'Artigos com finalidade', 'bronzepodcast' ); ?></span>
 				<span><?php esc_html_e( 'Envio a partir de Portugal', 'bronzepodcast' ); ?></span>
 			</div>
 			<?php if ( class_exists( 'WooCommerce' ) ) : ?>

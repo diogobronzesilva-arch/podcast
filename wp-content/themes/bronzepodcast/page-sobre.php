@@ -13,7 +13,7 @@ get_header();
 		<div class="content-shell content-shell--wide page-hero__content">
 			<p class="eyebrow"><?php esc_html_e( 'Manifesto · Desde 2020', 'bronzepodcast' ); ?></p>
 			<h1><?php esc_html_e( 'Fé, nação e combate espiritual.', 'bronzepodcast' ); ?></h1>
-			<p class="page-hero__lede"><?php esc_html_e( 'Um podcast católico feito em Portugal, para quem não desiste de procurar clareza no meio da tormenta.', 'bronzepodcast' ); ?></p>
+			<p class="page-hero__lede"><?php esc_html_e( 'Criei este Podcast em 2020 com um objectivo simples: divulgar a Fé Católica Tradicional.', 'bronzepodcast' ); ?></p>
 		</div>
 	</section>
 

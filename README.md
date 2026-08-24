@@ -12,6 +12,8 @@ Tema personalizado para reconstruir `bronzepodcast.com` em código, com o catál
 - Formulário de contacto com validação, proteção por nonce e campo anti-spam.
 - Templates de artigos, arquivo, pesquisa e erro 404.
 - Integração base com WooCommerce.
+- Guia de voz para manter o copy próximo da identidade de Diogo Bronze.
+- Processo documentado de validação, staging, publicação e rollback.
 - Preparado para traduções e para um tema-filho no futuro.
 
 ## Instalação
@@ -35,6 +37,11 @@ Tema personalizado para reconstruir `bronzepodcast.com` em código, com o catál
 - `/contacto/`
 
 O inventário completo dos endereços públicos já encontrados está em [`docs/inventario-site.md`](docs/inventario-site.md).
+
+## Publicação segura
+
+- [`docs/release-workflow.md`](docs/release-workflow.md): fonte oficial, testes, staging, backup, publicação e rollback.
+- [`docs/voz-e-copy.md`](docs/voz-e-copy.md): princípios de voz e decisões de copy para todas as páginas.
 
 ## Próximas etapas
 

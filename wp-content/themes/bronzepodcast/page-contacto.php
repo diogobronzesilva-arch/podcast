@@ -13,8 +13,8 @@ $status = isset( $_GET['estado'] ) ? sanitize_key( wp_unslash( $_GET['estado'] )
 	<div class="content-shell content-shell--wide contact-layout">
 		<section class="contact-intro">
 			<p class="eyebrow"><?php esc_html_e( 'Contacto direto', 'bronzepodcast' ); ?></p>
-			<h1><?php esc_html_e( 'Vamos conversar.', 'bronzepodcast' ); ?></h1>
-			<p><?php esc_html_e( 'Questões sobre o podcast, propostas, imprensa ou futuras encomendas: escreva-nos. Lemos todas as mensagens.', 'bronzepodcast' ); ?></p>
+			<h1><?php esc_html_e( 'Escreva-me.', 'bronzepodcast' ); ?></h1>
+			<p><?php esc_html_e( 'Para questões sobre o Podcast, imprensa, encomendas ou apenas para continuar uma conversa começada num episódio.', 'bronzepodcast' ); ?></p>
 			<a class="contact-email" href="mailto:info@bronzepodcast.com">info@bronzepodcast.com</a>
 			<div class="contact-topics" aria-label="<?php esc_attr_e( 'Assuntos de contacto', 'bronzepodcast' ); ?>">
 				<span><?php esc_html_e( 'Podcast', 'bronzepodcast' ); ?></span>
@@ -48,7 +48,7 @@ $status = isset( $_GET['estado'] ) ? sanitize_key( wp_unslash( $_GET['estado'] )
 					<input id="contact-email" type="email" name="email" autocomplete="email" required>
 				</p>
 				<p>
-					<label for="contact-message"><?php esc_html_e( 'Como podemos ajudar?', 'bronzepodcast' ); ?></label>
+					<label for="contact-message"><?php esc_html_e( 'A sua mensagem', 'bronzepodcast' ); ?></label>
 					<textarea id="contact-message" name="mensagem" rows="7" required></textarea>
 				</p>
 				<button class="button button--accent" type="submit"><?php esc_html_e( 'Enviar mensagem', 'bronzepodcast' ); ?><span aria-hidden="true">→</span></button>

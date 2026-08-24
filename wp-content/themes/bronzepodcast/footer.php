@@ -13,15 +13,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="content-shell content-shell--wide site-footer__grid">
 		<section class="newsletter" aria-labelledby="newsletter-title">
 			<p class="eyebrow"><?php esc_html_e( 'Carta Bronze', 'bronzepodcast' ); ?></p>
-			<h2 id="newsletter-title"><?php esc_html_e( 'Uma mensagem breve quando houver algo que valha a pena partilhar.', 'bronzepodcast' ); ?></h2>
-			<p class="newsletter__lede"><?php esc_html_e( 'Novos episódios, artigos e novidades da loja. Sem ruído e sem excesso.', 'bronzepodcast' ); ?></p>
+			<h2 id="newsletter-title"><?php esc_html_e( 'Receba notícias do Bronze Podcast.', 'bronzepodcast' ); ?></h2>
+			<p class="newsletter__lede"><?php esc_html_e( 'Novos episódios, artigos e novidades da loja. Apenas quando houver alguma coisa para partilhar.', 'bronzepodcast' ); ?></p>
 			<form class="newsletter__form" action="#" method="post" data-newsletter-form>
 				<label for="newsletter-email"><?php esc_html_e( 'Endereço de email', 'bronzepodcast' ); ?></label>
 				<div class="newsletter__controls">
 					<input id="newsletter-email" type="email" name="email" autocomplete="email" placeholder="<?php esc_attr_e( 'O seu melhor email', 'bronzepodcast' ); ?>" required>
-					<button type="submit"><?php esc_html_e( 'Quero receber', 'bronzepodcast' ); ?> <span aria-hidden="true">→</span></button>
+					<button type="submit"><?php esc_html_e( 'Subscrever', 'bronzepodcast' ); ?> <span aria-hidden="true">→</span></button>
 				</div>
-				<p class="newsletter__note"><?php esc_html_e( 'A subscrição será ativada antes da publicação definitiva.', 'bronzepodcast' ); ?></p>
+				<p class="newsletter__note"><?php esc_html_e( 'A subscrição será ligada antes da abertura pública.', 'bronzepodcast' ); ?></p>
 			</form>
 		</section>
 
