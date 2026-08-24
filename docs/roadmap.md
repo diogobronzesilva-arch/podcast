@@ -4,27 +4,27 @@ Este documento separa o que pode ser feito já do que exige decisões, credencia
 
 ## Fase 0 — Base do projecto
 
-**Estado: concluída em rascunho.**
+**Estado: concluída no site temporário.**
 
 - Tema WordPress e WooCommerce criado.
-- Páginas e URLs principais preservados.
+- Páginas principais publicadas; o Blog foi retirado por decisão editorial.
 - Revamp visual mobile-first concluído.
-- Copy 0.4.1 preparado, mas ainda não publicado.
+- Copy 0.4.1 publicado.
 - Ramo local alinhado com o GitHub e validações automáticas activas.
 
-**Para fechar a fase:** aprovar o copy e instalar a versão 0.4.1 na Hostinger.
+**Para fechar a fase:** manter o GitHub e a instalação WordPress alinhados.
 
 ## Fase 1 — Conteúdo editorial
 
-**Objectivo:** o site deixa de ser uma estrutura vazia e passa a representar o projecto real.
+**Objectivo:** o Podcast apresenta episódios reais; os artigos vivem nas Notes de diogobronzesilva.com.
 
 1. Confirmar os episódios que devem estar na página inicial.
-2. Importar os artigos existentes e substituir o post provisório do WordPress.
-3. Preservar os URLs históricos dos artigos listados no inventário.
-4. Definir uma rotina simples: episódio, artigo complementar quando fizer sentido, e actualização da página inicial.
-5. Ligar a newsletter a um serviço escolhido.
+2. Publicar os artigos existentes nas Notes de diogobronzesilva.com.
+3. Definir redireccionamentos para os URLs históricos quando a estrutura das Notes estiver confirmada.
+4. Definir uma rotina simples: episódio no Bronze Podcast e artigo complementar nas Notes quando fizer sentido.
+5. Ligar a newsletter a um serviço escolhido, apenas quando houver uma cadência editorial definida.
 
-**Concluído quando:** o Blog tem os artigos reais, não há conteúdo provisório e a newsletter guarda subscrições reais com consentimento.
+**Concluído quando:** a página inicial mostra episódios reais, não há conteúdo provisório no Bronze Podcast e os artigos estão nas Notes.
 
 ## Fase 2 — Staging e operação
 

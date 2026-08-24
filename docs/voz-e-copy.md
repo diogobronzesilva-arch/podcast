@@ -41,9 +41,9 @@ Conservar o manifesto original. O cabeçalho deve introduzir o texto com o objec
 
 Dizer simplesmente onde se pode ouvir. YouTube e Spotify não precisam de slogans; precisam de instruções claras.
 
-### Blog
+### Artigos
 
-Apresentar os artigos como continuação e aprofundamento do Podcast: Fé, Igreja, Portugal, família e ordem cristã.
+Os artigos deixam de pertencer ao Bronze Podcast. Devem ser publicados nas Notes de diogobronzesilva.com, preservando a autoria, os textos e os endereços históricos através de redireccionamentos quando a nova estrutura estiver definida.
 
 ### Loja
 

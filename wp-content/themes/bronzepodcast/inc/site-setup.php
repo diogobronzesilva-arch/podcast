@@ -56,12 +56,11 @@ function bronzepodcast_after_switch_theme() {
 HTML;
 
 	$pages = array(
-		'home'      => bronzepodcast_create_page( 'Bronze Podcast', 'inicio' ),
-		'sobre'     => bronzepodcast_create_page( 'Um Podcast Católico', 'sobre', $about_content ),
-		'podcast'   => bronzepodcast_create_page( 'Podcast', 'podcast' ),
-		'blog-list' => bronzepodcast_create_page( 'Blog', 'blog-list' ),
-		'loja'      => bronzepodcast_create_page( 'Loja Online', 'loja' ),
-		'contacto'  => bronzepodcast_create_page( 'Contacto', 'contacto' ),
+		'home'     => bronzepodcast_create_page( 'Bronze Podcast', 'inicio' ),
+		'sobre'    => bronzepodcast_create_page( 'Um Podcast Católico', 'sobre', $about_content ),
+		'podcast'  => bronzepodcast_create_page( 'Podcast', 'podcast' ),
+		'loja'     => bronzepodcast_create_page( 'Loja Online', 'loja' ),
+		'contacto' => bronzepodcast_create_page( 'Contacto', 'contacto' ),
 	);
 
 	if ( $pages['home'] ) {
@@ -82,7 +81,6 @@ HTML;
 			$items = array(
 				array( 'title' => 'Sobre', 'page_id' => $pages['sobre'], 'url' => home_url( '/sobre/' ) ),
 				array( 'title' => 'Podcast', 'page_id' => $pages['podcast'], 'url' => home_url( '/podcast/' ) ),
-				array( 'title' => 'Blog', 'page_id' => $pages['blog-list'], 'url' => home_url( '/blog-list/' ) ),
 				array( 'title' => 'Oração', 'url' => 'https://tesourofieis.com' ),
 				array( 'title' => 'Loja', 'page_id' => $pages['loja'], 'url' => home_url( '/loja/' ) ),
 				array( 'title' => 'Contacto', 'page_id' => $pages['contacto'], 'url' => home_url( '/contacto/' ) ),

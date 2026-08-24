@@ -7,7 +7,7 @@ Tema personalizado para reconstruir `bronzepodcast.com` em código, com o catál
 - Identidade visual, logótipo e imagens principais guardados no próprio tema.
 - Cabeçalho responsivo e navegação móvel.
 - Página inicial com os episódios atualmente destacados e produtos recentes.
-- Páginas próprias para `/sobre/`, `/podcast/`, `/blog-list/`, `/loja/` e `/contacto/`.
+- Páginas próprias para `/sobre/`, `/podcast/`, `/loja/` e `/contacto/`.
 - Criação automática e não destrutiva das páginas e do menu ao ativar o tema.
 - Formulário de contacto com validação, proteção por nonce e campo anti-spam.
 - Templates de artigos, arquivo, pesquisa e erro 404.
@@ -32,7 +32,6 @@ Tema personalizado para reconstruir `bronzepodcast.com` em código, com o catál
 - `/`
 - `/sobre/`
 - `/podcast/`
-- `/blog-list/`
 - `/loja/`
 - `/contacto/`
 

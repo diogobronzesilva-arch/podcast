@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '0.4.1' );
+define( 'BRONZEPODCAST_VERSION', '0.4.2' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -92,7 +92,6 @@ function bronzepodcast_menu_fallback() {
 	$links = array(
 		__( 'Sobre', 'bronzepodcast' )    => home_url( '/sobre/' ),
 		__( 'Podcast', 'bronzepodcast' )  => home_url( '/podcast/' ),
-		__( 'Blog', 'bronzepodcast' )     => home_url( '/blog-list/' ),
 		__( 'Oração', 'bronzepodcast' )   => 'https://tesourofieis.com',
 		__( 'Loja', 'bronzepodcast' )     => bronzepodcast_store_url(),
 		__( 'Contacto', 'bronzepodcast' ) => home_url( '/contacto/' ),

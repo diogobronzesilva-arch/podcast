@@ -9,7 +9,7 @@ Levantamento inicial feito a partir das páginas públicas e dos resultados inde
 | Início | `/` | `front-page.php` |
 | Sobre | `/sobre/` | `page-sobre.php` |
 | Podcast | `/podcast/` | `page-podcast.php` |
-| Blog | `/blog-list/` | `page-blog-list.php` |
+| Blog | `/blog-list/` | Retirado do Bronze Podcast; artigos passam para as Notes de diogobronzesilva.com |
 | Oração | `https://tesourofieis.com` | Ligação externa preservada |
 | Loja | `/loja/` | `page-loja.php` e integração WooCommerce |
 | Contacto | `/contacto/` | `page-contacto.php` |
