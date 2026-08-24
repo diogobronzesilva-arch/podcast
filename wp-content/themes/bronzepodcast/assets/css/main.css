@@ -106,12 +106,12 @@ p { margin: 0 0 1.25em; }
 .collection-preview article > span { color: var(--bronze-light); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em; }
 .collection-preview h3 { margin-top: 120px; }
 .collection-preview p { color: var(--muted); font-size: 0.88rem; margin: 0; max-width: 240px; }
-.store-promises-wrap { background: var(--paper); color: var(--ink); }
+.store-promises-wrap { background: linear-gradient(120deg, #553325 0%, #2a201c 47%, #14181b 100%); color: var(--paper); }
 .store-promises { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 54px; }
 .store-promises-wrap .store-promises { margin-bottom: 0; }
-.store-promises span { align-items: center; border-right: 1px solid rgba(17, 20, 23, 0.16); display: flex; font-size: 0.68rem; font-weight: 700; gap: 12px; justify-content: center; letter-spacing: 0.08em; min-height: 74px; text-align: center; text-transform: uppercase; }
-.store-promises span::before { color: var(--bronze); content: "✦"; }
-.store-promises span:first-child { border-left: 1px solid rgba(17, 20, 23, 0.16); }
+.store-promises span { align-items: center; border-right: 1px solid rgba(241, 237, 230, 0.16); display: flex; font-size: 0.68rem; font-weight: 700; gap: 12px; justify-content: center; letter-spacing: 0.08em; min-height: 74px; text-align: center; text-transform: uppercase; }
+.store-promises span::before { color: var(--bronze-light); content: "✦"; }
+.store-promises span:first-child { border-left: 1px solid rgba(241, 237, 230, 0.16); }
 .setup-notice { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; color: var(--muted); padding: 34px; }
 .setup-notice p { margin: 0; }
 .shop-main { min-height: 56vh; padding-block: clamp(70px, 8vw, 118px); }
@@ -306,7 +306,7 @@ p { margin: 0 0 1.25em; }
   .store-collections { align-items: flex-start; flex-direction: column; gap: 14px; }
   .store-collections__links { justify-content: flex-start; }
   .store-promises { grid-template-columns: 1fr; }
-  .store-promises span, .store-promises span:first-child { border-left: 0; border-right: 0; border-bottom: 1px solid rgba(17, 20, 23, 0.16); min-height: 58px; }
+  .store-promises span, .store-promises span:first-child { border-left: 0; border-right: 0; border-bottom: 1px solid rgba(241, 237, 230, 0.16); min-height: 58px; }
   .archive-intro { align-items: flex-start; flex-direction: column; gap: 8px; }
   .site-footer__grid { gap: 60px; }
   .newsletter__controls { align-items: stretch; flex-direction: column; }

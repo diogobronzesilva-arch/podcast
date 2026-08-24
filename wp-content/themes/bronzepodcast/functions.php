@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '0.5.2' );
+define( 'BRONZEPODCAST_VERSION', '0.5.3' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -82,6 +82,24 @@ function bronzepodcast_assets() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'bronzepodcast_assets' );
+
+/**
+ * Mantém o nome da marca nos títulos públicos enquanto o domínio temporário
+ * estiver configurado como nome do site no WordPress.
+ *
+ * @param string $title Título calculado pelo WordPress.
+ * @return string
+ */
+function bronzepodcast_document_title( $title ) {
+	$site_name = get_bloginfo( 'name' );
+
+	if ( $site_name ) {
+		return str_replace( $site_name, 'Bronze Podcast', $title );
+	}
+
+	return $title;
+}
+add_filter( 'pre_get_document_title', 'bronzepodcast_document_title' );
 
 function bronzepodcast_excerpt_length() {
 	return 26;
@@ -173,6 +191,21 @@ function bronzepodcast_store_collections() {
 		return;
 	}
 
+	usort(
+		$categories,
+		function ( $left, $right ) {
+			$priority = array( 'tercos-de-combate' => 0 );
+			$left_order  = isset( $priority[ $left->slug ] ) ? $priority[ $left->slug ] : 1;
+			$right_order = isset( $priority[ $right->slug ] ) ? $priority[ $right->slug ] : 1;
+
+			if ( $left_order !== $right_order ) {
+				return $left_order - $right_order;
+			}
+
+			return strcasecmp( $left->name, $right->name );
+		}
+	);
+
 	echo '<nav class="store-collections content-shell content-shell--wide" aria-label="' . esc_attr__( 'Coleções da loja', 'bronzepodcast' ) . '">';
 	echo '<span class="store-collections__label">' . esc_html__( 'Explorar por coleção', 'bronzepodcast' ) . '</span>';
 	echo '<div class="store-collections__links">';
@@ -209,6 +242,51 @@ function bronzepodcast_store_context() {
 add_action( 'woocommerce_after_main_content', 'bronzepodcast_store_context', 11 );
 
 /**
+ * Mantém os Terços de Combate no início do catálogo, sem excluir as restantes
+ * coleções nem alterar a ordenação definida pelo WooCommerce dentro de cada grupo.
+ *
+ * @param array    $clauses Cláusulas SQL da consulta principal.
+ * @param WP_Query $query   Consulta em curso.
+ * @return array
+ */
+function bronzepodcast_prioritize_combat_rosaries( $clauses, $query ) {
+	if ( is_admin() || ! $query->is_main_query() || ! function_exists( 'is_shop' ) || ! is_shop() || $query->get( 's' ) ) {
+		return $clauses;
+	}
+
+	$category = get_term_by( 'slug', 'tercos-de-combate', 'product_cat' );
+	if ( ! $category || is_wp_error( $category ) ) {
+		return $clauses;
+	}
+
+	global $wpdb;
+	$term_taxonomy_id = absint( $category->term_taxonomy_id );
+	$clauses['join'] .= " LEFT JOIN {$wpdb->term_relationships} AS bronzepodcast_combat_relationships ON {$wpdb->posts}.ID = bronzepodcast_combat_relationships.object_id AND bronzepodcast_combat_relationships.term_taxonomy_id = {$term_taxonomy_id}";
+	$clauses['orderby'] = '(bronzepodcast_combat_relationships.object_id IS NULL) ASC, ' . $clauses['orderby'];
+
+	return $clauses;
+}
+add_filter( 'posts_clauses', 'bronzepodcast_prioritize_combat_rosaries', 20, 2 );
+
+/**
+ * Completa a tradução da interface do WooCommerce, independentemente da língua
+ * definida pela instalação de origem.
+ *
+ * @param string     $text    Texto padrão do botão.
+ * @param WC_Product $product Produto em ciclo.
+ * @return string
+ */
+function bronzepodcast_loop_add_to_cart_text( $text, $product ) {
+	if ( $product && $product->is_type( 'variable' ) ) {
+		return __( 'Ver opções', 'bronzepodcast' );
+	}
+
+	return __( 'Adicionar ao carrinho', 'bronzepodcast' );
+}
+add_filter( 'woocommerce_product_add_to_cart_text', 'bronzepodcast_loop_add_to_cart_text', 10, 2 );
+add_filter( 'woocommerce_product_single_add_to_cart_text', 'bronzepodcast_loop_add_to_cart_text', 10, 2 );
+
+/**
  * Descrição e dados de entidade legíveis por motores de pesquisa e sistemas
  * de resposta. O conteúdo mantém-se específico ao Bronze e não depende de
  * palavras-chave repetidas.
@@ -227,10 +305,28 @@ function bronzepodcast_seo_head() {
 		$description = 'Conhece o Bronze Podcast, criado por Diogo Bronze Silva em 2020 para conversar sobre fé católica, tradição e Portugal.';
 	}
 
+	$share_image = is_singular() ? get_the_post_thumbnail_url( get_queried_object_id(), 'large' ) : '';
+	if ( ! $share_image ) {
+		$share_image = get_template_directory_uri() . '/assets/images/fatima-noite.png';
+	}
+
 	echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
+	echo '<meta property="og:site_name" content="Bronze Podcast">' . "\n";
+	echo '<meta property="og:type" content="website">' . "\n";
+	echo '<meta property="og:title" content="' . esc_attr( wp_get_document_title() ) . '">' . "\n";
+	echo '<meta property="og:description" content="' . esc_attr( $description ) . '">' . "\n";
+	echo '<meta property="og:image" content="' . esc_url( $share_image ) . '">' . "\n";
+	echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
 	$data = array(
 		'@context' => 'https://schema.org',
 		'@graph'   => array(
+			array(
+				'@type'      => 'WebSite',
+				'@id'        => home_url( '/#website' ),
+				'name'       => 'Bronze Podcast',
+				'url'        => home_url( '/' ),
+				'inLanguage' => 'pt-PT',
+			),
 			array(
 				'@type'       => 'Organization',
 				'@id'          => home_url( '/#organization' ),
@@ -248,6 +344,7 @@ function bronzepodcast_seo_head() {
 				'description'   => 'Conversas sobre fé católica, tradição e Portugal.',
 				'inLanguage'    => 'pt-PT',
 				'author'        => array( '@type' => 'Person', 'name' => 'Diogo Bronze Silva' ),
+				'publisher'     => array( '@id' => home_url( '/#organization' ) ),
 			),
 		),
 	);

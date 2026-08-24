@@ -25,6 +25,13 @@ function bronzepodcast_handle_contact_form() {
 		exit;
 	}
 
+	$remote_address = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+	$rate_key       = 'bronzepodcast_contact_' . hash( 'sha256', $remote_address );
+	if ( get_transient( $rate_key ) ) {
+		wp_safe_redirect( add_query_arg( 'estado', 'erro', $redirect ) );
+		exit;
+	}
+
 	$name    = isset( $_POST['nome'] ) ? sanitize_text_field( wp_unslash( $_POST['nome'] ) ) : '';
 	$email   = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
 	$message = isset( $_POST['mensagem'] ) ? sanitize_textarea_field( wp_unslash( $_POST['mensagem'] ) ) : '';
@@ -37,7 +44,8 @@ function bronzepodcast_handle_contact_form() {
 	$subject = sprintf( '[Bronze Podcast] Mensagem de %s', $name );
 	$body    = "Nome: {$name}\nEmail: {$email}\n\nMensagem:\n{$message}";
 	$headers = array( 'Reply-To: ' . $name . ' <' . $email . '>' );
-	$sent    = wp_mail( get_option( 'admin_email' ), $subject, $body, $headers );
+	set_transient( $rate_key, 1, MINUTE_IN_SECONDS );
+	$sent = wp_mail( get_option( 'admin_email' ), $subject, $body, $headers );
 
 	wp_safe_redirect( add_query_arg( 'estado', $sent ? 'enviado' : 'erro', $redirect ) );
 	exit;

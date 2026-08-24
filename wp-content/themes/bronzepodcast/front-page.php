@@ -33,15 +33,15 @@ get_header();
 			<div class="episode-grid">
 				<article class="episode-card">
 					<div class="video-frame">
-						<iframe src="https://www.youtube-nocookie.com/embed/5zQscJKPbWA" title="<?php esc_attr_e( 'Episódio recente do Bronze Podcast', 'bronzepodcast' ); ?>" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+						<iframe src="https://www.youtube-nocookie.com/embed/xsM6DrjWxM4" title="<?php esc_attr_e( 'B07 — A Violência | Bronze Podcast', 'bronzepodcast' ); ?>" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 					</div>
-					<div class="episode-card__meta"><span><?php esc_html_e( 'Bronze Podcast', 'bronzepodcast' ); ?></span><strong><?php esc_html_e( 'Ver no YouTube', 'bronzepodcast' ); ?> ↗</strong></div>
+					<div class="episode-card__meta"><span><?php esc_html_e( 'B07 — A Violência', 'bronzepodcast' ); ?></span><strong><?php esc_html_e( 'Ver no YouTube', 'bronzepodcast' ); ?> ↗</strong></div>
 				</article>
 				<article class="episode-card">
 					<div class="video-frame">
-						<iframe src="https://www.youtube-nocookie.com/embed/2EZZfALA6wE" title="<?php esc_attr_e( 'Episódio recente do Bronze Podcast', 'bronzepodcast' ); ?>" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+						<iframe src="https://www.youtube-nocookie.com/embed/YaPC_g224TQ" title="<?php esc_attr_e( '#47 — O Silêncio | Bronze Podcast', 'bronzepodcast' ); ?>" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 					</div>
-					<div class="episode-card__meta"><span><?php esc_html_e( 'Novo episódio', 'bronzepodcast' ); ?></span><strong><?php esc_html_e( 'Ver no YouTube', 'bronzepodcast' ); ?> ↗</strong></div>
+					<div class="episode-card__meta"><span><?php esc_html_e( '#47 — O Silêncio', 'bronzepodcast' ); ?></span><strong><?php esc_html_e( 'Ver no YouTube', 'bronzepodcast' ); ?> ↗</strong></div>
 				</article>
 			</div>
 		</div>
