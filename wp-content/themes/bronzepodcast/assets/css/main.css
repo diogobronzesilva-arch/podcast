@@ -302,7 +302,8 @@ p { margin: 0 0 1.25em; }
   .page-hero h1 { font-size: clamp(3.55rem, 13vw, 5.4rem); }
   .about-rail { position: static; }
   .platform-card { min-height: 430px; }
-  .woocommerce ul.products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .woocommerce ul.products { gap: 32px 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .woocommerce ul.products li.product .woocommerce-loop-product__title { font-size: clamp(1.35rem, 3.4vw, 1.75rem); padding-top: 14px; }
   .store-collections { align-items: flex-start; flex-direction: column; gap: 14px; }
   .store-collections__links { justify-content: flex-start; }
   .store-promises { grid-template-columns: 1fr; }
@@ -335,7 +336,12 @@ p { margin: 0 0 1.25em; }
   .hero__actions { align-items: stretch; flex-direction: column; }
   .hero__actions .button { width: 100%; }
   .episode-card__meta { align-items: flex-start; flex-direction: column; gap: 4px; padding: 15px 17px; }
-  .episode-grid, .post-grid, .woocommerce ul.products { grid-template-columns: 1fr; }
+  .episode-grid, .post-grid { grid-template-columns: 1fr; }
+  .woocommerce ul.products { gap: 30px 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .woocommerce ul.products li.product a img { border-radius: 12px; }
+  .woocommerce ul.products li.product .woocommerce-loop-product__title { font-size: clamp(1.12rem, 5vw, 1.4rem); line-height: 1.02; padding-top: 12px; }
+  .woocommerce ul.products li.product .price { font-size: 0.82rem; margin-block: 8px 12px; }
+  .woocommerce ul.products li.product .button { font-size: 0.55rem; letter-spacing: 0.07em; min-height: 43px; padding: 10px 8px; width: 100%; }
   .page-hero { min-height: 460px; }
   .page-hero__content { padding-block: 52px; }
   .page-hero h1 { font-size: clamp(3.15rem, 14vw, 4.2rem); }
