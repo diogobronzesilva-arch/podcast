@@ -84,18 +84,21 @@ function bronzepodcast_calculate_weight_shipping( $rates, $package ) {
 		}
 	}
 
-	$rate_id = 'bronzepodcast_ctt_rate';
-	$taxes   = class_exists( 'WC_Tax' ) && WC_Tax::is_tax_enabled() ? WC_Tax::calc_shipping_tax( $cost, WC_Tax::get_shipping_tax_rates() ) : array();
+	try {
+		$rate_id  = 'bronzepodcast_ctt_rate';
+		$rate_label = sprintf( '%s (%s kg)', $label, number_format( $total_weight, 2, ',', '' ) );
 
-	$new_rate = new WC_Shipping_Rate(
-		$rate_id,
-		sprintf( '%s (%s kg)', $label, number_format( $total_weight, 2, ',', '' ) ),
-		$cost,
-		$taxes,
-		'bronzepodcast_shipping'
-	);
+		$new_rate = new WC_Shipping_Rate(
+			$rate_id,
+			$rate_label,
+			$cost,
+			array(),
+			'bronzepodcast_shipping'
+		);
 
-	// Se não existirem métodos configurados ou apenas os padrões, substitui pela taxa exata por escalão.
-	return array( $rate_id => $new_rate );
+		return array( $rate_id => $new_rate );
+	} catch ( Throwable $e ) {
+		return $rates;
+	}
 }
 add_filter( 'woocommerce_package_rates', 'bronzepodcast_calculate_weight_shipping', 100, 2 );
