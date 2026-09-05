@@ -13,7 +13,7 @@ get_header();
 		<div class="content-shell content-shell--wide hero__content">
 			<div class="hero__copy">
 				<h1><?php esc_html_e( 'Bronze Podcast', 'bronzepodcast' ); ?></h1>
-				<p class="hero__intro"><?php esc_html_e( 'Um espaço de conversa sobre a Fé Católica, a tradição e Portugal. Feito para quem quer pensar sem barulho e viver com mais firmeza.', 'bronzepodcast' ); ?></p>
+				<p class="hero__intro"><?php esc_html_e( 'Um espaço de conversa sobre a Fé Católica, a tradição e Portugal.', 'bronzepodcast' ); ?></p>
 				<div class="hero__actions">
 					<a class="button button--accent" href="<?php echo esc_url( home_url( '/podcast/' ) ); ?>"><?php esc_html_e( 'Ver episódios', 'bronzepodcast' ); ?><span aria-hidden="true">→</span></a>
 					<a class="button button--ghost" href="<?php echo esc_url( home_url( '/sobre/' ) ); ?>"><?php esc_html_e( 'Conhecer o projeto', 'bronzepodcast' ); ?></a>

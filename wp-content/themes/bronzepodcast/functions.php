@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.0.0' );
+define( 'BRONZEPODCAST_VERSION', '1.0.1' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -655,3 +655,65 @@ function bronzepodcast_wrapper_start() {
 function bronzepodcast_wrapper_end() {
 	echo '</div></main>';
 }
+
+/**
+ * Tradução e refinamento editorial dos separadores e textos nativos do WooCommerce.
+ */
+function bronzepodcast_woocommerce_product_tabs( $tabs ) {
+	if ( isset( $tabs['description'] ) ) {
+		$tabs['description']['title'] = __( 'Descrição', 'bronzepodcast' );
+	}
+	if ( isset( $tabs['additional_information'] ) ) {
+		$tabs['additional_information']['title'] = __( 'Informação Adicional', 'bronzepodcast' );
+	}
+	if ( isset( $tabs['reviews'] ) ) {
+		$tabs['reviews']['title'] = __( 'Avaliações', 'bronzepodcast' );
+	}
+	return $tabs;
+}
+add_filter( 'woocommerce_product_tabs', 'bronzepodcast_woocommerce_product_tabs', 98 );
+
+/**
+ * Tradução das mensagens de disponibilidade e stock.
+ */
+function bronzepodcast_woocommerce_get_availability_text( $availability, $product ) {
+	if ( ! $product->is_in_stock() ) {
+		return __( 'Esgotado', 'bronzepodcast' );
+	}
+	if ( $product->managing_stock() && $product->get_stock_quantity() > 0 ) {
+		return sprintf( __( '%d em stock', 'bronzepodcast' ), (int) $product->get_stock_quantity() );
+	}
+	return __( 'Em stock', 'bronzepodcast' );
+}
+add_filter( 'woocommerce_get_availability_text', 'bronzepodcast_woocommerce_get_availability_text', 10, 2 );
+
+/**
+ * Tradução de termos específicos do WooCommerce para português de Portugal.
+ */
+function bronzepodcast_filter_woocommerce_translations( $translation, $text, $domain ) {
+	if ( 'woocommerce' === $domain ) {
+		if ( 'Description' === $text ) {
+			return 'Descrição';
+		}
+		if ( 'Additional information' === $text ) {
+			return 'Informação Adicional';
+		}
+		if ( 'Category:' === $text ) {
+			return 'Categoria:';
+		}
+		if ( 'Categories:' === $text ) {
+			return 'Categorias:';
+		}
+		if ( 'Tag:' === $text ) {
+			return 'Etiqueta:';
+		}
+		if ( 'Tags:' === $text ) {
+			return 'Etiquetas:';
+		}
+		if ( 'Related products' === $text ) {
+			return 'Produtos Relacionados';
+		}
+	}
+	return $translation;
+}
+add_filter( 'gettext', 'bronzepodcast_filter_woocommerce_translations', 20, 3 );
