@@ -8,12 +8,14 @@
   const closeMenu = () => {
     header.classList.remove('menu-is-open');
     toggle.setAttribute('aria-expanded', 'false');
+    toggle.querySelector('.screen-reader-text').textContent = 'Abrir menu';
   };
 
   toggle.addEventListener('click', () => {
     const willOpen = !header.classList.contains('menu-is-open');
     header.classList.toggle('menu-is-open', willOpen);
     toggle.setAttribute('aria-expanded', String(willOpen));
+    toggle.querySelector('.screen-reader-text').textContent = willOpen ? 'Fechar menu' : 'Abrir menu';
   });
 
   navigation.addEventListener('click', (event) => {

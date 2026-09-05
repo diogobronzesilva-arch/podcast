@@ -20,6 +20,7 @@ get_header();
 				<figure class="entry-image"><?php the_post_thumbnail( 'full' ); ?></figure>
 			<?php endif; ?>
 			<div class="entry-content"><?php the_content(); ?></div>
+			<?php wp_link_pages(); ?>
 		</article>
 	<?php endwhile; ?>
 </main>

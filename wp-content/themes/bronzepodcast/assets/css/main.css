@@ -27,6 +27,7 @@ body.admin-bar .site-header { top: 32px; }
 img { display: block; height: auto; max-width: 100%; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.24em; }
 button, input, textarea, select { font: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid var(--bronze-light); outline-offset: 4px; }
 h1, h2, h3, h4 { font-family: var(--display); font-weight: 500; letter-spacing: -0.035em; line-height: 0.98; margin: 0 0 0.55em; }
 h1 { font-size: clamp(3.5rem, 6.7vw, 7rem); }
 h2 { font-size: clamp(2.7rem, 4.8vw, 5.4rem); }
@@ -63,10 +64,10 @@ p { margin: 0 0 1.25em; }
 .menu-toggle__line { background: currentColor; display: block; height: 1px; margin-block: 6px; transition: transform 180ms ease, opacity 180ms ease; width: 24px; }
 
 /* Buttons and shared headings */
-.button, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce #respond input#submit { align-items: center; background: var(--paper); border: 1px solid var(--paper); border-radius: 999px; color: var(--ink); display: inline-flex; font-size: 0.7rem; font-weight: 700; gap: 14px; justify-content: center; letter-spacing: 0.1em; min-height: 52px; padding: 13px 25px; text-decoration: none; text-transform: uppercase; transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease; }
+.button, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce #respond input#submit { align-items: center; background: var(--paper); border: 1px solid var(--paper); border-radius: 999px; color: var(--ink); display: inline-flex; font-size: 0.7rem; font-weight: 700; gap: 14px; justify-content: center; letter-spacing: 0.1em; line-height: 1.2; min-height: 52px; padding: 13px 25px; text-decoration: none; text-transform: uppercase; transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease; }
 .button:hover, .woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover { background: var(--white); border-color: var(--white); color: var(--ink); transform: translateY(-2px); }
-.button--accent { background: var(--bronze); border-color: var(--bronze); color: var(--white); }
-.button--accent:hover { background: var(--bronze-light); border-color: var(--bronze-light); color: var(--ink-deep); }
+.button--accent { background: var(--bronze); border-color: var(--bronze); box-shadow: 0 9px 22px rgba(199, 123, 85, 0.2); color: var(--white); }
+.button--accent:hover { background: var(--bronze-light); border-color: var(--bronze-light); box-shadow: 0 13px 28px rgba(199, 123, 85, 0.28); color: var(--ink-deep); }
 .button--outline, .button--ghost { background: transparent; border-color: var(--line-strong); color: var(--paper); }
 .button--outline:hover, .button--ghost:hover { background: rgba(241, 237, 230, 0.08); border-color: var(--paper); color: var(--paper); }
 .section-heading { margin-bottom: clamp(42px, 6vw, 78px); }
@@ -78,7 +79,7 @@ p { margin: 0 0 1.25em; }
 .text-link:hover span { transform: translate(3px, -3px); }
 
 /* Home hero */
-.hero { align-items: center; background-image: url("../images/fatima-noite.png"); background-position: center 52%; background-size: cover; display: flex; min-height: min(820px, calc(100svh - 92px)); overflow: hidden; position: relative; }
+.hero { align-items: center; background-image: url("../images/fatima-noite.png"); background-image: image-set(url("../images/fatima-noite.webp") type("image/webp"), url("../images/fatima-noite.png") type("image/png")); background-position: center 52%; background-size: cover; display: flex; min-height: min(820px, calc(100svh - 92px)); overflow: hidden; position: relative; }
 .hero__overlay { background: linear-gradient(90deg, rgba(8, 11, 14, 0.80) 0%, rgba(8, 11, 14, 0.48) 46%, rgba(8, 11, 14, 0.08) 100%), linear-gradient(0deg, rgba(8, 11, 14, 0.42), transparent 52%); inset: 0; position: absolute; }
 .hero__content { padding-block: clamp(96px, 11vw, 160px); position: relative; z-index: 1; }
 .hero__copy { max-width: 680px; }
@@ -95,11 +96,18 @@ p { margin: 0 0 1.25em; }
 .video-frame iframe { border: 0; height: 100%; width: 100%; }
 .episode-card__meta { align-items: center; display: flex; font-size: 0.67rem; justify-content: space-between; letter-spacing: 0.1em; padding: 19px 22px; text-transform: uppercase; }
 .episode-card__meta span { color: var(--muted); }
-.episode-card__meta strong { color: var(--paper); }
+.episode-card__meta a { color: var(--paper); font-weight: 700; text-decoration: none; }
+.episode-card__meta a span { color: var(--bronze-light); display: inline-block; transition: transform 180ms ease; }
+.episode-card__meta a:hover span { transform: translate(2px, -2px); }
 
 /* Store preview and WooCommerce */
 .store-feature { background: var(--ink-deep); }
-.store-feature .section-heading h2 { max-width: 880px; }
+.store-feature__heading { align-items: end; display: flex; gap: 44px; justify-content: space-between; margin-bottom: clamp(42px, 6vw, 72px); }
+.store-feature__intro { max-width: 650px; }
+.store-feature__intro .eyebrow { margin-bottom: 16px; }
+.store-feature__intro h2 { margin-bottom: 20px; }
+.store-feature__intro p:not(.eyebrow) { color: var(--paper-soft); font-size: 1rem; margin: 0; max-width: 540px; }
+.store-feature__all { margin-top: 42px; }
 .collection-preview { display: grid; gap: 1px; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: hidden; }
 .collection-preview article { background: linear-gradient(150deg, rgba(230, 164, 126, 0.08), transparent 54%), var(--surface); min-height: 330px; padding: clamp(28px, 4vw, 46px); position: relative; transition: background 220ms ease, transform 220ms ease; }
 .collection-preview article:hover { background: linear-gradient(150deg, rgba(230, 164, 126, 0.17), transparent 58%), var(--surface-raised); }
@@ -129,6 +137,7 @@ p { margin: 0 0 1.25em; }
 .woocommerce ul.products li.product:hover a img { filter: brightness(1.04); transform: translateY(-5px); }
 .woocommerce ul.products li.product .woocommerce-loop-product__title { color: var(--paper); font-family: var(--display); font-size: clamp(1.6rem, 2.4vw, 2.15rem); letter-spacing: -0.025em; padding-top: 20px; }
 .woocommerce ul.products li.product .price, .woocommerce div.product p.price, .woocommerce div.product span.price { color: var(--bronze-light); font-weight: 700; }
+.woocommerce ul.products li.product .button { margin-top: 12px; }
 .woocommerce span.onsale { background: var(--bronze); }
 .woocommerce-message, .woocommerce-info, .woocommerce-error { background: var(--paper); border-top-color: var(--bronze); color: var(--ink); }
 .woocommerce form .form-row input.input-text, .woocommerce form .form-row textarea, .woocommerce .quantity .qty, .woocommerce select { background: var(--paper); border: 1px solid #d8d2ca; border-radius: 9px; color: var(--ink); min-height: 48px; padding: 9px 13px; }
@@ -148,10 +157,10 @@ p { margin: 0 0 1.25em; }
 /* Inner-page heroes */
 .page-hero { align-items: end; background-position: center; background-size: cover; display: flex; min-height: clamp(500px, 62vh, 680px); overflow: hidden; position: relative; }
 .page-hero::after { border: 1px solid rgba(241, 237, 230, 0.13); border-radius: 50%; content: ""; height: min(46vw, 660px); position: absolute; right: -12vw; top: -22vw; width: min(46vw, 660px); }
-.page-hero--about { background-image: url("../images/arcanjo-roma.png"); background-position: center 36%; }
-.page-hero--podcast { background-image: url("../images/vaticano-nuvens.png"); }
-.page-hero--blog { background-image: url("../images/biblioteca.png"); background-position: center 52%; }
-.page-hero--store { background-image: url("../images/livro.png"); background-position: center 46%; }
+.page-hero--about { background-image: url("../images/arcanjo-roma.png"); background-image: image-set(url("../images/arcanjo-roma.webp") type("image/webp"), url("../images/arcanjo-roma.png") type("image/png")); background-position: center 36%; }
+.page-hero--podcast { background-image: url("../images/vaticano-nuvens.png"); background-image: image-set(url("../images/vaticano-nuvens.webp") type("image/webp"), url("../images/vaticano-nuvens.png") type("image/png")); }
+.page-hero--blog { background-image: url("../images/biblioteca.png"); background-image: image-set(url("../images/biblioteca.webp") type("image/webp"), url("../images/biblioteca.png") type("image/png")); background-position: center 52%; }
+.page-hero--store { background-image: url("../images/livro.png"); background-image: image-set(url("../images/livro.webp") type("image/webp"), url("../images/livro.png") type("image/png")); background-position: center 46%; }
 .page-hero__overlay { background: linear-gradient(90deg, rgba(9, 12, 15, 0.9), rgba(9, 12, 15, 0.38) 72%), linear-gradient(0deg, rgba(9, 12, 15, 0.9), transparent 60%); inset: 0; position: absolute; }
 .page-hero__content { padding-block: clamp(62px, 8vw, 100px); position: relative; z-index: 1; }
 .page-hero h1 { font-size: clamp(3.8rem, 6.2vw, 6.6rem); margin: 0; max-width: 980px; }
@@ -294,6 +303,7 @@ p { margin: 0 0 1.25em; }
   .hero h1 { font-size: clamp(3.7rem, 14vw, 5.8rem); }
   .episode-grid, .post-grid, .platform-grid, .contact-layout, .about-layout, .manifesto__inner, .site-footer__grid, .store-context { grid-template-columns: 1fr; }
   .section-heading--split { align-items: flex-start; flex-direction: column; gap: 22px; }
+  .store-feature__heading { align-items: flex-start; flex-direction: column; gap: 28px; }
   .collection-preview { grid-template-columns: 1fr; }
   .collection-preview article { min-height: 250px; }
   .collection-preview h3 { margin-top: 70px; }

@@ -12,8 +12,8 @@ $status = isset( $_GET['estado'] ) ? sanitize_key( wp_unslash( $_GET['estado'] )
 <main id="primary" class="site-main section-pad contact-page">
 	<div class="content-shell content-shell--wide contact-layout">
 		<section class="contact-intro">
-			<h1><?php esc_html_e( 'Agradeço Feedback.', 'bronzepodcast' ); ?></h1>
-			<p><?php esc_html_e( 'Para questões sobre o Podcast, imprensa, encomendas ou para continuar uma conversa começada num episódio.', 'bronzepodcast' ); ?></p>
+			<h1><?php esc_html_e( 'Agradeço o teu feedback.', 'bronzepodcast' ); ?></h1>
+			<p><?php esc_html_e( 'Para questões sobre o podcast, imprensa, encomendas ou para continuar uma conversa começada num episódio.', 'bronzepodcast' ); ?></p>
 			<a class="contact-email" href="mailto:info@bronzepodcast.com">info@bronzepodcast.com</a>
 			<div class="contact-topics" aria-label="<?php esc_attr_e( 'Assuntos de contacto', 'bronzepodcast' ); ?>">
 				<span><?php esc_html_e( 'Podcast', 'bronzepodcast' ); ?></span>
@@ -23,7 +23,7 @@ $status = isset( $_GET['estado'] ) ? sanitize_key( wp_unslash( $_GET['estado'] )
 		</section>
 
 		<section class="contact-form-card" aria-labelledby="contact-form-title">
-			<p class="eyebrow"><?php esc_html_e( 'Envie uma mensagem', 'bronzepodcast' ); ?></p>
+			<p class="eyebrow"><?php esc_html_e( 'Envia uma mensagem', 'bronzepodcast' ); ?></p>
 			<h2 id="contact-form-title" class="screen-reader-text"><?php esc_html_e( 'Formulário de contacto', 'bronzepodcast' ); ?></h2>
 			<?php if ( 'enviado' === $status ) : ?>
 				<p class="form-status form-status--success" role="status"><?php esc_html_e( 'Obrigado. A sua mensagem foi enviada.', 'bronzepodcast' ); ?></p>
@@ -39,15 +39,15 @@ $status = isset( $_GET['estado'] ) ? sanitize_key( wp_unslash( $_GET['estado'] )
 					<input id="contact-website" type="text" name="website" tabindex="-1" autocomplete="off">
 				</p>
 				<p>
-					<label for="contact-name"><?php esc_html_e( 'O seu nome', 'bronzepodcast' ); ?></label>
+					<label for="contact-name"><?php esc_html_e( 'O teu nome', 'bronzepodcast' ); ?></label>
 					<input id="contact-name" type="text" name="nome" autocomplete="name" required>
 				</p>
 				<p>
-					<label for="contact-email"><?php esc_html_e( 'O seu email', 'bronzepodcast' ); ?></label>
+					<label for="contact-email"><?php esc_html_e( 'O teu email', 'bronzepodcast' ); ?></label>
 					<input id="contact-email" type="email" name="email" autocomplete="email" required>
 				</p>
 				<p>
-					<label for="contact-message"><?php esc_html_e( 'A sua mensagem', 'bronzepodcast' ); ?></label>
+					<label for="contact-message"><?php esc_html_e( 'A tua mensagem', 'bronzepodcast' ); ?></label>
 					<textarea id="contact-message" name="mensagem" rows="7" required></textarea>
 				</p>
 				<button class="button button--accent" type="submit"><?php esc_html_e( 'Enviar mensagem', 'bronzepodcast' ); ?><span aria-hidden="true">→</span></button>

@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '0.5.4' );
+define( 'BRONZEPODCAST_VERSION', '0.5.8' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -91,6 +91,10 @@ add_action( 'wp_enqueue_scripts', 'bronzepodcast_assets' );
  * @return string
  */
 function bronzepodcast_document_title( $title ) {
+	if ( is_front_page() ) {
+		return 'Bronze Podcast — Fé católica, tradição e Portugal';
+	}
+
 	$site_name = get_bloginfo( 'name' );
 
 	if ( $site_name ) {
@@ -100,6 +104,18 @@ function bronzepodcast_document_title( $title ) {
 	return $title;
 }
 add_filter( 'pre_get_document_title', 'bronzepodcast_document_title' );
+
+/**
+ * Declara a língua editorial do site no HTML público, mesmo em instalações
+ * WordPress herdadas cuja língua do painel ainda não tenha sido atualizada.
+ *
+ * @param string $attributes Atributos calculados pelo WordPress.
+ * @return string
+ */
+function bronzepodcast_language_attributes( $attributes ) {
+	return 'lang="pt-PT" dir="ltr"';
+}
+add_filter( 'language_attributes', 'bronzepodcast_language_attributes' );
 
 function bronzepodcast_excerpt_length() {
 	return 26;
@@ -292,17 +308,32 @@ add_filter( 'woocommerce_product_single_add_to_cart_text', 'bronzepodcast_loop_a
  * palavras-chave repetidas.
  */
 function bronzepodcast_seo_head() {
-	if ( is_admin() ) {
+	global $wp;
+
+	if ( is_admin() || defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || defined( 'SEOPRESS_VERSION' ) ) {
 		return;
 	}
 
 	$description = 'Bronze Podcast: conversas sobre fé católica, tradição e Portugal. Episódios em vídeo e áudio, e uma loja de livros, terços e artigos religiosos.';
-	if ( function_exists( 'is_shop' ) && is_shop() ) {
+	if ( is_front_page() ) {
+		$description = 'Bronze Podcast: fé católica, tradição e Portugal. Vê e ouve os episódios mais recentes e descobre a loja de terços, livros e artigos religiosos.';
+	} elseif ( function_exists( 'is_shop' ) && is_shop() ) {
 		$description = 'Loja do Bronze Podcast: livros, terços e artigos religiosos escolhidos para a vida de oração, a formação e a casa.';
 	} elseif ( is_page( 'podcast' ) ) {
 		$description = 'Ouve e vê o Bronze Podcast no YouTube e Spotify: conversas sobre fé católica, tradição e Portugal.';
 	} elseif ( is_page( 'sobre' ) ) {
 		$description = 'Conhece o Bronze Podcast, criado por Diogo Bronze Silva em 2020 para conversar sobre fé católica, tradição e Portugal.';
+	} elseif ( is_page( 'contacto' ) ) {
+		$description = 'Entra em contacto com o Bronze Podcast para questões sobre episódios, imprensa ou encomendas.';
+	} elseif ( is_singular() ) {
+		$summary = get_post_field( 'post_excerpt', get_queried_object_id() );
+		if ( ! $summary ) {
+			$summary = get_post_field( 'post_content', get_queried_object_id() );
+		}
+		$summary = wp_trim_words( wp_strip_all_tags( strip_shortcodes( $summary ) ), 28, '' );
+		if ( $summary ) {
+			$description = $summary;
+		}
 	}
 
 	$share_image = is_singular() ? get_the_post_thumbnail_url( get_queried_object_id(), 'large' ) : '';
@@ -310,12 +341,27 @@ function bronzepodcast_seo_head() {
 		$share_image = get_template_directory_uri() . '/assets/images/fatima-noite.png';
 	}
 
+	$path = isset( $wp->request ) ? $wp->request : '';
+	$url  = is_singular() ? get_permalink() : home_url( '/' . $path . '/' );
+
 	echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
+	if ( is_search() ) {
+		echo '<meta name="robots" content="noindex,follow">' . "\n";
+	}
+	if ( ! is_singular() ) {
+		echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
+	}
+	echo '<meta property="og:locale" content="pt_PT">' . "\n";
 	echo '<meta property="og:site_name" content="Bronze Podcast">' . "\n";
-	echo '<meta property="og:type" content="website">' . "\n";
+	echo '<meta property="og:type" content="' . ( is_singular( 'post' ) ? 'article' : 'website' ) . '">' . "\n";
 	echo '<meta property="og:title" content="' . esc_attr( wp_get_document_title() ) . '">' . "\n";
 	echo '<meta property="og:description" content="' . esc_attr( $description ) . '">' . "\n";
+	echo '<meta property="og:url" content="' . esc_url( $url ) . '">' . "\n";
 	echo '<meta property="og:image" content="' . esc_url( $share_image ) . '">' . "\n";
+	if ( is_singular( 'post' ) ) {
+		echo '<meta property="article:published_time" content="' . esc_attr( get_the_date( DATE_W3C ) ) . '">' . "\n";
+		echo '<meta property="article:modified_time" content="' . esc_attr( get_the_modified_date( DATE_W3C ) ) . '">' . "\n";
+	}
 	echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
 	$data = array(
 		'@context' => 'https://schema.org',
@@ -334,7 +380,7 @@ function bronzepodcast_seo_head() {
 				'url'          => home_url( '/' ),
 				'logo'         => get_template_directory_uri() . '/assets/images/logo.png',
 				'email'        => 'info@bronzepodcast.com',
-				'sameAs'       => array( 'https://www.youtube.com/@bronzepodcast', 'https://www.instagram.com/bronzepodcast/', 'https://x.com/bronzpodcast' ),
+				'sameAs'       => array( 'https://www.youtube.com/@bronzepodcast', 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg', 'https://www.instagram.com/bronzepodcast/', 'https://x.com/bronzpodcast' ),
 			),
 			array(
 				'@type'        => 'PodcastSeries',
@@ -351,6 +397,102 @@ function bronzepodcast_seo_head() {
 	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
 }
 add_action( 'wp_head', 'bronzepodcast_seo_head', 2 );
+
+/**
+ * A instalação de origem publica um índice de sitemap cujos ficheiros filhos
+ * respondem com 404. Desativamos esse índice nativo e publicamos abaixo uma
+ * sitemap única, diretamente rastreável por Google e Search Console.
+ *
+ * @return false
+ */
+function bronzepodcast_disable_broken_core_sitemap() {
+	return false;
+}
+add_filter( 'wp_sitemaps_enabled', 'bronzepodcast_disable_broken_core_sitemap' );
+
+/**
+ * Lista as páginas editoriais, produtos e coleções numa sitemap XML pequena e
+ * estável. Interceta igualmente /wp-sitemap.xml para corrigir instalações
+ * onde a sitemap nativa do WordPress ficou indisponível após a migração.
+ *
+ * @return void
+ */
+function bronzepodcast_output_sitemap() {
+	if ( is_admin() || ! isset( $_SERVER['REQUEST_URI'] ) ) {
+		return;
+	}
+
+	$path = wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH );
+	if ( ! in_array( untrailingslashit( $path ), array( '/wp-sitemap.xml', '/sitemap.xml' ), true ) ) {
+		return;
+	}
+
+	$items = array(
+		array(
+			'loc'     => home_url( '/' ),
+			'lastmod' => get_lastpostmodified( 'GMT' ),
+		),
+	);
+
+	foreach ( array( 'page', 'post', 'product' ) as $post_type ) {
+		$posts = get_posts(
+			array(
+				'post_type'      => $post_type,
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'orderby'        => 'modified',
+				'order'          => 'DESC',
+			)
+		);
+
+		foreach ( $posts as $post ) {
+			$items[] = array(
+				'loc'     => get_permalink( $post ),
+				'lastmod' => get_post_modified_time( 'c', true, $post ),
+			);
+		}
+	}
+
+	if ( taxonomy_exists( 'product_cat' ) ) {
+		$categories = get_terms(
+			array(
+				'taxonomy'   => 'product_cat',
+				'hide_empty' => true,
+			)
+		);
+
+		if ( ! is_wp_error( $categories ) ) {
+			foreach ( $categories as $category ) {
+				$url = get_term_link( $category );
+				if ( ! is_wp_error( $url ) ) {
+					$items[] = array( 'loc' => $url );
+				}
+			}
+		}
+	}
+
+	$items = array_values(
+		array_unique(
+			$items,
+			SORT_REGULAR
+		)
+	);
+
+	status_header( 200 );
+	header( 'Content-Type: application/xml; charset=UTF-8' );
+	echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+	echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+	foreach ( $items as $item ) {
+		echo "\t<url><loc>" . esc_url( $item['loc'] ) . '</loc>';
+		if ( ! empty( $item['lastmod'] ) ) {
+			echo '<lastmod>' . esc_html( gmdate( 'c', strtotime( $item['lastmod'] ) ) ) . '</lastmod>';
+		}
+		echo "</url>\n";
+	}
+	echo '</urlset>';
+	exit;
+}
+add_action( 'template_redirect', 'bronzepodcast_output_sitemap', 0 );
 
 function bronzepodcast_woocommerce_wrappers() {
 	remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
