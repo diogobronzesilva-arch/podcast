@@ -7,11 +7,13 @@ Tema personalizado para reconstruir `bronzepodcast.com` em código, com o catál
 - Identidade visual, logótipo e imagens principais guardados no próprio tema.
 - Cabeçalho responsivo e navegação móvel.
 - Página inicial com os episódios atualmente destacados e produtos recentes.
-- Páginas próprias para `/sobre/`, `/podcast/`, `/blog-list/`, `/loja/` e `/contacto/`.
+- Páginas próprias para `/sobre/`, `/podcast/`, `/loja/` e `/contacto/`.
 - Criação automática e não destrutiva das páginas e do menu ao ativar o tema.
 - Formulário de contacto com validação, proteção por nonce e campo anti-spam.
 - Templates de artigos, arquivo, pesquisa e erro 404.
 - Integração base com WooCommerce.
+- Guia de voz para manter o copy próximo da identidade de Diogo Bronze.
+- Processo documentado de validação, staging, publicação e rollback.
 - Preparado para traduções e para um tema-filho no futuro.
 
 ## Instalação
@@ -30,11 +32,16 @@ Tema personalizado para reconstruir `bronzepodcast.com` em código, com o catál
 - `/`
 - `/sobre/`
 - `/podcast/`
-- `/blog-list/`
 - `/loja/`
 - `/contacto/`
 
 O inventário completo dos endereços públicos já encontrados está em [`docs/inventario-site.md`](docs/inventario-site.md).
+
+## Publicação segura
+
+- [`docs/release-workflow.md`](docs/release-workflow.md): fonte oficial, testes, staging, backup, publicação e rollback.
+- [`docs/voz-e-copy.md`](docs/voz-e-copy.md): princípios de voz e decisões de copy para todas as páginas.
+- [`docs/roadmap.md`](docs/roadmap.md): sequência de trabalho e condições para a abertura pública.
 
 ## Próximas etapas
 

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "800px",
+      "wideSize": "1280px"
+    },
+    "color": {
+      "defaultPalette": false,
+      "palette": [
+        { "slug": "ink", "color": "#111417", "name": "Tinta" },
+        { "slug": "paper", "color": "#f1ede6", "name": "Papel" },
+        { "slug": "white", "color": "#ffffff", "name": "Branco" },
+        { "slug": "bronze", "color": "#c77b55", "name": "Bronze" },
+        { "slug": "blue", "color": "#17374b", "name": "Azul profundo" }
+      ]
+    },
+    "typography": {
+      "fluid": true,
+      "fontFamilies": [
+        { "slug": "display", "name": "Cormorant Garamond", "fontFamily": "'Cormorant Garamond', Georgia, serif" },
+        { "slug": "sans", "name": "Manrope", "fontFamily": "Manrope, Arial, sans-serif" }
+      ]
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "#111417",
+      "text": "#f1ede6"
+    },
+    "typography": {
+      "fontFamily": "Manrope, Arial, sans-serif",
+      "lineHeight": "1.7"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "'Cormorant Garamond', Georgia, serif",
+          "fontWeight": "500",
+          "lineHeight": "1"
+        }
+      },
+      "link": {
+        "color": { "text": "#f1ede6" }
+      }
+    }
+  }
+}

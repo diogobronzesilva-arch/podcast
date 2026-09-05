@@ -1,0 +1,67 @@
+name: Verificar tema WordPress
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  php-lint:
+    name: PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["8.1", "8.2", "8.3"]
+    steps:
+      - name: Obter código
+        uses: actions/checkout@v4
+
+      - name: Preparar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Validar ficheiros PHP
+        run: find wp-content/themes/bronzepodcast -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+  theme-package:
+    name: Validar e empacotar tema
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter código
+        uses: actions/checkout@v4
+
+      - name: Confirmar ficheiros obrigatórios
+        run: |
+          test -s wp-content/themes/bronzepodcast/style.css
+          test -s wp-content/themes/bronzepodcast/index.php
+          test -s wp-content/themes/bronzepodcast/functions.php
+
+      - name: Validar JavaScript e theme.json
+        run: |
+          node --check wp-content/themes/bronzepodcast/assets/js/navigation.js
+          jq empty wp-content/themes/bronzepodcast/theme.json
+
+      - name: Confirmar versão do tema
+        run: |
+          theme_version=$(awk -F ': ' '/^Version:/ { print $2; exit }' wp-content/themes/bronzepodcast/style.css)
+          code_version=$(sed -n "s/define( 'BRONZEPODCAST_VERSION', '\([^']*\)' );/\1/p" wp-content/themes/bronzepodcast/functions.php)
+          test -n "$theme_version"
+          test "$theme_version" = "$code_version"
+
+      - name: Criar pacote instalável
+        run: |
+          cd wp-content/themes
+          zip -rq "$GITHUB_WORKSPACE/bronzepodcast-theme.zip" bronzepodcast
+
+      - name: Validar pacote instalável
+        run: unzip -t bronzepodcast-theme.zip
+
+      - name: Guardar pacote
+        uses: actions/upload-artifact@v4
+        with:
+          name: bronzepodcast-theme
+          path: bronzepodcast-theme.zip
