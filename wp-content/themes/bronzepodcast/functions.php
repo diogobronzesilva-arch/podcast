@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.0.3' );
+define( 'BRONZEPODCAST_VERSION', '1.0.4' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -778,4 +778,17 @@ function bronzepodcast_filter_woocommerce_ngettext( $translation, $single, $plur
 	return $translation;
 }
 add_filter( 'ngettext', 'bronzepodcast_filter_woocommerce_ngettext', 20, 5 );
+
+/**
+ * Simplifica o texto dos botões na listagem de produtos (loja e página inicial) para 'Comprar'.
+ * Nas páginas individuais de produto mantém-se 'Adicionar ao carrinho'.
+ */
+function bronzepodcast_product_add_to_cart_text( $text, $product ) {
+	if ( ! is_product() ) {
+		return __( 'Comprar', 'bronzepodcast' );
+	}
+	return $text;
+}
+add_filter( 'woocommerce_product_add_to_cart_text', 'bronzepodcast_product_add_to_cart_text', 99, 2 );
+
 
