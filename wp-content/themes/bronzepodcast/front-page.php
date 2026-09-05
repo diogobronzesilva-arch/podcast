@@ -59,7 +59,7 @@ get_header();
 			</div>
 
 			<?php if ( class_exists( 'WooCommerce' ) && function_exists( 'wc_get_products' ) && wc_get_products( array( 'limit' => 1, 'status' => 'publish', 'return' => 'ids' ) ) ) : ?>
-				<?php echo do_shortcode( '[products limit="6" columns="3" orderby="date" order="DESC" visibility="visible"]' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php echo do_shortcode( '[products limit="6" columns="3" category="tercos-de-combate" orderby="menu_order date" order="ASC" visibility="visible"]' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				<a class="store-feature__all text-link" href="<?php echo esc_url( bronzepodcast_store_url() ); ?>"><?php esc_html_e( 'Ver todas as peças', 'bronzepodcast' ); ?> <span aria-hidden="true">→</span></a>
 			<?php else : ?>
 				<div class="collection-preview" aria-label="<?php esc_attr_e( 'Coleções em preparação', 'bronzepodcast' ); ?>">
