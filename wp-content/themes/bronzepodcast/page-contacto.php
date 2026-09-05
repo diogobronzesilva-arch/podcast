@@ -26,9 +26,9 @@ $status = isset( $_GET['estado'] ) ? sanitize_key( wp_unslash( $_GET['estado'] )
 			<p class="eyebrow"><?php esc_html_e( 'Envia uma mensagem', 'bronzepodcast' ); ?></p>
 			<h2 id="contact-form-title" class="screen-reader-text"><?php esc_html_e( 'Formulário de contacto', 'bronzepodcast' ); ?></h2>
 			<?php if ( 'enviado' === $status ) : ?>
-				<p class="form-status form-status--success" role="status"><?php esc_html_e( 'Obrigado. A sua mensagem foi enviada.', 'bronzepodcast' ); ?></p>
+				<p class="form-status form-status--success" role="status"><?php esc_html_e( 'Obrigado. A tua mensagem foi enviada.', 'bronzepodcast' ); ?></p>
 			<?php elseif ( 'erro' === $status ) : ?>
-				<p class="form-status form-status--error" role="alert"><?php esc_html_e( 'Não foi possível enviar a mensagem. Confirme os campos ou escreva-nos por email.', 'bronzepodcast' ); ?></p>
+				<p class="form-status form-status--error" role="alert"><?php esc_html_e( 'Não foi possível enviar a mensagem. Confirma os teus dados ou escreve por email.', 'bronzepodcast' ); ?></p>
 			<?php endif; ?>
 
 			<form class="contact-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">

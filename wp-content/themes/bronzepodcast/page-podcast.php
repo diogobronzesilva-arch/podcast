@@ -33,7 +33,7 @@ get_header();
 
 	<section class="podcast-cta section-pad">
 		<div class="content-shell podcast-cta__inner">
-			<p class="eyebrow"><?php esc_html_e( 'Acompanhe o projecto', 'bronzepodcast' ); ?></p>
+			<p class="eyebrow"><?php esc_html_e( 'Acompanha o projeto', 'bronzepodcast' ); ?></p>
 			<h2><?php esc_html_e( 'Não percas o próximo.', 'bronzepodcast' ); ?></h2>
 			<p><?php esc_html_e( 'Subscreve o canal no YouTube. É lá que os episódios aparecem primeiro e a conversa continua.', 'bronzepodcast' ); ?></p>
 			<a class="button button--accent" href="https://www.youtube.com/@bronzepodcast" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Subscrever no YouTube', 'bronzepodcast' ); ?><span aria-hidden="true">↗</span></a>

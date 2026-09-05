@@ -20,9 +20,9 @@ get_header();
 	<section class="section-pad">
 		<div class="content-shell content-shell--wide">
 			<div class="store-promises" aria-label="<?php esc_attr_e( 'Compromissos da Loja Bronze', 'bronzepodcast' ); ?>">
-				<span><?php esc_html_e( 'Livros e devoções', 'bronzepodcast' ); ?></span>
-				<span><?php esc_html_e( 'Para rezar e aprender', 'bronzepodcast' ); ?></span>
-				<span><?php esc_html_e( 'Envio a partir de Portugal', 'bronzepodcast' ); ?></span>
+				<span><?php esc_html_e( 'Escolhas com critério', 'bronzepodcast' ); ?></span>
+				<span><?php esc_html_e( 'Para rezar, ler e oferecer', 'bronzepodcast' ); ?></span>
+				<span><?php esc_html_e( 'Enviado a partir de Portugal', 'bronzepodcast' ); ?></span>
 			</div>
 			<?php if ( class_exists( 'WooCommerce' ) ) : ?>
 				<?php echo do_shortcode( '[products columns="3" paginate="true"]' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

@@ -26,6 +26,7 @@ get_header();
 			<?php the_posts_pagination(); ?>
 		<?php else : ?>
 			<p><?php esc_html_e( 'Não encontrámos resultados. Tenta uma pesquisa diferente.', 'bronzepodcast' ); ?></p>
+			<?php get_search_form(); ?>
 		<?php endif; ?>
 	</div>
 </main>
