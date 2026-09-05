@@ -43,7 +43,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 	<div class="content-shell content-shell--wide site-footer__legal">
 		<p>&copy; <?php echo esc_html( wp_date( 'Y' ) ); ?> Bronze Podcast · <?php esc_html_e( 'Feito em Portugal', 'bronzepodcast' ); ?></p>
-		<a href="https://tesourofieis.com" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Oração e vida espiritual', 'bronzepodcast' ); ?> ↗</a>
+		<nav class="legal-links" aria-label="<?php esc_attr_e( 'Informações legais e transparência', 'bronzepodcast' ); ?>">
+			<a href="<?php echo esc_url( home_url( '/termos-e-condicoes/' ) ); ?>"><?php esc_html_e( 'Termos e Condições', 'bronzepodcast' ); ?></a>
+			<a href="<?php echo esc_url( home_url( '/politica-de-privacidade/' ) ); ?>"><?php esc_html_e( 'Privacidade', 'bronzepodcast' ); ?></a>
+			<a href="<?php echo esc_url( home_url( '/envios-e-devolucoes/' ) ); ?>"><?php esc_html_e( 'Envios e Devoluções', 'bronzepodcast' ); ?></a>
+			<a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Livro de Reclamações', 'bronzepodcast' ); ?> <span aria-hidden="true">↗</span></a>
+			<a href="https://tesourofieis.com" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Oração e vida espiritual', 'bronzepodcast' ); ?> <span aria-hidden="true">↗</span></a>
+		</nav>
 	</div>
 </footer>
 <?php wp_footer(); ?>

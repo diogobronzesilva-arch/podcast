@@ -9,10 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '0.5.9' );
+define( 'BRONZEPODCAST_VERSION', '0.6.0' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
+require_once get_template_directory() . '/inc/shipping.php';
 
 function bronzepodcast_setup() {
 	load_theme_textdomain( 'bronzepodcast', get_template_directory() . '/languages' );
@@ -94,6 +95,27 @@ function bronzepodcast_document_title( $title ) {
 	if ( is_front_page() ) {
 		return 'Bronze Podcast — Fé católica, tradição e Portugal';
 	}
+	if ( function_exists( 'is_shop' ) && is_shop() ) {
+		return 'Loja Bronze — Terços de Combate, Livros e Artigos Religiosos';
+	}
+	if ( is_page( 'sobre' ) ) {
+		return 'Sobre o Bronze Podcast — Fé, Tradição e Portugal';
+	}
+	if ( is_page( 'podcast' ) ) {
+		return 'Bronze Podcast — Vídeo e Áudio no YouTube e Spotify';
+	}
+	if ( is_page( 'contacto' ) ) {
+		return 'Contacto — Bronze Podcast';
+	}
+	if ( function_exists( 'is_cart' ) && is_cart() ) {
+		return 'Carrinho — Loja Bronze';
+	}
+	if ( function_exists( 'is_checkout' ) && is_checkout() ) {
+		return 'Finalizar Encomenda — Loja Bronze';
+	}
+	if ( function_exists( 'is_account_page' ) && is_account_page() ) {
+		return 'A Minha Conta — Bronze Podcast';
+	}
 
 	$site_name = get_bloginfo( 'name' );
 
@@ -101,7 +123,7 @@ function bronzepodcast_document_title( $title ) {
 		return str_replace( $site_name, 'Bronze Podcast', $title );
 	}
 
-	return $title;
+	return sprintf( '%s — Bronze Podcast', $title );
 }
 add_filter( 'pre_get_document_title', 'bronzepodcast_document_title' );
 
@@ -116,6 +138,44 @@ function bronzepodcast_language_attributes( $attributes ) {
 	return 'lang="pt-PT" dir="ltr"';
 }
 add_filter( 'language_attributes', 'bronzepodcast_language_attributes' );
+
+/**
+ * Força a localização para Português de Portugal (pt_PT) no frontend público,
+ * garantindo a tradução de todas as strings e microcópia do WooCommerce.
+ *
+ * @param string $locale Código de idioma atual.
+ * @return string
+ */
+function bronzepodcast_force_frontend_locale( $locale ) {
+	if ( ! is_admin() ) {
+		return 'pt_PT';
+	}
+	return $locale;
+}
+add_filter( 'locale', 'bronzepodcast_force_frontend_locale' );
+
+/**
+ * Traduz e alinha os títulos das páginas essenciais da loja WooCommerce.
+ *
+ * @param string   $title Título original da página.
+ * @param int|null $id    ID da página.
+ * @return string
+ */
+function bronzepodcast_fix_page_titles( $title, $id = null ) {
+	if ( ! is_admin() && in_the_loop() && is_main_query() ) {
+		if ( function_exists( 'is_checkout' ) && is_checkout() ) {
+			return function_exists( 'is_order_received_page' ) && is_order_received_page() ? __( 'Encomenda Recebida', 'bronzepodcast' ) : __( 'Finalizar Encomenda', 'bronzepodcast' );
+		}
+		if ( function_exists( 'is_cart' ) && is_cart() ) {
+			return __( 'Carrinho', 'bronzepodcast' );
+		}
+		if ( function_exists( 'is_account_page' ) && is_account_page() ) {
+			return __( 'A Minha Conta', 'bronzepodcast' );
+		}
+	}
+	return $title;
+}
+add_filter( 'the_title', 'bronzepodcast_fix_page_titles', 10, 2 );
 
 function bronzepodcast_excerpt_length() {
 	return 26;
@@ -446,6 +506,9 @@ function bronzepodcast_output_sitemap() {
 		);
 
 		foreach ( $posts as $post ) {
+			if ( 'shop' === $post->post_name ) {
+				continue;
+			}
 			$items[] = array(
 				'loc'     => get_permalink( $post ),
 				'lastmod' => get_post_modified_time( 'c', true, $post ),
@@ -463,6 +526,9 @@ function bronzepodcast_output_sitemap() {
 
 		if ( ! is_wp_error( $categories ) ) {
 			foreach ( $categories as $category ) {
+				if ( in_array( $category->slug, array( 'uncategorized', 'sem-categoria' ), true ) ) {
+					continue;
+				}
 				$url = get_term_link( $category );
 				if ( ! is_wp_error( $url ) ) {
 					$items[] = array( 'loc' => $url );
@@ -493,6 +559,52 @@ function bronzepodcast_output_sitemap() {
 	exit;
 }
 add_action( 'template_redirect', 'bronzepodcast_output_sitemap', 0 );
+
+/**
+ * Redireciona 301 o endereço herdado /shop/ para a página oficial /loja/.
+ */
+function bronzepodcast_redirect_old_shop() {
+	if ( is_admin() || ! isset( $_SERVER['REQUEST_URI'] ) ) {
+		return;
+	}
+
+	$path = untrailingslashit( wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ) );
+	if ( '/shop' === $path ) {
+		wp_safe_redirect( home_url( '/loja/' ), 301 );
+		exit;
+	}
+}
+add_action( 'template_redirect', 'bronzepodcast_redirect_old_shop', 1 );
+
+/**
+ * Corrige a renderização do Checkout, garantindo que o formulário de finalização
+ * de compra e métodos de pagamento são apresentados em vez do bloco de carrinho.
+ *
+ * @param string $content Conteúdo da página.
+ * @return string
+ */
+function bronzepodcast_fix_checkout_content( $content ) {
+	if ( is_admin() ) {
+		return $content;
+	}
+
+	$is_checkout_url = false;
+	if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+		$req_path = untrailingslashit( wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ) );
+		if ( in_array( $req_path, array( '/checkout', '/finalizar-compra' ), true ) ) {
+			$is_checkout_url = true;
+		}
+	}
+
+	if ( ( function_exists( 'is_checkout' ) && is_checkout() && ( ! function_exists( 'is_order_received_page' ) || ! is_order_received_page() ) ) || $is_checkout_url ) {
+		if ( strpos( $content, 'wp-block-woocommerce-cart' ) !== false || strpos( $content, 'woocommerce/cart' ) !== false || strpos( $content, 'woocommerce-checkout' ) === false ) {
+			return do_shortcode( '[woocommerce_checkout]' );
+		}
+	}
+
+	return $content;
+}
+add_filter( 'the_content', 'bronzepodcast_fix_checkout_content', 1 );
 
 function bronzepodcast_woocommerce_wrappers() {
 	remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
