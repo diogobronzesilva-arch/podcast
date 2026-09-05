@@ -25,6 +25,12 @@ if ( function_exists( 'is_shop' ) && is_shop() ) :
 	</div>
 	<?php
 endif;
-
-woocommerce_content();
+?>
+<main id="primary" class="site-main shop-main">
+	<div class="content-shell content-shell--wide">
+		<?php woocommerce_content(); ?>
+	</div>
+</main>
+<?php
 get_footer();
+
