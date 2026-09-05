@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.0.1' );
+define( 'BRONZEPODCAST_VERSION', '1.0.2' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -688,7 +688,22 @@ function bronzepodcast_woocommerce_get_availability_text( $availability, $produc
 add_filter( 'woocommerce_get_availability_text', 'bronzepodcast_woocommerce_get_availability_text', 10, 2 );
 
 /**
- * Tradução de termos específicos do WooCommerce para português de Portugal.
+ * Customiza as opções de ordenação da loja para português de Portugal.
+ */
+function bronzepodcast_woocommerce_catalog_orderby( $orderby ) {
+	return array(
+		'menu_order' => __( 'Ordem dos itens', 'bronzepodcast' ),
+		'popularity' => __( 'Popularidade', 'bronzepodcast' ),
+		'rating'     => __( 'Classificação média', 'bronzepodcast' ),
+		'date'       => __( 'Mais recentes', 'bronzepodcast' ),
+		'price'      => __( 'Preço: mais baixo para o mais alto', 'bronzepodcast' ),
+		'price-desc' => __( 'Preço: mais alto para o mais baixo', 'bronzepodcast' ),
+	);
+}
+add_filter( 'woocommerce_catalog_orderby', 'bronzepodcast_woocommerce_catalog_orderby', 99 );
+
+/**
+ * Tradução de termos e contagens do WooCommerce para português de Portugal.
  */
 function bronzepodcast_filter_woocommerce_translations( $translation, $text, $domain ) {
 	if ( 'woocommerce' === $domain ) {
@@ -713,7 +728,54 @@ function bronzepodcast_filter_woocommerce_translations( $translation, $text, $do
 		if ( 'Related products' === $text ) {
 			return 'Produtos Relacionados';
 		}
+		if ( 'Default sorting' === $text ) {
+			return 'Ordem dos itens';
+		}
+		if ( 'Sort by popularity' === $text ) {
+			return 'Popularidade';
+		}
+		if ( 'Sort by average rating' === $text ) {
+			return 'Classificação média';
+		}
+		if ( 'Sort by latest' === $text ) {
+			return 'Mais recentes';
+		}
+		if ( 'Sort by price: low to high' === $text ) {
+			return 'Preço: mais baixo para o mais alto';
+		}
+		if ( 'Sort by price: high to low' === $text ) {
+			return 'Preço: mais alto para o mais baixo';
+		}
+		if ( 'Showing the single result' === $text ) {
+			return 'A mostrar o único resultado';
+		}
+		if ( 'In stock' === $text ) {
+			return 'Em stock';
+		}
+		if ( 'Out of stock' === $text ) {
+			return 'Esgotado';
+		}
 	}
 	return $translation;
 }
 add_filter( 'gettext', 'bronzepodcast_filter_woocommerce_translations', 20, 3 );
+
+/**
+ * Tradução das contagens no plural (ex: Showing 19-27 of 56 results).
+ */
+function bronzepodcast_filter_woocommerce_ngettext( $translation, $single, $plural, $number, $domain ) {
+	if ( 'woocommerce' === $domain ) {
+		if ( strpos( $single, 'Showing %1$d' ) !== false || strpos( $plural, 'Showing %1$d' ) !== false ) {
+			return 'A mostrar %1$d&ndash;%2$d de %3$d resultados';
+		}
+		if ( strpos( $single, 'Showing all %d results' ) !== false || strpos( $plural, 'Showing all %d results' ) !== false ) {
+			return 'A mostrar todos os %d resultados';
+		}
+		if ( strpos( $single, '%s in stock' ) !== false || strpos( $plural, '%s in stock' ) !== false ) {
+			return '%s em stock';
+		}
+	}
+	return $translation;
+}
+add_filter( 'ngettext', 'bronzepodcast_filter_woocommerce_ngettext', 20, 5 );
+
