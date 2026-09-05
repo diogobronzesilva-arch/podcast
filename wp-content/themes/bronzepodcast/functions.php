@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '0.6.1' );
+define( 'BRONZEPODCAST_VERSION', '1.0.0' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -588,6 +588,14 @@ function bronzepodcast_fix_checkout_content( $content ) {
 		return $content;
 	}
 
+	if ( function_exists( 'is_order_received_page' ) && is_order_received_page() ) {
+		return $content;
+	}
+
+	if ( isset( $_SERVER['REQUEST_URI'] ) && strpos( wp_unslash( $_SERVER['REQUEST_URI'] ), 'order-received' ) !== false ) {
+		return $content;
+	}
+
 	$is_checkout_url = false;
 	if ( isset( $_SERVER['REQUEST_URI'] ) ) {
 		$req_path = untrailingslashit( wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ) );
@@ -596,7 +604,7 @@ function bronzepodcast_fix_checkout_content( $content ) {
 		}
 	}
 
-	if ( ( function_exists( 'is_checkout' ) && is_checkout() && ( ! function_exists( 'is_order_received_page' ) || ! is_order_received_page() ) ) || $is_checkout_url ) {
+	if ( ( function_exists( 'is_checkout' ) && is_checkout() ) || $is_checkout_url ) {
 		if ( strpos( $content, 'wp-block-woocommerce-cart' ) !== false || strpos( $content, 'woocommerce/cart' ) !== false || strpos( $content, 'woocommerce-checkout' ) === false ) {
 			return do_shortcode( '[woocommerce_checkout]' );
 		}
@@ -605,6 +613,16 @@ function bronzepodcast_fix_checkout_content( $content ) {
 	return $content;
 }
 add_filter( 'the_content', 'bronzepodcast_fix_checkout_content', 1 );
+
+/**
+ * Garante que o botão 'Voltar à loja' no carrinho vazio encaminha sempre para /loja/.
+ *
+ * @return string
+ */
+function bronzepodcast_return_to_shop_url() {
+	return bronzepodcast_store_url();
+}
+add_filter( 'woocommerce_return_to_shop_redirect', 'bronzepodcast_return_to_shop_url' );
 
 function bronzepodcast_woocommerce_wrappers() {
 	remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
