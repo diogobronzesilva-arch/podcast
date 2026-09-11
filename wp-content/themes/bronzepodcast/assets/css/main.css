@@ -164,14 +164,15 @@ p { margin: 0 0 1.25em; }
 .woocommerce div.product .product_meta a { color: var(--paper-soft); text-decoration: none; }
 .woocommerce div.product .product_meta a:hover { color: var(--bronze-light); }
 .woocommerce div.product div.images img { background: var(--paper); border-radius: 16px; width: 100%; }
-.woocommerce div.product .woocommerce-tabs ul.tabs { background: transparent; border-bottom: 1px solid var(--line); margin: 0 0 32px; padding: 0; }
-.woocommerce div.product .woocommerce-tabs ul.tabs::before, .woocommerce div.product .woocommerce-tabs ul.tabs::after { display: none; }
-.woocommerce div.product .woocommerce-tabs ul.tabs li { background: transparent; border: 0; border-bottom: 2px solid transparent; margin: 0 28px 0 0; padding: 0 0 14px; }
-.woocommerce div.product .woocommerce-tabs ul.tabs li::before, .woocommerce div.product .woocommerce-tabs ul.tabs li::after { display: none; }
-.woocommerce div.product .woocommerce-tabs ul.tabs li.active { border-bottom-color: var(--bronze); }
-.woocommerce div.product .woocommerce-tabs ul.tabs li a { color: var(--muted); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-.woocommerce div.product .woocommerce-tabs ul.tabs li.active a { color: var(--paper); }
-.woocommerce div.product .woocommerce-tabs .panel { color: var(--paper-soft); font-size: 1rem; line-height: 1.65; }
+.woocommerce div.product .woocommerce-tabs ul.tabs { background: transparent !important; border: 0 !important; border-bottom: 1px solid var(--line) !important; display: flex !important; flex-wrap: wrap !important; gap: 28px !important; list-style: none !important; margin: 0 0 32px !important; overflow: visible !important; padding: 0 !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs::before, .woocommerce div.product .woocommerce-tabs ul.tabs::after, .woocommerce div.product .woocommerce-tabs ul.tabs li::before, .woocommerce div.product .woocommerce-tabs ul.tabs li::after, .woocommerce div.product .woocommerce-tabs ul.tabs li.active::before, .woocommerce div.product .woocommerce-tabs ul.tabs li.active::after { border: 0 !important; box-shadow: none !important; content: none !important; display: none !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li { background: transparent !important; border: 0 !important; border-bottom: 2px solid transparent !important; border-radius: 0 !important; box-shadow: none !important; display: inline-block !important; margin: 0 !important; padding: 0 0 14px !important; position: relative !important; transition: border-color 160ms ease !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li:hover { border-bottom-color: var(--line-strong) !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active { background: transparent !important; border: 0 !important; border-bottom: 2px solid var(--bronze) !important; border-radius: 0 !important; box-shadow: none !important; z-index: 1 !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li a { background: transparent !important; border: 0 !important; box-shadow: none !important; color: var(--muted) !important; display: inline-block !important; font-size: 0.78rem !important; font-weight: 700 !important; letter-spacing: 0.1em !important; outline: none !important; padding: 0 !important; text-decoration: none !important; text-shadow: none !important; text-transform: uppercase !important; transition: color 160ms ease !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li:hover a { color: var(--paper) !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a { background: transparent !important; color: var(--bronze-light) !important; text-shadow: none !important; }
+.woocommerce div.product .woocommerce-tabs .panel { background: transparent !important; border: 0 !important; box-shadow: none !important; color: var(--paper-soft); font-size: 1rem; line-height: 1.65; margin: 0 !important; padding: 0 !important; }
 .woocommerce div.product .woocommerce-tabs .panel h2 { color: var(--paper); font-size: 1.8rem; margin-bottom: 16px; }
 .woocommerce-checkout #payment { background: var(--surface) !important; border: 1px solid var(--line) !important; border-radius: 14px !important; padding: 24px !important; }
 .woocommerce-checkout #payment ul.payment_methods { border-bottom: 1px solid var(--line) !important; margin-bottom: 20px !important; padding-bottom: 16px !important; }
