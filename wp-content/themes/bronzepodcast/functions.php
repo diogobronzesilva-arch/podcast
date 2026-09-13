@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.2.5' );
+define( 'BRONZEPODCAST_VERSION', '1.2.6' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -58,6 +58,22 @@ function bronzepodcast_setup() {
 	);
 }
 add_action( 'after_setup_theme', 'bronzepodcast_setup' );
+
+/**
+ * Garante que o novo Selo Numismático oficial da Ordem de Cristo
+ * substitui qualquer imagem legada armazenada na base de dados do WordPress.
+ */
+add_filter( 'get_custom_logo', 'bronzepodcast_force_official_logo', 999 );
+function bronzepodcast_force_official_logo( $html ) {
+	$logo_url = get_template_directory_uri() . '/assets/images/avatar_cruz_cristo.png?v=1.2.6';
+	return sprintf(
+		'<a href="%1$s" class="custom-logo-link" rel="home" aria-label="%2$s"><img src="%3$s" class="custom-logo" alt="%2$s" width="72" height="72" /></a>',
+		esc_url( home_url( '/' ) ),
+		esc_attr__( 'Bronze Podcast', 'bronzepodcast' ),
+		esc_url( $logo_url )
+	);
+}
+add_filter( 'theme_mod_custom_logo', '__return_false', 999 );
 
 function bronzepodcast_assets() {
 	wp_enqueue_style(

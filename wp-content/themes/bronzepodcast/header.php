@@ -29,13 +29,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 <header class="site-header" data-site-header>
 	<div class="site-header__inner content-shell content-shell--wide">
 		<div class="site-brand">
-			<?php if ( has_custom_logo() ) : ?>
-				<?php the_custom_logo(); ?>
-			<?php else : ?>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="<?php esc_attr_e( 'Bronze Podcast — página inicial', 'bronzepodcast' ); ?>">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/avatar_cruz_cristo.png' ); ?>" alt="<?php esc_attr_e( 'Bronze Podcast', 'bronzepodcast' ); ?>" width="72" height="72">
-				</a>
-			<?php endif; ?>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="custom-logo-link" aria-label="<?php esc_attr_e( 'Bronze Podcast — página inicial', 'bronzepodcast' ); ?>">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/avatar_cruz_cristo.png?v=1.2.6' ); ?>" alt="<?php esc_attr_e( 'Bronze Podcast', 'bronzepodcast' ); ?>" width="72" height="72" class="custom-logo">
+			</a>
 		</div>
 
 		<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" data-menu-toggle>
