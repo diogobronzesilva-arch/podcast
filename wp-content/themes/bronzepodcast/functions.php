@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.1.0' );
+define( 'BRONZEPODCAST_VERSION', '1.1.1' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -714,80 +714,94 @@ add_filter( 'woocommerce_sale_flash', 'bronzepodcast_custom_sale_flash', 10, 3 )
  * Tradução de termos e contagens do WooCommerce para português de Portugal.
  */
 function bronzepodcast_filter_woocommerce_translations( $translation, $text, $domain ) {
-	if ( 'woocommerce' === $domain ) {
-		if ( 'Sale!' === $text ) {
-			return 'Promoção';
-		}
-		if ( 'Select options' === $text ) {
-			return 'Comprar';
-		}
-		if ( 'Read more' === $text ) {
-			return 'Ver mais';
-		}
-		if ( 'View cart' === $text ) {
-			return 'Ver carrinho';
-		}
-		if ( 'Shop order' === $text ) {
-			return 'Ordenar loja';
-		}
-		if ( 'Product Pagination' === $text ) {
-			return 'Paginação de produtos';
-		}
-		if ( 'This product has multiple variants. The options may be chosen on the product page' === $text ) {
-			return 'Este artigo tem várias opções que podem ser escolhidas na página do produto.';
-		}
-		if ( '&ldquo;%s&rdquo; has been added to your cart.' === $text ) {
-			return '&ldquo;%s&rdquo; foi adicionado ao seu carrinho.';
-		}
-		if ( 'Description' === $text ) {
-			return 'Descrição';
-		}
-		if ( 'Additional information' === $text ) {
-			return 'Informação Adicional';
-		}
-		if ( 'Category:' === $text ) {
-			return 'Categoria:';
-		}
-		if ( 'Categories:' === $text ) {
-			return 'Categorias:';
-		}
-		if ( 'Tag:' === $text ) {
-			return 'Etiqueta:';
-		}
-		if ( 'Tags:' === $text ) {
-			return 'Etiquetas:';
-		}
-		if ( 'Related products' === $text ) {
-			return 'Produtos Relacionados';
-		}
-		if ( 'Default sorting' === $text ) {
-			return 'Ordem dos itens';
-		}
-		if ( 'Sort by popularity' === $text ) {
-			return 'Popularidade';
-		}
-		if ( 'Sort by average rating' === $text ) {
-			return 'Classificação média';
-		}
-		if ( 'Sort by latest' === $text ) {
-			return 'Mais recentes';
-		}
-		if ( 'Sort by price: low to high' === $text ) {
-			return 'Preço: mais baixo para o mais alto';
-		}
-		if ( 'Sort by price: high to low' === $text ) {
-			return 'Preço: mais alto para o mais baixo';
-		}
-		if ( 'Showing the single result' === $text ) {
-			return 'A mostrar o único resultado';
-		}
-		if ( 'In stock' === $text ) {
-			return 'Em stock';
-		}
-		if ( 'Out of stock' === $text ) {
-			return 'Esgotado';
+	static $translations_map = null;
+
+	if ( null === $translations_map ) {
+		$translations_map = array(
+			// Catálogo e Produtos
+			'Sale!'                                                                     => 'Promoção',
+			'Select options'                                                            => 'Comprar',
+			'Read more'                                                                 => 'Ver mais',
+			'View cart'                                                                 => 'Ver carrinho',
+			'Shop order'                                                                => 'Ordenar loja',
+			'Product Pagination'                                                        => 'Paginação de produtos',
+			'This product has multiple variants. The options may be chosen on the product page' => 'Este artigo tem várias opções que podem ser escolhidas na página do produto.',
+			'&ldquo;%s&rdquo; has been added to your cart.'                            => '&ldquo;%s&rdquo; foi adicionado ao seu carrinho.',
+			'Description'                                                               => 'Descrição',
+			'Additional information'                                                    => 'Informação Adicional',
+			'Category:'                                                                 => 'Categoria:',
+			'Categories:'                                                               => 'Categorias:',
+			'Tag:'                                                                      => 'Etiqueta:',
+			'Tags:'                                                                     => 'Etiquetas:',
+			'Related products'                                                          => 'Produtos Relacionados',
+			'Default sorting'                                                           => 'Ordem dos itens',
+			'Sort by popularity'                                                        => 'Popularidade',
+			'Sort by average rating'                                                    => 'Classificação média',
+			'Sort by latest'                                                            => 'Mais recentes',
+			'Sort by price: low to high'                                                => 'Preço: mais baixo para o mais alto',
+			'Sort by price: high to low'                                                => 'Preço: mais alto para o mais baixo',
+			'Showing the single result'                                                 => 'A mostrar o único resultado',
+			'In stock'                                                                  => 'Em stock',
+			'Out of stock'                                                              => 'Esgotado',
+
+			// Carrinho e Checkout (WooCommerce Blocks & Clássico)
+			'Shipping address'                                                          => 'Morada de envio',
+			'Billing address'                                                           => 'Morada de faturação',
+			'Billing details'                                                           => 'Dados de faturação',
+			'Payment options'                                                           => 'Opções de pagamento',
+			'Payment methods'                                                           => 'Métodos de pagamento',
+			'Shipping options'                                                          => 'Opções de envio',
+			'First name'                                                                => 'Primeiro nome',
+			'Last name'                                                                 => 'Apelido',
+			'Company'                                                                   => 'Empresa',
+			'Company (optional)'                                                        => 'Empresa (opcional)',
+			'Address'                                                                   => 'Morada',
+			'Apartment, suite, etc.'                                                    => 'Apartamento, fração, andar, etc.',
+			'Add apartment, suite, etc.'                                                => 'Apartamento, fração, andar, etc. (opcional)',
+			'Postal code'                                                               => 'Código postal',
+			'Postcode / ZIP'                                                            => 'Código postal',
+			'City'                                                                      => 'Cidade',
+			'Phone'                                                                     => 'Telefone',
+			'Phone (optional)'                                                          => 'Telefone (opcional)',
+			'Email address'                                                             => 'Endereço de email',
+			'Order notes (optional)'                                                    => 'Notas da encomenda (opcional)',
+			'Use same address for billing'                                              => 'Utilizar a mesma morada para faturação',
+			'Save payment information to my account for future purchases.'              => 'Guardar os dados de pagamento na minha conta para futuras compras.',
+			'Place order'                                                               => 'Finalizar encomenda',
+			'Place Order'                                                               => 'Finalizar encomenda',
+			'Contact information'                                                       => 'Informações de contacto',
+			'Order summary'                                                             => 'Resumo da encomenda',
+			'Subtotal'                                                                  => 'Subtotal',
+			'Total'                                                                     => 'Total',
+			'Shipping'                                                                  => 'Envio',
+			'Discount'                                                                  => 'Desconto',
+			'Coupon code'                                                               => 'Código do cupão',
+			'Apply'                                                                     => 'Aplicar',
+			'Remove'                                                                    => 'Remover',
+			'There are no payment methods available. This may be an error on our side, please contact us if you need any help placing your order.' => 'Não existem métodos de pagamento disponíveis. Se necessitar de assistência com a sua encomenda, por favor contacte-nos.',
+			'Credit Card'                                                               => 'Cartão de Crédito',
+			'Credit / Debit Card'                                                       => 'Cartão de Crédito / Débito',
+			'Card Number'                                                               => 'Número do cartão',
+			'Expiry Date'                                                               => 'Data de validade',
+			'Card Code (CVC)'                                                           => 'Código do cartão (CVC)',
+			'Return to Cart'                                                            => 'Voltar ao carrinho',
+			'Return to cart'                                                            => 'Voltar ao carrinho',
+			'Proceed to checkout'                                                       => 'Finalizar compra',
+			'Proceed to Checkout'                                                       => 'Finalizar compra',
+			'Cart totals'                                                               => 'Totais do carrinho',
+			'Update cart'                                                               => 'Atualizar carrinho',
+			'Coupon'                                                                    => 'Cupão',
+			'Apply coupon'                                                              => 'Aplicar cupão',
+			'Coupon code applied successfully.'                                         => 'Cupão aplicado com sucesso.',
+		);
+	}
+
+	if ( isset( $translations_map[ $text ] ) ) {
+		if ( empty( $domain ) || 'woocommerce' === $domain || 'woocommerce-gateway-stripe' === $domain || 'default' === $domain ) {
+			return $translations_map[ $text ];
 		}
 	}
+
 	return $translation;
 }
 add_filter( 'gettext', 'bronzepodcast_filter_woocommerce_translations', 20, 3 );
