@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.1.3' );
+define( 'BRONZEPODCAST_VERSION', '1.1.4' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -223,33 +223,131 @@ function bronzepodcast_prevent_empty_stripe_script() {
 }
 add_action( 'wp_enqueue_scripts', 'bronzepodcast_prevent_empty_stripe_script', 999 );
 
+function bronzepodcast_stripe_elements_styling( $styling = array() ) {
+	return array(
+		'base' => array(
+			'color'             => '#ffffff',
+			'fontFamily'        => 'Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+			'fontSize'          => '15px',
+			'fontWeight'        => '500',
+			'lineHeight'        => '24px',
+			'fontSmoothing'     => 'antialiased',
+			'iconColor'         => '#e6a47e',
+			'::placeholder'     => array(
+				'color' => '#d8d2c8',
+			),
+			':-webkit-autofill' => array(
+				'color' => '#ffffff',
+			),
+		),
+		'invalid' => array(
+			'color'     => '#f87171',
+			'iconColor' => '#f87171',
+		),
+	);
+}
+add_filter( 'wc_stripe_elements_styling', 'bronzepodcast_stripe_elements_styling', 999 );
+add_filter( 'wc_stripe_elements_options', function( $options ) {
+	if ( ! is_array( $options ) ) {
+		$options = array();
+	}
+	$options['style'] = bronzepodcast_stripe_elements_styling( array() );
+	return $options;
+}, 999 );
+add_filter( 'wc_stripe_params', function( $params ) {
+	if ( is_array( $params ) ) {
+		if ( ! isset( $params['elements_options'] ) || ! is_array( $params['elements_options'] ) ) {
+			$params['elements_options'] = array();
+		}
+		$params['elements_options']['style'] = bronzepodcast_stripe_elements_styling( array() );
+	}
+	return $params;
+}, 999 );
+
 function bronzepodcast_stripe_js_guard() {
 	if ( function_exists( 'is_checkout' ) && is_checkout() ) {
 		?>
 		<script>
-		/* Bronze Podcast: Proteção contra exceções de inicialização vazia da Stripe */
+		/* Bronze Podcast: Proteção contra erros vazios e estilização escura de alto contraste para o Stripe Elements */
 		(function() {
+			var patchElements = function(elementsGroup) {
+				if (!elementsGroup || elementsGroup.__bronze_patched) return elementsGroup;
+				elementsGroup.__bronze_patched = true;
+
+				var origCreate = elementsGroup.create;
+				elementsGroup.create = function(type, opts) {
+					opts = opts || {};
+					opts.style = opts.style || {};
+					opts.style.base = opts.style.base || {};
+
+					opts.style.base.color = '#ffffff';
+					opts.style.base.fontFamily = 'Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+					opts.style.base.fontSize = '15px';
+					opts.style.base.fontWeight = '500';
+					opts.style.base.lineHeight = '24px';
+					opts.style.base.iconColor = '#e6a47e';
+					opts.style.base['::placeholder'] = {
+						color: '#d8d2c8'
+					};
+					opts.style.base[':-webkit-autofill'] = {
+						color: '#ffffff'
+					};
+
+					if (!opts.style.invalid) {
+						opts.style.invalid = {};
+					}
+					opts.style.invalid.color = '#f87171';
+					opts.style.invalid.iconColor = '#f87171';
+
+					return origCreate.call(this, type, opts);
+				};
+				return elementsGroup;
+			};
+
+			var wrapStripeInstance = function(instance) {
+				if (!instance || instance.__bronze_inst_patched) return instance;
+				instance.__bronze_inst_patched = true;
+
+				var origElements = instance.elements;
+				if (typeof origElements === 'function') {
+					instance.elements = function(elementsOpts) {
+						var group = origElements.apply(this, arguments);
+						return patchElements(group);
+					};
+				}
+				return instance;
+			};
+
+			var wrapStripeFn = function(realStripe) {
+				return function(key, opts) {
+					if (!key || typeof key !== 'string' || key.trim() === '') {
+						console.warn('[Bronze Theme] Chave Stripe vazia evitada com sucesso.');
+						return {
+							elements: function() {
+								return {
+									create: function() {
+										return { mount: function() {}, on: function() {} };
+									}
+								};
+							}
+						};
+					}
+					var inst = realStripe(key, opts);
+					return wrapStripeInstance(inst);
+				};
+			};
+
 			var _rawStripe = window.Stripe;
+			if (typeof _rawStripe === 'function') {
+				window.Stripe = wrapStripeFn(_rawStripe);
+			}
+
 			Object.defineProperty(window, 'Stripe', {
 				configurable: true,
 				enumerable: true,
 				get: function() { return _rawStripe; },
 				set: function(realStripe) {
-					_rawStripe = function(key, opts) {
-						if (!key || typeof key !== 'string' || key.trim() === '') {
-							console.warn('[Bronze Theme] Chave Stripe vazia evitada com sucesso.');
-							return {
-								elements: function() {
-									return {
-										create: function() {
-											return { mount: function() {}, on: function() {} };
-										}
-									};
-								}
-							};
-						}
-						return realStripe(key, opts);
-					};
+					_rawStripe = wrapStripeFn(realStripe);
 				}
 			});
 		})();
@@ -863,9 +961,15 @@ function bronzepodcast_filter_woocommerce_translations( $translation, $text, $do
 			'There are no payment methods available. This may be an error on our side, please contact us if you need any help placing your order.' => 'Não existem métodos de pagamento disponíveis. Se necessitar de assistência com a sua encomenda, por favor contacte-nos.',
 			'Credit Card'                                                               => 'Cartão de Crédito',
 			'Credit / Debit Card'                                                       => 'Cartão de Crédito / Débito',
+			'Card'                                                                      => 'Cartão de Crédito',
 			'Card Number'                                                               => 'Número do cartão',
+			'Card number'                                                               => 'Número do cartão',
 			'Expiry Date'                                                               => 'Data de validade',
+			'Expiry'                                                                    => 'Data de validade',
 			'Card Code (CVC)'                                                           => 'Código do cartão (CVC)',
+			'Security code'                                                             => 'Código de segurança',
+			'Security Code'                                                             => 'Código de segurança',
+			'MM / YY'                                                                   => 'MM / AA',
 			'Return to Cart'                                                            => 'Voltar ao carrinho',
 			'Return to cart'                                                            => 'Voltar ao carrinho',
 			'Proceed to checkout'                                                       => 'Finalizar compra',

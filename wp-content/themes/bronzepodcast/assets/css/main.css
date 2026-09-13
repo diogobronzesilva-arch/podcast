@@ -455,6 +455,71 @@ p { margin: 0 0 1.25em; }
   transform: translateY(-2px) !important;
 }
 
+/* Stripe Elements & Card Payment Fields */
+.wc-stripe-elements-field,
+.StripeElement,
+.wc-stripe-card-element,
+.wc-stripe-card-element-container,
+.wc-stripe-inline-card-element,
+#stripe-card-element,
+#stripe-exp-element,
+#stripe-cvc-element,
+.wc-block-components-checkout-step--payment .wc-stripe-elements-field,
+.wc-block-components-checkout-step--payment .StripeElement,
+.wc-block-gateway-container .StripeElement,
+.wc-block-gateway-container .wc-stripe-elements-field,
+.wc-block-components-radio-control-accordion-content .StripeElement,
+.wc-block-components-radio-control-accordion-content .wc-stripe-elements-field,
+.wc-block-components-radio-control-accordion-content div[id^="stripe-"] {
+  background: var(--surface-raised) !important;
+  background-color: #1d2227 !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  color: #ffffff !important;
+  min-height: 48px !important;
+  padding: 13px 16px !important;
+  transition: all 180ms ease !important;
+}
+
+.StripeElement--focus,
+.wc-stripe-elements-field:focus-within,
+div[id^="stripe-"]:focus-within {
+  background-color: #22272d !important;
+  border-color: var(--bronze-light) !important;
+  box-shadow: 0 0 0 1px var(--bronze-light), 0 4px 16px rgba(0, 0, 0, 0.28) !important;
+}
+
+.StripeElement--invalid {
+  border-color: #f87171 !important;
+}
+
+.StripeElement iframe,
+.wc-stripe-elements-field iframe {
+  background: transparent !important;
+  background-color: transparent !important;
+  color-scheme: dark !important;
+}
+
+.wc-block-components-radio-control-accordion-content input[type="text"],
+.wc-block-components-radio-control-accordion-content input[type="tel"],
+.wc-block-components-radio-control-accordion-content input[type="numeric"],
+.wc-block-components-radio-control-accordion-content input[type="password"] {
+  background: var(--surface-raised) !important;
+  background-color: #1d2227 !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 10px !important;
+  color: #ffffff !important;
+  min-height: 48px !important;
+  padding: 12px 14px !important;
+}
+
+.wc-block-components-radio-control-accordion-content input::placeholder {
+  color: var(--paper-soft) !important;
+  opacity: 0.9 !important;
+}
+
 /* Notice Banners (Errors & Alerts) */
 .wc-block-components-notice-banner.is-error {
   background: rgba(220, 53, 69, 0.14) !important;
