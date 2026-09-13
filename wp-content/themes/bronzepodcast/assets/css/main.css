@@ -222,8 +222,28 @@ p { margin: 0 0 1.25em; }
 
 /* Inputs & Form Fields - Deep Dark Surface with Bronze accents */
 .wc-block-components-text-input,
-.wc-block-components-combobox {
-  background-color: var(--surface-raised) !important;
+.wc-block-components-combobox,
+.wc-block-components-combobox-control,
+.components-combobox-control,
+.components-input-control__container,
+.components-input-control__backdrop,
+.wc-block-components-country-input,
+.wc-block-components-country-input > div,
+.wc-block-components-country-input .components-base-control,
+.wc-block-components-country-input .components-base-control__field,
+.wc-block-components-country-input .components-combobox-control,
+.wc-block-components-country-input .components-input-control__container,
+.wc-block-components-country-input .components-input-control__backdrop,
+.wc-block-components-select-control,
+.wc-block-components-select-control__select,
+.wc-block-components-address-form__country,
+.wc-block-components-address-form .wc-block-components-country-input,
+.wc-block-components-address-form [class*="country"],
+.wc-block-components-address-form [class*="combobox"],
+div[class*="country-input"],
+div[class*="combobox-control"] {
+  background: var(--surface-raised) !important;
+  background-color: #1d2227 !important;
   border: 1px solid var(--line-strong) !important;
   border-radius: 10px !important;
   box-shadow: none !important;
@@ -232,14 +252,30 @@ p { margin: 0 0 1.25em; }
 }
 
 .wc-block-components-text-input:hover,
-.wc-block-components-combobox:hover {
+.wc-block-components-combobox:hover,
+.wc-block-components-combobox-control:hover,
+.components-combobox-control:hover,
+.components-input-control__container:hover .components-input-control__backdrop,
+.wc-block-components-country-input:hover,
+.wc-block-components-country-input > div:hover,
+.wc-block-components-country-input:hover .components-input-control__backdrop,
+.wc-block-components-select-control:hover {
   border-color: rgba(230, 164, 126, 0.45) !important;
 }
 
 .wc-block-components-text-input.is-active,
 .wc-block-components-combobox.is-active,
+.wc-block-components-combobox-control.is-active,
+.components-combobox-control.is-active,
+.wc-block-components-country-input.is-active,
+.wc-block-components-country-input.is-active .components-input-control__backdrop,
+.components-input-control__container:focus-within .components-input-control__backdrop,
 .wc-block-components-text-input:focus-within,
-.wc-block-components-combobox:focus-within {
+.wc-block-components-combobox:focus-within,
+.wc-block-components-combobox-control:focus-within,
+.components-combobox-control:focus-within,
+.wc-block-components-country-input:focus-within,
+.wc-block-components-country-input:focus-within .components-input-control__backdrop {
   background-color: #22272d !important;
   border-color: var(--bronze-light) !important;
   box-shadow: 0 0 0 1px var(--bronze-light), 0 4px 16px rgba(0, 0, 0, 0.28) !important;
@@ -252,7 +288,15 @@ p { margin: 0 0 1.25em; }
 .wc-block-components-text-input input[type="tel"],
 .wc-block-components-text-input input[type="password"],
 .wc-block-components-text-input input[type="number"],
-.wc-block-components-combobox .wc-block-components-combobox__input {
+.wc-block-components-combobox .wc-block-components-combobox__input,
+.wc-block-components-combobox input,
+.wc-block-components-combobox-control input,
+.components-combobox-control input,
+.components-combobox-control__input,
+.wc-block-components-country-input input,
+.wc-block-components-country-input select,
+.wc-block-components-select-control select,
+.wc-block-components-select-control__select {
   background: transparent !important;
   background-color: transparent !important;
   border: 0 !important;
@@ -268,7 +312,12 @@ p { margin: 0 0 1.25em; }
 
 /* Floating labels in resting state (field empty) */
 .wc-block-components-text-input label,
-.wc-block-components-combobox label {
+.wc-block-components-combobox label,
+.wc-block-components-combobox-control label,
+.components-combobox-control label,
+.wc-block-components-country-input label,
+.wc-block-components-country-input .components-base-control__label,
+.components-base-control__label {
   color: var(--paper-soft) !important;
   font-size: 0.92rem !important;
   font-weight: 500 !important;
@@ -280,8 +329,14 @@ p { margin: 0 0 1.25em; }
 /* Floating labels in active / focused state */
 .wc-block-components-text-input.is-active label,
 .wc-block-components-combobox.is-active label,
+.wc-block-components-combobox-control.is-active label,
+.components-combobox-control.is-active label,
+.wc-block-components-country-input.is-active label,
 .wc-block-components-text-input:focus-within label,
-.wc-block-components-combobox:focus-within label {
+.wc-block-components-combobox:focus-within label,
+.wc-block-components-combobox-control:focus-within label,
+.components-combobox-control:focus-within label,
+.wc-block-components-country-input:focus-within label {
   color: var(--bronze-light) !important;
   font-size: 0.68rem !important;
   font-weight: 700 !important;
@@ -314,7 +369,10 @@ p { margin: 0 0 1.25em; }
   color: var(--white) !important;
 }
 
-.wc-block-components-combobox svg {
+.wc-block-components-combobox svg,
+.wc-block-components-combobox-control svg,
+.components-combobox-control svg,
+.wc-block-components-country-input svg {
   color: var(--paper-soft) !important;
   fill: var(--paper-soft) !important;
 }
@@ -455,7 +513,59 @@ p { margin: 0 0 1.25em; }
   transform: translateY(-2px) !important;
 }
 
+/* Express Checkout Divider */
+.wc-block-components-express-payment-continue-rule,
+.wc-block-components-express-checkout-continue-rule,
+[class*="express-payment-continue-rule"],
+[class*="express-checkout-continue-rule"],
+.wc-stripe-express-checkout-separator,
+.wc-stripe-payment-request-button-separator {
+  align-items: center !important;
+  color: var(--paper-soft) !important;
+  display: flex !important;
+  font-family: var(--sans) !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  margin-block: 28px 24px !important;
+  text-align: center !important;
+}
+
+.wc-block-components-express-payment-continue-rule::before,
+.wc-block-components-express-payment-continue-rule::after,
+.wc-block-components-express-checkout-continue-rule::before,
+.wc-block-components-express-checkout-continue-rule::after,
+[class*="express-payment-continue-rule"]::before,
+[class*="express-payment-continue-rule"]::after,
+.wc-stripe-express-checkout-separator::before,
+.wc-stripe-express-checkout-separator::after,
+.wc-stripe-payment-request-button-separator::before,
+.wc-stripe-payment-request-button-separator::after {
+  border-bottom: 1px solid var(--line) !important;
+  content: "" !important;
+  flex: 1 !important;
+}
+
+.wc-block-components-express-payment-continue-rule > *,
+.wc-block-components-express-checkout-continue-rule > *,
+[class*="express-payment-continue-rule"] > * {
+  color: var(--paper-soft) !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  padding-inline: 16px !important;
+}
+
+
 /* Stripe Elements & Card Payment Fields */
+.wc-block-components-radio-control-accordion-content,
+.wc-block-components-radio-control-accordion-content fieldset,
+.wc-block-gateway-container {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 .wc-stripe-elements-field,
 .StripeElement,
 .wc-stripe-card-element,
@@ -470,7 +580,10 @@ p { margin: 0 0 1.25em; }
 .wc-block-gateway-container .wc-stripe-elements-field,
 .wc-block-components-radio-control-accordion-content .StripeElement,
 .wc-block-components-radio-control-accordion-content .wc-stripe-elements-field,
-.wc-block-components-radio-control-accordion-content div[id^="stripe-"] {
+.wc-block-components-radio-control-accordion-content div[id^="stripe-"],
+.wc-block-components-radio-control-accordion-content .wc-stripe-card-element-container,
+.wc-block-components-radio-control-accordion-content fieldset .wc-stripe-elements-field,
+.wc-block-components-radio-control-accordion-content fieldset .StripeElement {
   background: var(--surface-raised) !important;
   background-color: #1d2227 !important;
   border: 1px solid var(--line-strong) !important;
@@ -518,6 +631,42 @@ div[id^="stripe-"]:focus-within {
 .wc-block-components-radio-control-accordion-content input::placeholder {
   color: var(--paper-soft) !important;
   opacity: 0.9 !important;
+}
+
+/* Order Notes & Textarea */
+.wc-block-components-order-note,
+.wc-block-components-textarea,
+.wc-block-checkout textarea,
+.wc-block-components-order-note textarea {
+  background: var(--surface-raised) !important;
+  background-color: #1d2227 !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 10px !important;
+  color: #ffffff !important;
+  padding: 14px 16px !important;
+  transition: all 180ms ease !important;
+}
+
+.wc-block-components-order-note textarea:focus,
+.wc-block-components-textarea:focus,
+.wc-block-checkout textarea:focus {
+  background-color: #22272d !important;
+  border-color: var(--bronze-light) !important;
+  box-shadow: 0 0 0 1px var(--bronze-light), 0 4px 16px rgba(0, 0, 0, 0.28) !important;
+  outline: none !important;
+}
+
+/* Coupon block in sidebar */
+.wc-block-components-totals-coupon,
+.wc-block-components-totals-coupon__content {
+  color: var(--paper) !important;
+}
+.wc-block-components-totals-coupon input[type="text"] {
+  background-color: #1d2227 !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 10px !important;
+  color: #ffffff !important;
+  padding: 12px 14px !important;
 }
 
 /* Notice Banners (Errors & Alerts) */
@@ -824,6 +973,19 @@ div[id^="stripe-"]:focus-within {
   .store-categories { grid-template-columns: 1fr; }
   .search-form__inner { flex-direction: column; }
   .search-form .search-submit { width: 100%; }
+  .wc-block-checkout__sidebar,
+  .wc-block-components-order-summary,
+  .woocommerce-order {
+    padding: 18px 14px !important;
+  }
+  .wc-block-components-checkout-step {
+    margin-bottom: 24px !important;
+  }
+  .wc-block-components-text-input input,
+  .wc-block-components-country-input input {
+    font-size: 0.92rem !important;
+    padding: 22px 12px 6px !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

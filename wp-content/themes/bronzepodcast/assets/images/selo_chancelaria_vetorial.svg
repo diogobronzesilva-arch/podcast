@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="gold-satin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF4C4" />
+      <stop offset="20%" stop-color="#E8C65F" />
+      <stop offset="50%" stop-color="#C89D2B" />
+      <stop offset="80%" stop-color="#A67B16" />
+      <stop offset="100%" stop-color="#6E4E08" />
+    </linearGradient>
+
+    <linearGradient id="gold-inner" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8A6412" />
+      <stop offset="50%" stop-color="#C89D2B" />
+      <stop offset="100%" stop-color="#F7DC7E" />
+    </linearGradient>
+
+    <linearGradient id="cross-body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2B2014" />
+      <stop offset="50%" stop-color="#1F160D" />
+      <stop offset="100%" stop-color="#140E07" />
+    </linearGradient>
+
+    <linearGradient id="crimson-sacro" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E62843" />
+      <stop offset="35%" stop-color="#B5182F" />
+      <stop offset="75%" stop-color="#800E1F" />
+      <stop offset="100%" stop-color="#520510" />
+    </linearGradient>
+
+    <radialGradient id="seal-bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E1710" />
+      <stop offset="65%" stop-color="#110C07" />
+      <stop offset="90%" stop-color="#0A0704" />
+      <stop offset="100%" stop-color="#050302" />
+    </radialGradient>
+
+    <path id="text-arc-top" d="M 160,512 A 352,352 0 0,1 864,512" fill="none" />
+    <path id="text-arc-bottom-upright" d="M 195,688 A 360,360 0 0,0 829,688" fill="none" />
+  </defs>
+
+  <circle cx="512" cy="512" r="492" fill="url(#seal-bg)" stroke="#4A3720" stroke-width="4" />
+  <circle cx="512" cy="512" r="480" fill="none" stroke="url(#gold-satin)" stroke-width="4" />
+  <circle cx="512" cy="512" r="468" fill="none" stroke="#6B4E1B" stroke-width="1.5" />
+  <circle cx="512" cy="512" r="316" fill="none" stroke="url(#gold-satin)" stroke-width="3.5" />
+  <circle cx="512" cy="512" r="304" fill="none" stroke="#6B4E1B" stroke-width="1.5" />
+  <circle cx="512" cy="512" r="302" fill="#0D0905" opacity="0.6" />
+
+  <text fill="url(#gold-satin)" font-family="'Cinzel', 'Trajan Pro', serif" font-weight="800" font-size="74" letter-spacing="22">
+    <textPath href="#text-arc-top" startOffset="50%" text-anchor="middle">BRONZE</textPath>
+  </text>
+
+  <text fill="#FAF8F2" font-family="'Cinzel', 'Trajan Pro', serif" font-weight="700" font-size="58" letter-spacing="24">
+    <textPath href="#text-arc-bottom-upright" startOffset="50%" text-anchor="middle">PODCAST</textPath>
+  </text>
+
+  <g transform="translate(142, 498) scale(1.65)">
+    <polygon points="10,1 4,19 19,7 1,7 16,19" fill="url(#gold-satin)" stroke="#6E4E08" stroke-width="0.8" />
+  </g>
+  <g transform="translate(850, 498) scale(1.65)">
+    <polygon points="10,1 4,19 19,7 1,7 16,19" fill="url(#gold-satin)" stroke="#6E4E08" stroke-width="0.8" />
+  </g>
+
+  <polygon points="
+    462,462 400,300 624,300 562,462 
+    724,400 724,624 562,562 
+    624,724 400,724 462,562 
+    300,624 300,400" 
+    fill="url(#cross-body)" stroke="url(#gold-satin)" stroke-width="9" stroke-linejoin="miter" />
+
+  <line x1="462" y1="462" x2="512" y2="512" stroke="#FFF4C4" stroke-width="3" />
+  <line x1="562" y1="462" x2="512" y2="512" stroke="#FFF4C4" stroke-width="3" />
+  <line x1="562" y1="562" x2="512" y2="512" stroke="#6E4E08" stroke-width="3" />
+  <line x1="462" y1="562" x2="512" y2="512" stroke="#6E4E08" stroke-width="3" />
+
+  <line x1="512" y1="300" x2="512" y2="462" stroke="url(#gold-satin)" stroke-width="2" opacity="0.5" />
+  <line x1="512" y1="562" x2="512" y2="724" stroke="url(#gold-satin)" stroke-width="2" opacity="0.5" />
+  <line x1="300" y1="512" x2="462" y2="512" stroke="url(#gold-satin)" stroke-width="2" opacity="0.5" />
+  <line x1="562" y1="512" x2="724" y2="512" stroke="url(#gold-satin)" stroke-width="2" opacity="0.5" />
+
+  <path d="
+    M 490,348 L 534,348 L 534,490 L 676,490 L 676,534 L 534,534 L 534,676 L 490,676 L 490,534 L 348,534 L 348,490 L 490,490 Z" 
+    fill="url(#crimson-sacro)" stroke="url(#gold-satin)" stroke-width="4" stroke-linejoin="miter" />
+
+  <polygon points="512,496 528,512 512,528 496,512" fill="#FFE89E" stroke="#B58A24" stroke-width="1" />
+</svg>

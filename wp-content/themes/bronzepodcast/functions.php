@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.1.4' );
+define( 'BRONZEPODCAST_VERSION', '1.2.5' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -142,6 +142,9 @@ add_filter( 'pre_get_document_title', 'bronzepodcast_document_title' );
  * @return string
  */
 function bronzepodcast_language_attributes( $attributes ) {
+	if ( is_admin() ) {
+		return $attributes;
+	}
 	return 'lang="pt-PT" dir="ltr"';
 }
 add_filter( 'language_attributes', 'bronzepodcast_language_attributes' );
@@ -265,6 +268,9 @@ add_filter( 'wc_stripe_params', function( $params ) {
 }, 999 );
 
 function bronzepodcast_stripe_js_guard() {
+	if ( is_admin() ) {
+		return;
+	}
 	if ( function_exists( 'is_checkout' ) && is_checkout() ) {
 		?>
 		<script>
@@ -894,6 +900,10 @@ add_filter( 'woocommerce_sale_flash', 'bronzepodcast_custom_sale_flash', 10, 3 )
  * Tradução de termos e contagens do WooCommerce para português de Portugal.
  */
 function bronzepodcast_filter_woocommerce_translations( $translation, $text, $domain ) {
+	if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return $translation;
+	}
+
 	static $translations_map = null;
 
 	if ( null === $translations_map ) {
@@ -926,11 +936,33 @@ function bronzepodcast_filter_woocommerce_translations( $translation, $text, $do
 
 			// Carrinho e Checkout (WooCommerce Blocks & Clássico)
 			'Shipping address'                                                          => 'Morada de envio',
-			'Billing address'                                                           => 'Morada de faturação',
-			'Billing details'                                                           => 'Dados de faturação',
-			'Payment options'                                                           => 'Opções de pagamento',
-			'Payment methods'                                                           => 'Métodos de pagamento',
+			'Shipping Address'                                                          => 'Morada de envio',
 			'Shipping options'                                                          => 'Opções de envio',
+			'Shipping Options'                                                          => 'Opções de envio',
+			'Payment options'                                                           => 'Opções de pagamento',
+			'Payment Options'                                                           => 'Opções de pagamento',
+			'Payment methods'                                                           => 'Métodos de pagamento',
+			'Payment Methods'                                                           => 'Métodos de pagamento',
+			'Billing address'                                                           => 'Morada de faturação',
+			'Billing Address'                                                           => 'Morada de faturação',
+			'Billing details'                                                           => 'Dados de faturação',
+			'Billing Details'                                                           => 'Dados de faturação',
+			'Add a note to your order'                                                  => 'Adicionar uma nota à sua encomenda',
+			'Add a note'                                                                => 'Adicionar uma nota',
+			'Order notes'                                                               => 'Notas da encomenda',
+			'Order notes (optional)'                                                    => 'Notas da encomenda (opcional)',
+			'Notes about your order, e.g. special notes for delivery.'                  => 'Instruções ou notas especiais sobre a entrega da sua encomenda.',
+			'Order summary'                                                             => 'Resumo da encomenda',
+			'Order Summary'                                                             => 'Resumo da encomenda',
+			'Add coupons'                                                               => 'Adicionar cupão',
+			'Add Coupons'                                                               => 'Adicionar cupão',
+			'Add a coupon'                                                              => 'Adicionar cupão',
+			'Coupons'                                                                   => 'Cupões',
+			'Coupon code'                                                               => 'Código do cupão',
+			'Have a coupon?'                                                            => 'Tem um cupão de desconto?',
+			'Enter code'                                                                => 'Inserir código',
+			'Apply'                                                                     => 'Aplicar',
+			'Remove'                                                                    => 'Remover',
 			'First name'                                                                => 'Primeiro nome',
 			'Last name'                                                                 => 'Apelido',
 			'Company'                                                                   => 'Empresa',
@@ -938,26 +970,30 @@ function bronzepodcast_filter_woocommerce_translations( $translation, $text, $do
 			'Address'                                                                   => 'Morada',
 			'Apartment, suite, etc.'                                                    => 'Apartamento, fração, andar, etc.',
 			'Add apartment, suite, etc.'                                                => 'Apartamento, fração, andar, etc. (opcional)',
+			'+ Add apartment, suite, etc.'                                              => '+ Adicionar apartamento, fração, andar, etc.',
+			'+ Add apartamento, fração, andar, etc.'                                    => '+ Adicionar apartamento, fração, andar, etc.',
 			'Postal code'                                                               => 'Código postal',
 			'Postcode / ZIP'                                                            => 'Código postal',
 			'City'                                                                      => 'Cidade',
+			'Country/Region'                                                            => 'País / Região',
+			'Country / Region'                                                          => 'País / Região',
+			'Country'                                                                   => 'País',
 			'Phone'                                                                     => 'Telefone',
 			'Phone (optional)'                                                          => 'Telefone (opcional)',
 			'Email address'                                                             => 'Endereço de email',
-			'Order notes (optional)'                                                    => 'Notas da encomenda (opcional)',
-			'Use same address for billing'                                              => 'Utilizar a mesma morada para faturação',
+			'Use same address for billing'                                              => 'Usar a mesma morada para faturação',
+			'Use same address for delivery'                                             => 'Usar a mesma morada para entrega',
 			'Save payment information to my account for future purchases.'              => 'Guardar os dados de pagamento na minha conta para futuras compras.',
 			'Place order'                                                               => 'Finalizar encomenda',
 			'Place Order'                                                               => 'Finalizar encomenda',
 			'Contact information'                                                       => 'Informações de contacto',
-			'Order summary'                                                             => 'Resumo da encomenda',
+			'Contact Information'                                                       => 'Informações de contacto',
 			'Subtotal'                                                                  => 'Subtotal',
 			'Total'                                                                     => 'Total',
 			'Shipping'                                                                  => 'Envio',
 			'Discount'                                                                  => 'Desconto',
-			'Coupon code'                                                               => 'Código do cupão',
-			'Apply'                                                                     => 'Aplicar',
-			'Remove'                                                                    => 'Remover',
+			'Taxes'                                                                     => 'Impostos',
+			'Including %s in taxes'                                                     => 'Inclui %s em impostos',
 			'There are no payment methods available. This may be an error on our side, please contact us if you need any help placing your order.' => 'Não existem métodos de pagamento disponíveis. Se necessitar de assistência com a sua encomenda, por favor contacte-nos.',
 			'Credit Card'                                                               => 'Cartão de Crédito',
 			'Credit / Debit Card'                                                       => 'Cartão de Crédito / Débito',
@@ -965,8 +1001,9 @@ function bronzepodcast_filter_woocommerce_translations( $translation, $text, $do
 			'Card Number'                                                               => 'Número do cartão',
 			'Card number'                                                               => 'Número do cartão',
 			'Expiry Date'                                                               => 'Data de validade',
+			'Expiry date'                                                               => 'Data de validade',
 			'Expiry'                                                                    => 'Data de validade',
-			'Card Code (CVC)'                                                           => 'Código do cartão (CVC)',
+			'Card Code (CVC)'                                                           => 'Código de segurança',
 			'Security code'                                                             => 'Código de segurança',
 			'Security Code'                                                             => 'Código de segurança',
 			'MM / YY'                                                                   => 'MM / AA',
@@ -975,6 +1012,54 @@ function bronzepodcast_filter_woocommerce_translations( $translation, $text, $do
 			'Proceed to checkout'                                                       => 'Finalizar compra',
 			'Proceed to Checkout'                                                       => 'Finalizar compra',
 			'Cart totals'                                                               => 'Totais do carrinho',
+			'Shopping cart'                                                             => 'Carrinho de compras',
+			'Cart'                                                                      => 'Carrinho',
+			'Empty cart'                                                                => 'Esvaziar carrinho',
+			'Your cart is currently empty!'                                             => 'O seu carrinho está vazio!',
+			'Browse store'                                                              => 'Explorar a loja',
+			// Termos e Condições & Privacidade
+			'Terms and conditions'                                                      => 'Termos e Condições',
+			'Terms and Conditions'                                                      => 'Termos e Condições',
+			'Privacy policy'                                                            => 'Política de Privacidade',
+			'Privacy Policy'                                                            => 'Política de Privacidade',
+			'By proceeding with your purchase you agree to our Terms and Conditions and Privacy Policy' => 'Ao prosseguir com a sua compra, concorda com os nossos Termos e Condições e Política de Privacidade',
+			'By placing your order you agree to our Terms and Conditions and Privacy Policy' => 'Ao finalizar a sua encomenda, concorda com os nossos Termos e Condições e Política de Privacidade',
+			'By proceeding with your purchase you agree to our %1$s and %2$s'           => 'Ao prosseguir com a sua compra, concorda com os nossos %1$s e a %2$s',
+			'By placing your order you agree to our %1$s and %2$s'                      => 'Ao finalizar a sua encomenda, concorda com os nossos %1$s e a %2$s',
+
+			// Carrinho / Cart Items & Express Checkout
+			'Product'                                                                   => 'Produto',
+			'PRODUCT'                                                                   => 'PRODUTO',
+			'Products'                                                                  => 'Produtos',
+			'PRODUCTS'                                                                  => 'PRODUTOS',
+			'Quantity'                                                                  => 'Quantidade',
+			'QUANTITY'                                                                  => 'QUANTIDADE',
+			'Price'                                                                     => 'Preço',
+			'PRICE'                                                                     => 'PREÇO',
+			'Estimated total'                                                           => 'Total estimado',
+			'Estimated Total'                                                           => 'Total estimado',
+			'Estimated shipping'                                                        => 'Envio estimado',
+			'Estimated Shipping'                                                        => 'Envio estimado',
+			'Express checkout'                                                          => 'Pagamento Expresso',
+			'Express Checkout'                                                          => 'Pagamento Expresso',
+			'Express Payment'                                                           => 'Pagamento Expresso',
+			'Express payment'                                                           => 'Pagamento Expresso',
+			'Express payment methods'                                                   => 'Métodos de pagamento expresso',
+			'Available payment methods'                                                 => 'Métodos de pagamento disponíveis',
+			'OR'                                                                        => 'OU',
+			'Or'                                                                        => 'Ou',
+			'or'                                                                        => 'ou',
+			'Or continue below'                                                         => 'Ou continue abaixo',
+			'or continue below'                                                         => 'ou continue abaixo',
+			'Or continue below:'                                                        => 'Ou continue abaixo:',
+			'or continue below:'                                                        => 'ou continue abaixo:',
+			'Or continue with'                                                          => 'Ou continue com',
+			'or continue with'                                                          => 'ou continue com',
+			'Remove item'                                                               => 'Remover item',
+			'Remove this item'                                                          => 'Remover este item',
+			'Reduce quantity'                                                           => 'Diminuir quantidade',
+			'Increase quantity'                                                         => 'Aumentar quantidade',
+
 			'Update cart'                                                               => 'Atualizar carrinho',
 			'Coupon'                                                                    => 'Cupão',
 			'Apply coupon'                                                              => 'Aplicar cupão',
@@ -983,7 +1068,7 @@ function bronzepodcast_filter_woocommerce_translations( $translation, $text, $do
 	}
 
 	if ( isset( $translations_map[ $text ] ) ) {
-		if ( empty( $domain ) || 'woocommerce' === $domain || 'woocommerce-gateway-stripe' === $domain || 'default' === $domain ) {
+		if ( empty( $domain ) || 'woocommerce' === $domain || 'woocommerce-gateway-stripe' === $domain || 'default' === $domain || strpos( (string) $domain, 'woocommerce' ) !== false || strpos( (string) $domain, 'stripe' ) !== false ) {
 			return $translations_map[ $text ];
 		}
 	}
@@ -993,9 +1078,285 @@ function bronzepodcast_filter_woocommerce_translations( $translation, $text, $do
 add_filter( 'gettext', 'bronzepodcast_filter_woocommerce_translations', 20, 3 );
 
 /**
+ * Injeção de traduções no motor JavaScript (wp.i18n) e observador DOM para WooCommerce Blocks.
+ * Executado exclusivamente no frontend público e estritamente nas páginas de Carrinho e Checkout.
+ */
+function bronzepodcast_checkout_i18n_script() {
+	if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return;
+	}
+
+	$is_cart_or_checkout = false;
+	if ( ( function_exists( 'is_cart' ) && is_cart() ) || ( function_exists( 'is_checkout' ) && is_checkout() ) ) {
+		$is_cart_or_checkout = true;
+	}
+	if ( ! $is_cart_or_checkout && isset( $_SERVER['REQUEST_URI'] ) ) {
+		$uri = untrailingslashit( wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ) );
+		if ( in_array( $uri, array( '/cart', '/carrinho', '/checkout', '/finalizar-compra' ), true ) ) {
+			$is_cart_or_checkout = true;
+		}
+	}
+
+	if ( ! $is_cart_or_checkout ) {
+		return;
+	}
+	?>
+	<script>
+	/* Bronze Podcast: Internacionalização estritamente contida para WooCommerce Blocks & Stripe */
+	(function() {
+		var dictionary = {
+			'PRODUCT': 'PRODUTO',
+			'Product': 'Produto',
+			'PRODUCTS': 'PRODUTOS',
+			'Products': 'Produtos',
+			'TOTAL': 'TOTAL',
+			'Total': 'Total',
+			'QUANTITY': 'QUANTIDADE',
+			'Quantity': 'Quantidade',
+			'PRICE': 'PREÇO',
+			'Price': 'Preço',
+			'Estimated total': 'Total estimado',
+			'Estimated Total': 'Total estimado',
+			'Estimated shipping': 'Envio estimado',
+			'Estimated Shipping': 'Envio estimado',
+			'Express checkout': 'Pagamento Expresso',
+			'Express Checkout': 'Pagamento Expresso',
+			'Express Payment': 'Pagamento Expresso',
+			'Express payment': 'Pagamento Expresso',
+			'Express payment methods': 'Métodos de pagamento expresso',
+			'Available payment methods': 'Métodos de pagamento disponíveis',
+			'OR': 'OU',
+			'Or': 'Ou',
+			'or': 'ou',
+			'Or continue below': 'Ou continue abaixo',
+			'or continue below': 'ou continue abaixo',
+			'Or continue below:': 'Ou continue abaixo:',
+			'or continue below:': 'ou continue abaixo:',
+			'Or continue with': 'Ou continue com',
+			'or continue with': 'ou continue com',
+			'Shipping address': 'Morada de envio',
+			'Shipping Address': 'Morada de envio',
+			'Shipping options': 'Opções de envio',
+			'Shipping Options': 'Opções de envio',
+			'Payment options': 'Opções de pagamento',
+			'Payment Options': 'Opções de pagamento',
+			'Payment methods': 'Métodos de pagamento',
+			'Payment Methods': 'Métodos de pagamento',
+			'Add a note to your order': 'Adicionar uma nota à sua encomenda',
+			'Add a note': 'Adicionar uma nota',
+			'Order notes': 'Notas da encomenda',
+			'Order notes (optional)': 'Notas da encomenda (opcional)',
+			'Order summary': 'Resumo da encomenda',
+			'Order Summary': 'Resumo da encomenda',
+			'Add coupons': 'Adicionar cupão',
+			'Add Coupons': 'Adicionar cupão',
+			'Add a coupon': 'Adicionar cupão',
+			'Coupons': 'Cupões',
+			'Coupon code': 'Código do cupão',
+			'Have a coupon?': 'Tem um cupão de desconto?',
+			'Enter code': 'Inserir código',
+			'Apply': 'Aplicar',
+			'Remove': 'Remover',
+			'Remove item': 'Remover item',
+			'Remove this item': 'Remover este item',
+			'Use same address for billing': 'Usar a mesma morada para faturação',
+			'Use same address for delivery': 'Usar a mesma morada para entrega',
+			'+ Add apartment, suite, etc.': '+ Adicionar apartamento, fração, andar, etc.',
+			'Add apartment, suite, etc.': 'Adicionar apartamento, fração, andar, etc.',
+			'Country/Region': 'País / Região',
+			'Country / Region': 'País / Região',
+			'Country': 'País',
+			'Billing address': 'Morada de faturação',
+			'Billing Address': 'Morada de faturação',
+			'Billing details': 'Dados de faturação',
+			'Contact information': 'Informações de contacto',
+			'Contact Information': 'Informações de contacto',
+			'Card': 'Cartão de Crédito',
+			'Credit Card': 'Cartão de Crédito',
+			'Credit / Debit Card': 'Cartão de Crédito / Débito',
+			'Card number': 'Número do cartão',
+			'Card Number': 'Número do cartão',
+			'Expiry Date': 'Data de validade',
+			'Expiry date': 'Data de validade',
+			'Expiry': 'Data de validade',
+			'Security code': 'Código de segurança',
+			'Security Code': 'Código de segurança',
+			'Card Code (CVC)': 'Código de segurança',
+			'MM / YY': 'MM / AA',
+			'Return to Cart': 'Voltar ao carrinho',
+			'Return to cart': 'Voltar ao carrinho',
+			'Proceed to checkout': 'Finalizar compra',
+			'Proceed to Checkout': 'Finalizar compra',
+			'Place order': 'Finalizar encomenda',
+			'Place Order': 'Finalizar encomenda',
+			'Cart totals': 'Totais do carrinho',
+			'Shopping cart': 'Carrinho de compras',
+			'Cart': 'Carrinho',
+			'Empty cart': 'Esvaziar carrinho',
+			'Your cart is currently empty!': 'O seu carrinho está vazio!',
+			'Browse store': 'Explorar a loja',
+			'Terms and Conditions': 'Termos e Condições',
+			'Terms and conditions': 'Termos e Condições',
+			'Privacy Policy': 'Política de Privacidade',
+			'Privacy policy': 'Política de Privacidade',
+			'By proceeding with your purchase you agree to our Terms and Conditions and Privacy Policy': 'Ao prosseguir com a sua compra, concorda com os nossos Termos e Condições e Política de Privacidade',
+			'By placing your order you agree to our Terms and Conditions and Privacy Policy': 'Ao finalizar a sua encomenda, concorda com os nossos Termos e Condições e Política de Privacidade'
+		};
+
+		var localeInjected = false;
+		function injectLocaleOnce() {
+			if (localeInjected) return;
+			if (window.wp && window.wp.i18n && window.wp.i18n.setLocaleData) {
+				var jed = { '': { domain: 'woocommerce', lang: 'pt_PT' } };
+				for (var key in dictionary) {
+					jed[key] = [dictionary[key]];
+				}
+				window.wp.i18n.setLocaleData(jed, 'woocommerce');
+				window.wp.i18n.setLocaleData(jed, 'woocommerce-gateway-stripe');
+				localeInjected = true;
+			}
+		}
+
+		var isTranslating = false;
+		function translateSubtree(root) {
+			if (!root || isTranslating) return;
+			isTranslating = true;
+
+			try {
+				var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+				var node;
+				while ((node = walker.nextNode())) {
+					var raw = node.nodeValue;
+					if (!raw) continue;
+					var val = raw.trim();
+					if (!val) continue;
+
+					if (dictionary[val]) {
+						node.nodeValue = raw.replace(val, dictionary[val]);
+					} else {
+						var changed = raw;
+						if (changed.indexOf('By proceeding with your purchase you agree to our') !== -1) {
+							changed = changed.replace('By proceeding with your purchase you agree to our', 'Ao prosseguir com a sua compra, concorda com os nossos');
+						}
+						if (changed.indexOf('By placing your order you agree to our') !== -1) {
+							changed = changed.replace('By placing your order you agree to our', 'Ao finalizar a sua encomenda, concorda com os nossos');
+						}
+						if (changed.indexOf('Terms and Conditions') !== -1) {
+							changed = changed.replace('Terms and Conditions', 'Termos e Condições');
+						}
+						if (changed.indexOf('Privacy Policy') !== -1) {
+							changed = changed.replace('Privacy Policy', 'Política de Privacidade');
+						}
+						if (changed.indexOf('Estimated total') !== -1) {
+							changed = changed.replace('Estimated total', 'Total estimado');
+						}
+						if (changed.indexOf('Estimated Total') !== -1) {
+							changed = changed.replace('Estimated Total', 'Total estimado');
+						}
+						if (changed.indexOf('Express Checkout') !== -1) {
+							changed = changed.replace('Express Checkout', 'Pagamento Expresso');
+						}
+						if (changed.indexOf('Express checkout') !== -1) {
+							changed = changed.replace('Express checkout', 'Pagamento Expresso');
+						}
+						if (changed.indexOf('Express Payment') !== -1) {
+							changed = changed.replace('Express Payment', 'Pagamento Expresso');
+						}
+						if (changed.indexOf('Express payment') !== -1) {
+							changed = changed.replace('Express payment', 'Pagamento Expresso');
+						}
+						if (changed.indexOf('Or continue below') !== -1) {
+							changed = changed.replace(/Or continue below/gi, 'Ou continue abaixo');
+						}
+						if (changed.indexOf('or continue below') !== -1) {
+							changed = changed.replace(/or continue below/gi, 'ou continue abaixo');
+						}
+						if (changed.indexOf('Or continue with') !== -1) {
+							changed = changed.replace(/Or continue with/gi, 'Ou continue com');
+						}
+						if (changed.indexOf('+ Add ') === 0) {
+							changed = changed.replace('+ Add ', '+ Adicionar ');
+						}
+						if (changed !== raw) {
+							node.nodeValue = changed;
+						}
+					}
+				}
+
+				var attrEls = root.querySelectorAll('[placeholder], [aria-label], [title]');
+				for (var i = 0; i < attrEls.length; i++) {
+					var el = attrEls[i];
+					var placeholder = el.getAttribute('placeholder');
+					if (placeholder && dictionary[placeholder.trim()]) {
+						el.setAttribute('placeholder', dictionary[placeholder.trim()]);
+					}
+					var ariaLabel = el.getAttribute('aria-label');
+					if (ariaLabel) {
+						var aTrim = ariaLabel.trim();
+						if (dictionary[aTrim]) {
+							el.setAttribute('aria-label', dictionary[aTrim]);
+						} else if (aTrim.indexOf('Express Checkout') !== -1 || aTrim.indexOf('Express checkout') !== -1) {
+							el.setAttribute('aria-label', aTrim.replace(/Express [cC]heckout/g, 'Pagamento Expresso'));
+						}
+					}
+				}
+			} finally {
+				isTranslating = false;
+			}
+		}
+
+		function runCartCheckoutTranslations() {
+			injectLocaleOnce();
+			var targets = document.querySelectorAll('.wc-block-cart, .wc-block-checkout, .woocommerce-cart, .woocommerce-checkout, .woocommerce');
+			if (targets.length > 0) {
+				for (var i = 0; i < targets.length; i++) {
+					translateSubtree(targets[i]);
+				}
+			} else {
+				var main = document.querySelector('main, #primary, body');
+				if (main) {
+					translateSubtree(main);
+				}
+			}
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', function() {
+				runCartCheckoutTranslations();
+			});
+		} else {
+			runCartCheckoutTranslations();
+		}
+
+		var scheduled = false;
+		var observer = new MutationObserver(function() {
+			if (isTranslating || scheduled) return;
+			scheduled = true;
+			window.requestAnimationFrame(function() {
+				scheduled = false;
+				runCartCheckoutTranslations();
+			});
+		});
+
+		var observeTarget = document.querySelector('main') || document.body || document.documentElement;
+		observer.observe(observeTarget, {
+			childList: true,
+			subtree: true
+		});
+	})();
+	</script>
+	<?php
+}
+add_action( 'wp_footer', 'bronzepodcast_checkout_i18n_script', 20 );
+
+/**
  * Tradução das contagens com contexto do WooCommerce (ex: Showing 1–9 of 44 results).
  */
 function bronzepodcast_filter_woocommerce_translations_with_context( $translation, $text, $context, $domain ) {
+	if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return $translation;
+	}
+
 	if ( 'woocommerce' === $domain ) {
 		if ( 'with first and last result' === $context ) {
 			if ( strpos( $text, 'Showing %1$d' ) !== false ) {
@@ -1011,6 +1372,10 @@ add_filter( 'gettext_with_context', 'bronzepodcast_filter_woocommerce_translatio
  * Tradução das contagens no plural com contexto (ex: Showing 1–9 of 44 results).
  */
 function bronzepodcast_filter_woocommerce_ngettext_with_context( $translation, $single, $plural, $number, $context, $domain ) {
+	if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return $translation;
+	}
+
 	if ( 'woocommerce' === $domain ) {
 		if ( 'with first and last result' === $context ) {
 			return 'A mostrar %1$d&ndash;%2$d de %3$d resultados';
@@ -1024,6 +1389,10 @@ add_filter( 'ngettext_with_context', 'bronzepodcast_filter_woocommerce_ngettext_
  * Tradução das contagens no plural (ex: Showing 19-27 of 56 results).
  */
 function bronzepodcast_filter_woocommerce_ngettext( $translation, $single, $plural, $number, $domain ) {
+	if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return $translation;
+	}
+
 	if ( 'woocommerce' === $domain ) {
 		if ( strpos( $single, 'Showing %1$d' ) !== false || strpos( $plural, 'Showing %1$d' ) !== false ) {
 			return 'A mostrar %1$d&ndash;%2$d de %3$d resultados';
@@ -1044,6 +1413,9 @@ add_filter( 'ngettext', 'bronzepodcast_filter_woocommerce_ngettext', 20, 5 );
  * Nas páginas individuais de produto mantém-se 'Adicionar ao carrinho'.
  */
 function bronzepodcast_product_add_to_cart_text( $text, $product ) {
+	if ( is_admin() ) {
+		return $text;
+	}
 	if ( ! is_product() ) {
 		return __( 'Comprar', 'bronzepodcast' );
 	}

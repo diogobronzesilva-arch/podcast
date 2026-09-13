@@ -122,12 +122,15 @@ add_action( 'after_switch_theme', 'bronzepodcast_after_switch_theme' );
  * Liga automaticamente a página /loja/ quando o WooCommerce é ativado depois do tema.
  */
 function bronzepodcast_assign_shop_page() {
+	if ( (int) get_option( 'woocommerce_shop_page_id' ) > 0 ) {
+		return;
+	}
+
 	$shop_page = get_page_by_path( 'loja', OBJECT, 'page' );
 
 	if (
 		class_exists( 'WooCommerce' ) &&
-		$shop_page instanceof WP_Post &&
-		(int) get_option( 'woocommerce_shop_page_id' ) !== (int) $shop_page->ID
+		$shop_page instanceof WP_Post
 	) {
 		update_option( 'woocommerce_shop_page_id', (int) $shop_page->ID );
 	}
@@ -138,6 +141,10 @@ add_action( 'woocommerce_init', 'bronzepodcast_assign_shop_page' );
  * Cria automaticamente as páginas de termos legais e envios se ainda não existirem.
  */
 function bronzepodcast_setup_legal_pages() {
+	if ( get_option( 'bronzepodcast_legal_pages_installed' ) ) {
+		return;
+	}
+
 	$terms_content = <<<'HTML'
 <p>Bem-vindo à Loja do Bronze Podcast. Ao realizar uma encomenda, concordas com os termos e condições gerais aqui estabelecidos.</p>
 <h2>1. Encomendas e Pagamentos</h2>
@@ -181,5 +188,15 @@ HTML;
 	bronzepodcast_create_page( 'Termos e Condições', 'termos-e-condicoes', $terms_content );
 	bronzepodcast_create_page( 'Política de Privacidade', 'politica-de-privacidade', $privacy_content );
 	bronzepodcast_create_page( 'Envios e Devoluções', 'envios-e-devolucoes', $shipping_content );
+
+	update_option( 'bronzepodcast_legal_pages_installed', 1 );
 }
-add_action( 'init', 'bronzepodcast_setup_legal_pages' );
+add_action( 'after_switch_theme', 'bronzepodcast_setup_legal_pages' );
+
+function bronzepodcast_check_legal_pages() {
+	if ( ! get_option( 'bronzepodcast_legal_pages_installed' ) ) {
+		bronzepodcast_setup_legal_pages();
+	}
+}
+add_action( 'admin_init', 'bronzepodcast_check_legal_pages' );
+

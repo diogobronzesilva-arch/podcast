@@ -20,11 +20,83 @@ $featured_episode = array(
 
 $curated_episodes = array(
 	array(
+		'id'      => 'S0EdIUdbcVE',
+		'code'    => 'B06',
+		'concept' => 'A Queda',
+		'title'   => 'B06 - Justiça Original VS Pecado Original',
+		'desc'    => 'Fundamentos na Sagrada Escritura, dogmas da Fé e a distinção essencial entre a justiça original e as consequências da Queda.',
+		'youtube' => 'https://www.youtube.com/watch?v=S0EdIUdbcVE',
+		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
+	),
+	array(
+		'id'      => 'P2J66t4AOTE',
+		'code'    => 'B05',
+		'concept' => 'O Compromisso',
+		'title'   => 'B05 - O Noivo, a Noiva e o Compromisso',
+		'desc'    => 'Sobre as características, virtudes e deveres no matrimónio católico perante o compromisso indissolúvel.',
+		'youtube' => 'https://www.youtube.com/watch?v=P2J66t4AOTE',
+		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
+	),
+	array(
+		'id'      => 'sUDiI2dN6Rg',
+		'code'    => 'B04',
+		'concept' => 'A Renúncia',
+		'title'   => 'B04 - Tinha Tudo e Não Tinha Nada',
+		'desc'    => 'O desapego das ilusões mundanas, a superação do vazio material e a redescoberta da oração interior.',
+		'youtube' => 'https://www.youtube.com/watch?v=sUDiI2dN6Rg',
+		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
+	),
+	array(
+		'id'      => 'FGAsf3R2hno',
+		'code'    => 'B03',
+		'concept' => 'A Usura',
+		'title'   => 'B03 - Economia, Família e o Futuro c/ Murilo Resende',
+		'desc'    => 'A erosão económica das famílias tradicionais, a moral contra a usura e os princípios de uma ordem social justa.',
+		'youtube' => 'https://www.youtube.com/watch?v=FGAsf3R2hno',
+		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
+	),
+	array(
+		'id'      => 'gJsI9GAMXiU',
+		'code'    => 'B02',
+		'concept' => 'A Rocha',
+		'title'   => 'B02 - A Pedra Angular c/ Dr. Haugen',
+		'desc'    => 'A firmeza imutável da doutrina da Igreja contra o relativismo secular contemporâneo.',
+		'youtube' => 'https://www.youtube.com/watch?v=gJsI9GAMXiU',
+		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
+	),
+	array(
+		'id'      => 'G5KFzh2gLCw',
+		'code'    => 'B01',
+		'concept' => 'A Verdade',
+		'title'   => 'B01 - Da Ideologia à Busca da Verdade',
+		'desc'    => 'O percurso intelectual e espiritual de rompimento com os dogmas liberais e socialistas em busca de Cristo.',
+		'youtube' => 'https://www.youtube.com/watch?v=G5KFzh2gLCw',
+		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
+	),
+	array(
+		'id'      => 'sMDfcIo4FG8',
+		'code'    => '#70',
+		'concept' => 'A Fidelidade',
+		'title'   => '#70 - Firmeza de Princípios e Fidelidade à Fé',
+		'desc'    => 'A defesa intransigente da verdade católica sem cedências ao espírito moderno em tempos de provação.',
+		'youtube' => 'https://www.youtube.com/watch?v=sMDfcIo4FG8',
+		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
+	),
+	array(
+		'id'      => 'lstDF0aAZ_c',
+		'code'    => '#69',
+		'concept' => 'A Santa Missa',
+		'title'   => '#69 - O Sentido do Sagrado na Liturgia Católica',
+		'desc'    => 'O valor transcendente do Santo Sacrifício da Missa, o recolhimento, a sacralidade e a liturgia perene.',
+		'youtube' => 'https://www.youtube.com/watch?v=lstDF0aAZ_c',
+		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
+	),
+	array(
 		'id'      => 'YaPC_g224TQ',
 		'code'    => '#47',
 		'concept' => 'O Silêncio',
-		'title'   => 'O Silêncio: A Busca de Deus no Mundo Moderno',
-		'desc'    => 'A necessidade do recolhimento, da oração interior e da fuga ao ruído perpétuo da sociedade digital.',
+		'title'   => '#47 - O Silêncio: A Busca de Deus no Mundo Moderno',
+		'desc'    => 'A necessidade vital do recolhimento, da oração interior e da fuga ao ruído ensurdecedor da sociedade digital.',
 		'youtube' => 'https://www.youtube.com/watch?v=YaPC_g224TQ',
 		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
 	),
@@ -32,7 +104,7 @@ $curated_episodes = array(
 		'id'      => 'FPQ8jPFxd90',
 		'code'    => '#35',
 		'concept' => 'Portugal',
-		'title'   => 'Portugal: A Batalha de Ourique e a Aliança com Cristo',
+		'title'   => '#35 - Portugal: A Fundação e a Aliança com Cristo',
 		'desc'    => 'A fundação mística da nacionalidade e o compromisso sagrado entre a Coroa de Portugal e a Fé Católica.',
 		'youtube' => 'https://www.youtube.com/watch?v=FPQ8jPFxd90',
 		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
@@ -41,8 +113,8 @@ $curated_episodes = array(
 		'id'      => 'o7E9CdRMKug',
 		'code'    => '#20',
 		'concept' => 'O Rosário',
-		'title'   => 'O Rosário: A Arma Espiritual dos Cristãos',
-		'desc'    => 'A origem medieval, a meditação dos mistérios e a força do Santo Rosário em tempos de combate.',
+		'title'   => '#20 - O Rosário: A Arma Espiritual dos Cristãos',
+		'desc'    => 'A origem, a meditação dos mistérios e a eficácia invencível do Santo Rosário para a salvação das almas.',
 		'youtube' => 'https://www.youtube.com/watch?v=o7E9CdRMKug',
 		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
 	),
@@ -50,54 +122,9 @@ $curated_episodes = array(
 		'id'      => 'iEJ5DV8o0y8',
 		'code'    => '#14',
 		'concept' => 'Fátima',
-		'title'   => 'Fátima: Os Apelos e o Dogma da Fé',
-		'desc'    => 'As aparições de 1917, as advertências sobre a apostasia e a promessa de preservação do dogma em Portugal.',
+		'title'   => '#14 - Fátima: Os Apelos e o Dogma da Fé',
+		'desc'    => 'As aparições de 1917, as mensagens proféticas e a promessa de preservação da Fé em Portugal.',
 		'youtube' => 'https://www.youtube.com/watch?v=iEJ5DV8o0y8',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'jI-2_LVDo7U',
-		'code'    => '#01',
-		'concept' => 'A Vida',
-		'title'   => 'A Vida: A Sacralidade da Existência e a Família',
-		'desc'    => 'A defesa incondicional da vida humana desde a conceção ao seu fim natural, frente à cultura da morte.',
-		'youtube' => 'https://www.youtube.com/watch?v=jI-2_LVDo7U',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'XS6QGK9BC9Q',
-		'code'    => 'Live',
-		'concept' => 'Pensamento Político',
-		'title'   => 'Salazar: O Pensamento Político e o Estado Novo',
-		'desc'    => 'Uma análise histórica e doutrinal sobre a ordem social, a Constituição de 1933 e a tradição portuguesa.',
-		'youtube' => 'https://www.youtube.com/watch?v=XS6QGK9BC9Q',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'q5ZI15xCG_E',
-		'code'    => '#03',
-		'concept' => 'O Matrimónio',
-		'title'   => 'O Matrimónio: O Sacramento e a Fidelidade Real',
-		'desc'    => 'A honra e o peso do sacramento matrimonial perante a banalização moderna e a quebra da família.',
-		'youtube' => 'https://www.youtube.com/watch?v=q5ZI15xCG_E',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => '3HxYRKDoFNM',
-		'code'    => '#33',
-		'concept' => 'A Economia',
-		'title'   => 'A Economia: O Bem Comum e a Doutrina Social',
-		'desc'    => 'Os princípios católicos sobre a dignidade do trabalho, a propriedade e a justiça económica.',
-		'youtube' => 'https://www.youtube.com/watch?v=3HxYRKDoFNM',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => '3be-K27lp9c',
-		'code'    => '#31',
-		'concept' => 'A Guerra',
-		'title'   => 'A Guerra: Teologia da Guerra Justa e Paz Real',
-		'desc'    => 'A moral católica clássica sobre os conflitos entre nações, a legítima defesa e a ilusão do pacifismo.',
-		'youtube' => 'https://www.youtube.com/watch?v=3be-K27lp9c',
 		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
 	),
 );
@@ -205,8 +232,13 @@ $curated_episodes = array(
 							<p class="podcast-card__desc"><?php echo esc_html( $episode['desc'] ); ?></p>
 							<div class="podcast-card__actions">
 								<a class="text-link" href="<?php echo esc_url( $episode['youtube'] ); ?>" target="_blank" rel="noopener noreferrer">
-									<?php esc_html_e( 'Assistir no YouTube', 'bronzepodcast' ); ?> <span>↗</span>
+									<?php esc_html_e( 'YouTube', 'bronzepodcast' ); ?> <span>↗</span>
 								</a>
+								<?php if ( ! empty( $episode['spotify'] ) ) : ?>
+									<a class="text-link" href="<?php echo esc_url( $episode['spotify'] ); ?>" target="_blank" rel="noopener noreferrer" style="margin-left: auto; color: var(--paper-soft);">
+										<?php esc_html_e( 'Spotify', 'bronzepodcast' ); ?> <span>↗</span>
+									</a>
+								<?php endif; ?>
 							</div>
 						</div>
 					</article>
