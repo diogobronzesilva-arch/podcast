@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.1.2' );
+define( 'BRONZEPODCAST_VERSION', '1.1.3' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -183,6 +183,81 @@ function bronzepodcast_fix_page_titles( $title, $id = null ) {
 	return $title;
 }
 add_filter( 'the_title', 'bronzepodcast_fix_page_titles', 10, 2 );
+
+/**
+ * Proteção defensiva para o Stripe no WooCommerce.
+ * Quando o plugin oficial da Stripe está ativo mas as chaves API (Publishable Key)
+ * estão em branco (""), impede que o script lance exceções não capturadas no checkout
+ * em blocos e suprime o método vazio até que as chaves sejam introduzidas.
+ */
+function bronzepodcast_is_stripe_configured() {
+	$stripe_settings = get_option( 'woocommerce_stripe_settings', array() );
+	if ( ! is_array( $stripe_settings ) ) {
+		return false;
+	}
+	$testmode = isset( $stripe_settings['testmode'] ) && 'yes' === $stripe_settings['testmode'];
+	$pub_key  = $testmode ? ( $stripe_settings['test_publishable_key'] ?? '' ) : ( $stripe_settings['publishable_key'] ?? '' );
+	return ! empty( trim( (string) $pub_key ) );
+}
+
+function bronzepodcast_disable_unconfigured_stripe_gateways( $gateways ) {
+	if ( ! is_admin() && ! bronzepodcast_is_stripe_configured() ) {
+		foreach ( array_keys( $gateways ) as $gateway_id ) {
+			if ( 0 === strpos( $gateway_id, 'stripe' ) ) {
+				unset( $gateways[ $gateway_id ] );
+			}
+		}
+	}
+	return $gateways;
+}
+add_filter( 'woocommerce_available_payment_gateways', 'bronzepodcast_disable_unconfigured_stripe_gateways', 999 );
+
+function bronzepodcast_prevent_empty_stripe_script() {
+	if ( ( function_exists( 'is_checkout' ) && is_checkout() ) || ( function_exists( 'is_cart' ) && is_cart() ) ) {
+		if ( ! bronzepodcast_is_stripe_configured() ) {
+			wp_dequeue_script( 'wc-stripe-blocks-checkout' );
+			wp_deregister_script( 'wc-stripe-blocks-checkout' );
+			wp_dequeue_script( 'stripe' );
+		}
+	}
+}
+add_action( 'wp_enqueue_scripts', 'bronzepodcast_prevent_empty_stripe_script', 999 );
+
+function bronzepodcast_stripe_js_guard() {
+	if ( function_exists( 'is_checkout' ) && is_checkout() ) {
+		?>
+		<script>
+		/* Bronze Podcast: Proteção contra exceções de inicialização vazia da Stripe */
+		(function() {
+			var _rawStripe = window.Stripe;
+			Object.defineProperty(window, 'Stripe', {
+				configurable: true,
+				enumerable: true,
+				get: function() { return _rawStripe; },
+				set: function(realStripe) {
+					_rawStripe = function(key, opts) {
+						if (!key || typeof key !== 'string' || key.trim() === '') {
+							console.warn('[Bronze Theme] Chave Stripe vazia evitada com sucesso.');
+							return {
+								elements: function() {
+									return {
+										create: function() {
+											return { mount: function() {}, on: function() {} };
+										}
+									};
+								}
+							};
+						}
+						return realStripe(key, opts);
+					};
+				}
+			});
+		})();
+		</script>
+		<?php
+	}
+}
+add_action( 'wp_head', 'bronzepodcast_stripe_js_guard', 1 );
 
 function bronzepodcast_excerpt_length() {
 	return 26;
