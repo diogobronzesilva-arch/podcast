@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.1.1' );
+define( 'BRONZEPODCAST_VERSION', '1.1.2' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -43,8 +43,6 @@ function bronzepodcast_setup() {
 				'min_rows'        => 1,
 				'max_rows'        => 8,
 				'default_columns' => 3,
-				'min_columns'     => 1,
-				'max_columns'     => 4,
 			),
 		)
 	);
@@ -54,8 +52,8 @@ function bronzepodcast_setup() {
 
 	register_nav_menus(
 		array(
-			'primary' => __( 'Menu principal', 'bronzepodcast' ),
-			'footer'  => __( 'Menu do rodapé', 'bronzepodcast' ),
+			'primary' => __( 'Menu Principal', 'bronzepodcast' ),
+			'footer'  => __( 'Menu Rodapé', 'bronzepodcast' ),
 		)
 	);
 }
@@ -68,10 +66,19 @@ function bronzepodcast_assets() {
 		array(),
 		null
 	);
+
+	$style_deps = array();
+	if ( wp_style_is( 'wc-blocks-style', 'registered' ) ) {
+		$style_deps[] = 'wc-blocks-style';
+	}
+	if ( wp_style_is( 'woocommerce-general', 'registered' ) ) {
+		$style_deps[] = 'woocommerce-general';
+	}
+
 	wp_enqueue_style(
 		'bronzepodcast-main',
 		get_template_directory_uri() . '/assets/css/main.css',
-		array(),
+		$style_deps,
 		BRONZEPODCAST_VERSION
 	);
 	wp_enqueue_script(
@@ -82,7 +89,7 @@ function bronzepodcast_assets() {
 		true
 	);
 }
-add_action( 'wp_enqueue_scripts', 'bronzepodcast_assets' );
+add_action( 'wp_enqueue_scripts', 'bronzepodcast_assets', 20 );
 
 /**
  * Mantém o nome da marca nos títulos públicos enquanto o domínio temporário

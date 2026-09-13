@@ -145,7 +145,8 @@ p { margin: 0 0 1.25em; }
 .woocommerce ul.products li.product a.button:hover, .woocommerce ul.products li.product .button:hover { background: var(--bronze) !important; border-color: var(--bronze) !important; color: var(--white) !important; transform: translateY(-2px); }
 .woocommerce span.onsale { background: var(--bronze); }
 .woocommerce-message, .woocommerce-info, .woocommerce-error { background: var(--paper); border-top-color: var(--bronze); color: var(--ink); }
-.woocommerce form .form-row input.input-text, .woocommerce form .form-row textarea, .woocommerce .quantity .qty, .woocommerce select { background: var(--paper); border: 1px solid #d8d2ca; border-radius: 9px; color: var(--ink); min-height: 48px; padding: 9px 13px; }
+.woocommerce form .form-row input.input-text, .woocommerce form .form-row textarea, .woocommerce .quantity .qty, .woocommerce select { background: var(--surface-raised); border: 1px solid var(--line-strong); border-radius: 9px; color: var(--paper); min-height: 48px; padding: 9px 13px; }
+.woocommerce form .form-row input.input-text:focus, .woocommerce form .form-row textarea:focus, .woocommerce select:focus { border-color: var(--bronze-light); box-shadow: 0 0 0 1px var(--bronze-light); outline: none; }
 .woocommerce table.shop_table { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; border-spacing: 0; overflow: hidden; width: 100%; }
 .woocommerce table.shop_table th { background: var(--surface-raised); border-bottom: 1px solid var(--line); color: var(--paper); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; padding: 16px 20px; text-transform: uppercase; }
 .woocommerce table.shop_table td { border-top: 1px solid var(--line); color: var(--paper-soft); padding: 18px 20px; }
@@ -182,6 +183,289 @@ p { margin: 0 0 1.25em; }
 .woocommerce-checkout #payment div.payment_box::before { border-bottom-color: var(--surface-raised) !important; }
 .woocommerce-checkout .woocommerce-billing-fields h3, .woocommerce-checkout .woocommerce-shipping-fields h3, .woocommerce-checkout #order_review_heading { color: var(--paper); font-size: 1.8rem; margin-bottom: 20px; }
 .woocommerce-checkout label { color: var(--paper-soft); font-size: 0.82rem; font-weight: 600; }
+
+/* WooCommerce Blocks Checkout & Form Inputs */
+.wc-block-checkout,
+.wp-block-woocommerce-checkout {
+  --wc-block-base-color: var(--paper);
+  --wc-block-background-color: var(--surface);
+  --wc-block-border-color: var(--line);
+  --wc-block-primary-color: var(--bronze);
+  --wc-block-input-background-color: var(--surface-raised);
+  --wc-block-input-color: var(--paper);
+  --wc-block-input-border-color: var(--line-strong);
+  --wc-block-input-placeholder-color: var(--paper-soft);
+  color: var(--paper);
+}
+
+.wc-block-components-checkout-step {
+  border-bottom: 1px solid var(--line) !important;
+  margin-bottom: 36px !important;
+  padding-bottom: 30px !important;
+}
+
+.wc-block-components-checkout-step__title,
+.wc-block-components-checkout-step__heading {
+  color: var(--paper) !important;
+  font-family: var(--display) !important;
+  font-size: clamp(1.7rem, 2.5vw, 2.3rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 18px !important;
+}
+
+.wc-block-components-checkout-step__description {
+  color: var(--muted) !important;
+  font-size: 0.92rem !important;
+  margin-bottom: 22px !important;
+}
+
+/* Inputs & Form Fields - Deep Dark Surface with Bronze accents */
+.wc-block-components-text-input,
+.wc-block-components-combobox {
+  background-color: var(--surface-raised) !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  position: relative !important;
+  transition: all 180ms ease !important;
+}
+
+.wc-block-components-text-input:hover,
+.wc-block-components-combobox:hover {
+  border-color: rgba(230, 164, 126, 0.45) !important;
+}
+
+.wc-block-components-text-input.is-active,
+.wc-block-components-combobox.is-active,
+.wc-block-components-text-input:focus-within,
+.wc-block-components-combobox:focus-within {
+  background-color: #22272d !important;
+  border-color: var(--bronze-light) !important;
+  box-shadow: 0 0 0 1px var(--bronze-light), 0 4px 16px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* Input text values */
+.wc-block-components-text-input input,
+.wc-block-components-text-input input[type="text"],
+.wc-block-components-text-input input[type="email"],
+.wc-block-components-text-input input[type="tel"],
+.wc-block-components-text-input input[type="password"],
+.wc-block-components-text-input input[type="number"],
+.wc-block-components-combobox .wc-block-components-combobox__input {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
+  font-family: var(--sans) !important;
+  font-size: 0.98rem !important;
+  font-weight: 500 !important;
+  padding: 24px 14px 8px !important;
+  outline: none !important;
+  caret-color: var(--bronze-light) !important;
+}
+
+/* Floating labels in resting state (field empty) */
+.wc-block-components-text-input label,
+.wc-block-components-combobox label {
+  color: var(--paper-soft) !important;
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+  opacity: 0.92 !important;
+  transition: all 160ms cubic-bezier(0.2, 0, 0, 1) !important;
+}
+
+/* Floating labels in active / focused state */
+.wc-block-components-text-input.is-active label,
+.wc-block-components-combobox.is-active label,
+.wc-block-components-text-input:focus-within label,
+.wc-block-components-combobox:focus-within label {
+  color: var(--bronze-light) !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.07em !important;
+  opacity: 1 !important;
+  text-transform: uppercase !important;
+}
+
+/* Combobox Country / Region Selector */
+.wc-block-components-combobox__menu,
+.components-popover__content {
+  background: var(--surface-raised) !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+  color: var(--paper) !important;
+}
+
+.wc-block-components-combobox__menu-item {
+  color: var(--paper) !important;
+  font-size: 0.92rem !important;
+  padding: 10px 14px !important;
+  transition: background 140ms ease !important;
+}
+
+.wc-block-components-combobox__menu-item:hover,
+.wc-block-components-combobox__menu-item[aria-selected="true"],
+.wc-block-components-combobox__menu-item.is-highlighted {
+  background: var(--bronze) !important;
+  color: var(--white) !important;
+}
+
+.wc-block-components-combobox svg {
+  color: var(--paper-soft) !important;
+  fill: var(--paper-soft) !important;
+}
+
+/* "+ Add apartment, suite, etc." action link */
+.wc-block-components-address-form__address_2-toggle {
+  color: var(--bronze-light) !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+  margin-top: 8px !important;
+  display: inline-block !important;
+}
+
+.wc-block-components-address-form__address_2-toggle:hover {
+  color: var(--paper) !important;
+}
+
+/* Checkboxes & Labels */
+.wc-block-components-checkbox {
+  align-items: center !important;
+  display: flex !important;
+  gap: 10px !important;
+  margin-block: 16px !important;
+}
+
+.wc-block-components-checkbox__input[type="checkbox"] {
+  accent-color: var(--bronze) !important;
+  border-radius: 4px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  width: 18px !important;
+}
+
+.wc-block-components-checkbox__label {
+  color: var(--paper) !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+}
+
+/* Radio Option Panels (Shipping & Payment options) */
+.wc-block-components-radio-control-accordion-option,
+.wc-block-components-panel {
+  background: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 12px !important;
+  color: var(--paper) !important;
+  margin-bottom: 12px !important;
+  transition: all 180ms ease !important;
+}
+
+.wc-block-components-radio-control-accordion-option:hover {
+  border-color: var(--line-strong) !important;
+}
+
+.wc-block-components-radio-control-accordion-option.is-checked {
+  background: var(--surface-raised) !important;
+  border-color: var(--bronze) !important;
+}
+
+.wc-block-components-radio-control__input[type="radio"] {
+  accent-color: var(--bronze) !important;
+}
+
+.wc-block-components-radio-control__label {
+  color: var(--paper) !important;
+  font-weight: 600 !important;
+}
+
+.wc-block-components-radio-control__description {
+  color: var(--paper-soft) !important;
+}
+
+/* Order Summary Sidebar & Totals */
+.wc-block-checkout__sidebar,
+.wc-block-components-order-summary {
+  background: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+}
+
+.wc-block-components-order-summary .wc-block-components-order-summary__header {
+  border-bottom: 1px solid var(--line) !important;
+  padding-bottom: 16px !important;
+}
+
+.wc-block-components-order-summary-item {
+  border-bottom: 1px solid var(--line) !important;
+  padding-block: 16px !important;
+}
+
+.wc-block-components-order-summary-item__title {
+  color: var(--paper) !important;
+  font-weight: 600 !important;
+}
+
+.wc-block-components-totals-item__label {
+  color: var(--paper-soft) !important;
+}
+
+.wc-block-components-totals-item__value {
+  color: var(--bronze-light) !important;
+  font-weight: 700 !important;
+}
+
+.wc-block-components-totals-footer-item .wc-block-components-totals-item__value {
+  color: var(--paper) !important;
+  font-size: 1.25rem !important;
+}
+
+/* Final Place Order Button */
+.wc-block-components-checkout-place-order-button {
+  align-items: center !important;
+  background: var(--bronze) !important;
+  border: 1px solid var(--bronze) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 24px rgba(199, 123, 85, 0.28) !important;
+  color: var(--white) !important;
+  display: inline-flex !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  justify-content: center !important;
+  letter-spacing: 0.12em !important;
+  min-height: 52px !important;
+  text-transform: uppercase !important;
+  transition: all 180ms ease !important;
+  width: 100% !important;
+}
+
+.wc-block-components-checkout-place-order-button:hover:not(:disabled) {
+  background: var(--bronze-light) !important;
+  border-color: var(--bronze-light) !important;
+  box-shadow: 0 12px 28px rgba(199, 123, 85, 0.38) !important;
+  color: var(--ink-deep) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Notice Banners (Errors & Alerts) */
+.wc-block-components-notice-banner.is-error {
+  background: rgba(220, 53, 69, 0.14) !important;
+  border: 1px solid rgba(220, 53, 69, 0.4) !important;
+  border-radius: 10px !important;
+  color: #fca5a5 !important;
+}
+
+.wc-block-components-notice-banner__content {
+  color: inherit !important;
+}
 .woocommerce div.product table.variations { border: 0; margin-bottom: 24px; width: 100%; }
 .woocommerce div.product table.variations td, .woocommerce div.product table.variations th { background: transparent; border: 0; padding: 8px 0; }
 .woocommerce div.product table.variations label { color: var(--paper-soft); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
