@@ -22,30 +22,6 @@ get_header();
 		</div>
 	</section>
 
-	<section class="episodes section-pad" aria-labelledby="episodes-title">
-		<div class="content-shell content-shell--wide">
-			<div class="section-heading section-heading--split">
-				<div>
-					<h2 id="episodes-title"><?php esc_html_e( 'Podcast', 'bronzepodcast' ); ?></h2>
-				</div>
-				<p class="section-heading__lede"><?php esc_html_e( 'Episódios recentes do canal, para ver ou ouvir no teu ritmo.', 'bronzepodcast' ); ?></p>
-			</div>
-			<div class="episode-grid">
-				<article class="episode-card">
-					<div class="video-frame">
-						<iframe src="https://www.youtube-nocookie.com/embed/xsM6DrjWxM4" title="<?php esc_attr_e( 'B07 — A Violência | Bronze Podcast', 'bronzepodcast' ); ?>" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-					</div>
-					<div class="episode-card__meta"><span><?php esc_html_e( 'B07 — A Violência', 'bronzepodcast' ); ?></span><a href="https://www.youtube.com/watch?v=xsM6DrjWxM4" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Ver no YouTube', 'bronzepodcast' ); ?> <span aria-hidden="true">↗</span></a></div>
-				</article>
-				<article class="episode-card">
-					<div class="video-frame">
-						<iframe src="https://www.youtube-nocookie.com/embed/YaPC_g224TQ" title="<?php esc_attr_e( '#47 — O Silêncio | Bronze Podcast', 'bronzepodcast' ); ?>" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-					</div>
-					<div class="episode-card__meta"><span><?php esc_html_e( '#47 — O Silêncio', 'bronzepodcast' ); ?></span><a href="https://www.youtube.com/watch?v=YaPC_g224TQ" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Ver no YouTube', 'bronzepodcast' ); ?> <span aria-hidden="true">↗</span></a></div>
-				</article>
-			</div>
-		</div>
-	</section>
 
 	<section class="store-feature section-pad" aria-labelledby="store-title">
 		<div class="content-shell content-shell--wide">

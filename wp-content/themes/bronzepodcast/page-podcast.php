@@ -141,9 +141,13 @@ $curated_episodes = array(
 
 			<div class="podcast-featured__card">
 				<div class="podcast-featured__media">
-					<div class="video-frame">
-						<iframe src="https://www.youtube-nocookie.com/embed/<?php echo esc_attr( $featured_episode['id'] ); ?>" title="<?php echo esc_attr( $featured_episode['title'] ); ?> | Bronze Podcast" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-					</div>
+					<a class="video-frame podcast-featured__poster" href="<?php echo esc_url( $featured_episode['youtube'] ); ?>" target="_blank" rel="noopener noreferrer" title="<?php esc_attr_e( 'Assistir no YouTube', 'bronzepodcast' ); ?>">
+						<img src="https://img.youtube.com/vi/<?php echo esc_attr( $featured_episode['id'] ); ?>/maxresdefault.jpg" alt="<?php echo esc_attr( $featured_episode['title'] ); ?>" loading="lazy" width="1280" height="720">
+						<span class="podcast-featured__play" aria-hidden="true">
+							<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+						</span>
+						<span class="podcast-featured__label"><?php esc_html_e( 'Assistir no YouTube', 'bronzepodcast' ); ?> ↗</span>
+					</a>
 				</div>
 				<div class="podcast-featured__info">
 					<div class="podcast-badge-wrap">
