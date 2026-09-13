@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.0.6' );
+define( 'BRONZEPODCAST_VERSION', '1.0.7' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -703,10 +703,42 @@ function bronzepodcast_woocommerce_catalog_orderby( $orderby ) {
 add_filter( 'woocommerce_catalog_orderby', 'bronzepodcast_woocommerce_catalog_orderby', 99 );
 
 /**
+ * Força a etiqueta de promoção do WooCommerce em português.
+ */
+function bronzepodcast_custom_sale_flash( $html, $post, $product ) {
+	return '<span class="onsale">' . esc_html__( 'Promoção', 'bronzepodcast' ) . '</span>';
+}
+add_filter( 'woocommerce_sale_flash', 'bronzepodcast_custom_sale_flash', 10, 3 );
+
+/**
  * Tradução de termos e contagens do WooCommerce para português de Portugal.
  */
 function bronzepodcast_filter_woocommerce_translations( $translation, $text, $domain ) {
 	if ( 'woocommerce' === $domain ) {
+		if ( 'Sale!' === $text ) {
+			return 'Promoção';
+		}
+		if ( 'Select options' === $text ) {
+			return 'Comprar';
+		}
+		if ( 'Read more' === $text ) {
+			return 'Ver mais';
+		}
+		if ( 'View cart' === $text ) {
+			return 'Ver carrinho';
+		}
+		if ( 'Shop order' === $text ) {
+			return 'Ordenar loja';
+		}
+		if ( 'Product Pagination' === $text ) {
+			return 'Paginação de produtos';
+		}
+		if ( 'This product has multiple variants. The options may be chosen on the product page' === $text ) {
+			return 'Este artigo tem várias opções que podem ser escolhidas na página do produto.';
+		}
+		if ( '&ldquo;%s&rdquo; has been added to your cart.' === $text ) {
+			return '&ldquo;%s&rdquo; foi adicionado ao seu carrinho.';
+		}
 		if ( 'Description' === $text ) {
 			return 'Descrição';
 		}
@@ -761,6 +793,34 @@ function bronzepodcast_filter_woocommerce_translations( $translation, $text, $do
 add_filter( 'gettext', 'bronzepodcast_filter_woocommerce_translations', 20, 3 );
 
 /**
+ * Tradução das contagens com contexto do WooCommerce (ex: Showing 1–9 of 44 results).
+ */
+function bronzepodcast_filter_woocommerce_translations_with_context( $translation, $text, $context, $domain ) {
+	if ( 'woocommerce' === $domain ) {
+		if ( 'with first and last result' === $context ) {
+			if ( strpos( $text, 'Showing %1$d' ) !== false ) {
+				return 'A mostrar %1$d&ndash;%2$d de %3$d resultados';
+			}
+		}
+	}
+	return $translation;
+}
+add_filter( 'gettext_with_context', 'bronzepodcast_filter_woocommerce_translations_with_context', 20, 4 );
+
+/**
+ * Tradução das contagens no plural com contexto (ex: Showing 1–9 of 44 results).
+ */
+function bronzepodcast_filter_woocommerce_ngettext_with_context( $translation, $single, $plural, $number, $context, $domain ) {
+	if ( 'woocommerce' === $domain ) {
+		if ( 'with first and last result' === $context ) {
+			return 'A mostrar %1$d&ndash;%2$d de %3$d resultados';
+		}
+	}
+	return $translation;
+}
+add_filter( 'ngettext_with_context', 'bronzepodcast_filter_woocommerce_ngettext_with_context', 20, 6 );
+
+/**
  * Tradução das contagens no plural (ex: Showing 19-27 of 56 results).
  */
 function bronzepodcast_filter_woocommerce_ngettext( $translation, $single, $plural, $number, $domain ) {
@@ -790,5 +850,23 @@ function bronzepodcast_product_add_to_cart_text( $text, $product ) {
 	return $text;
 }
 add_filter( 'woocommerce_product_add_to_cart_text', 'bronzepodcast_product_add_to_cart_text', 99, 2 );
+
+/**
+ * Abre links de menus externos (como Tesouro dos Fiéis) em novo separador de forma segura.
+ */
+function bronzepodcast_external_menu_links( $atts, $item, $args ) {
+	if ( ! empty( $atts['href'] ) ) {
+		$home_host = wp_parse_url( home_url(), PHP_URL_HOST );
+		$link_host = wp_parse_url( $atts['href'], PHP_URL_HOST );
+
+		if ( $link_host && $link_host !== $home_host ) {
+			$atts['target'] = '_blank';
+			$atts['rel']    = 'noopener noreferrer';
+		}
+	}
+	return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'bronzepodcast_external_menu_links', 10, 3 );
+
 
 

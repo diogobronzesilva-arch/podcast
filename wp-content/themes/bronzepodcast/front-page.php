@@ -77,7 +77,7 @@ get_header();
 				<h2><?php esc_html_e( 'Não se pode separar a Fé da Nação.', 'bronzepodcast' ); ?></h2>
 			</div>
 			<div class="manifesto__copy">
-				<p><?php esc_html_e( 'A fé não vive fora da história, da família ou da Nação. O Bronze existe para conversar sobre isso com clareza e sem fingimento.', 'bronzepodcast' ); ?></p>
+				<p><?php esc_html_e( 'A fé não vive fora da história, da família ou da Nação.', 'bronzepodcast' ); ?></p>
 				<a class="button button--outline" href="<?php echo esc_url( home_url( '/sobre/' ) ); ?>"><?php esc_html_e( 'Ler mais', 'bronzepodcast' ); ?><span aria-hidden="true">→</span></a>
 			</div>
 		</div>
