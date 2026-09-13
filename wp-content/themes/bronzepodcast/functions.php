@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.2.6' );
+define( 'BRONZEPODCAST_VERSION', '1.2.7' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -78,7 +78,7 @@ add_filter( 'theme_mod_custom_logo', '__return_false', 999 );
 function bronzepodcast_assets() {
 	wp_enqueue_style(
 		'bronzepodcast-fonts',
-		'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap',
+		'https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap',
 		array(),
 		null
 	);

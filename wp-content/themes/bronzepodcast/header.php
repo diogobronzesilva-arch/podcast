@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="site-header__inner content-shell content-shell--wide">
 		<div class="site-brand">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="custom-logo-link" aria-label="<?php esc_attr_e( 'Bronze Podcast — página inicial', 'bronzepodcast' ); ?>">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/avatar_cruz_cristo.png?v=1.2.6' ); ?>" alt="<?php esc_attr_e( 'Bronze Podcast', 'bronzepodcast' ); ?>" width="72" height="72" class="custom-logo">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/avatar_cruz_cristo.png?v=' . BRONZEPODCAST_VERSION ); ?>" alt="<?php esc_attr_e( 'Bronze Podcast', 'bronzepodcast' ); ?>" width="72" height="72" class="custom-logo">
 			</a>
 		</div>
 

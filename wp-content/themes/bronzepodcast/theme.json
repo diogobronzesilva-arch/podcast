@@ -20,6 +20,7 @@
     "typography": {
       "fluid": true,
       "fontFamilies": [
+        { "slug": "brand", "name": "Cinzel", "fontFamily": "'Cinzel', Georgia, serif" },
         { "slug": "display", "name": "Cormorant Garamond", "fontFamily": "'Cormorant Garamond', Georgia, serif" },
         { "slug": "sans", "name": "Manrope", "fontFamily": "Manrope, Arial, sans-serif" }
       ]
