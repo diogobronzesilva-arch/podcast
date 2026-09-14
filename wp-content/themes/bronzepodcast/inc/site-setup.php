@@ -200,3 +200,34 @@ function bronzepodcast_check_legal_pages() {
 }
 add_action( 'admin_init', 'bronzepodcast_check_legal_pages' );
 
+/**
+ * Garante a criação automática do cupão oficial 'YOUTUBE10' (10% de desconto)
+ * divulgado em todas as descrições de vídeo do canal do YouTube.
+ */
+function bronzepodcast_setup_youtube10_coupon() {
+	if ( ! function_exists( 'wc_get_coupon_id_by_code' ) ) {
+		return;
+	}
+	if ( get_option( 'bronzepodcast_youtube10_coupon_installed' ) ) {
+		return;
+	}
+
+	$code = 'youtube10';
+	$coupon_id = wc_get_coupon_id_by_code( $code );
+
+	if ( ! $coupon_id ) {
+		$coupon = new WC_Coupon();
+		$coupon->set_code( $code );
+		$coupon->set_discount_type( 'percent' );
+		$coupon->set_amount( 10 );
+		$coupon->set_description( 'Desconto oficial de 10% para a comunidade do YouTube' );
+		$coupon->set_individual_use( false );
+		$coupon->save();
+	}
+
+	update_option( 'bronzepodcast_youtube10_coupon_installed', 1 );
+}
+add_action( 'woocommerce_init', 'bronzepodcast_setup_youtube10_coupon' );
+add_action( 'admin_init', 'bronzepodcast_setup_youtube10_coupon' );
+
+
