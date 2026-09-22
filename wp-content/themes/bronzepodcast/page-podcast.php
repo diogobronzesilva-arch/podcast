@@ -8,126 +8,17 @@
 get_header();
 ?>
 <?php
-$featured_episode = array(
-	'id'      => 'xsM6DrjWxM4',
-	'code'    => 'B07',
-	'concept' => 'A Fortaleza',
-	'title'   => 'A Violência: Mansidão, Coragem e a Verdadeira Fortaleza',
-	'desc'    => 'Sobre a imposição da violência pelos Estados modernos sobre os seus povos, os limites da autoridade e qual a verdadeira posição doutrinal e moral católica.',
-	'youtube' => 'https://www.youtube.com/watch?v=xsM6DrjWxM4',
-	'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-);
+$featured_episode = function_exists( 'bronzepodcast_get_featured_episode' ) ? bronzepodcast_get_featured_episode() : null;
+$all_episodes     = function_exists( 'bronzepodcast_get_all_episodes' ) ? bronzepodcast_get_all_episodes() : array();
+$curated_episodes = array();
 
-$curated_episodes = array(
-	array(
-		'id'      => 'S0EdIUdbcVE',
-		'code'    => 'B06',
-		'concept' => 'A Queda',
-		'title'   => 'B06 - Justiça Original VS Pecado Original',
-		'desc'    => 'Fundamentos na Sagrada Escritura, dogmas da Fé e a distinção essencial entre a justiça original e as consequências da Queda.',
-		'youtube' => 'https://www.youtube.com/watch?v=S0EdIUdbcVE',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'P2J66t4AOTE',
-		'code'    => 'B05',
-		'concept' => 'O Compromisso',
-		'title'   => 'B05 - O Noivo, a Noiva e o Compromisso',
-		'desc'    => 'Sobre as características, virtudes e deveres no matrimónio católico perante o compromisso indissolúvel.',
-		'youtube' => 'https://www.youtube.com/watch?v=P2J66t4AOTE',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'sUDiI2dN6Rg',
-		'code'    => 'B04',
-		'concept' => 'A Renúncia',
-		'title'   => 'B04 - Tinha Tudo e Não Tinha Nada',
-		'desc'    => 'O desapego das ilusões mundanas, a superação do vazio material e a redescoberta da oração interior.',
-		'youtube' => 'https://www.youtube.com/watch?v=sUDiI2dN6Rg',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'FGAsf3R2hno',
-		'code'    => 'B03',
-		'concept' => 'A Usura',
-		'title'   => 'B03 - Economia, Família e o Futuro c/ Murilo Resende',
-		'desc'    => 'A erosão económica das famílias tradicionais, a moral contra a usura e os princípios de uma ordem social justa.',
-		'youtube' => 'https://www.youtube.com/watch?v=FGAsf3R2hno',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'gJsI9GAMXiU',
-		'code'    => 'B02',
-		'concept' => 'A Rocha',
-		'title'   => 'B02 - A Pedra Angular c/ Dr. Haugen',
-		'desc'    => 'A firmeza imutável da doutrina da Igreja contra o relativismo secular contemporâneo.',
-		'youtube' => 'https://www.youtube.com/watch?v=gJsI9GAMXiU',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'G5KFzh2gLCw',
-		'code'    => 'B01',
-		'concept' => 'A Verdade',
-		'title'   => 'B01 - Da Ideologia à Busca da Verdade',
-		'desc'    => 'O percurso intelectual e espiritual de rompimento com os dogmas liberais e socialistas em busca de Cristo.',
-		'youtube' => 'https://www.youtube.com/watch?v=G5KFzh2gLCw',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'sMDfcIo4FG8',
-		'code'    => '#70',
-		'concept' => 'A Fidelidade',
-		'title'   => '#70 - Firmeza de Princípios e Fidelidade à Fé',
-		'desc'    => 'A defesa intransigente da verdade católica sem cedências ao espírito moderno em tempos de provação.',
-		'youtube' => 'https://www.youtube.com/watch?v=sMDfcIo4FG8',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'lstDF0aAZ_c',
-		'code'    => '#69',
-		'concept' => 'A Santa Missa',
-		'title'   => '#69 - O Sentido do Sagrado na Liturgia Católica',
-		'desc'    => 'O valor transcendente do Santo Sacrifício da Missa, o recolhimento, a sacralidade e a liturgia perene.',
-		'youtube' => 'https://www.youtube.com/watch?v=lstDF0aAZ_c',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'YaPC_g224TQ',
-		'code'    => '#47',
-		'concept' => 'O Silêncio',
-		'title'   => '#47 - O Silêncio: A Busca de Deus no Mundo Moderno',
-		'desc'    => 'A necessidade vital do recolhimento, da oração interior e da fuga ao ruído ensurdecedor da sociedade digital.',
-		'youtube' => 'https://www.youtube.com/watch?v=YaPC_g224TQ',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'FPQ8jPFxd90',
-		'code'    => '#35',
-		'concept' => 'Portugal',
-		'title'   => '#35 - Portugal: A Fundação e a Aliança com Cristo',
-		'desc'    => 'A fundação mística da nacionalidade e o compromisso sagrado entre a Coroa de Portugal e a Fé Católica.',
-		'youtube' => 'https://www.youtube.com/watch?v=FPQ8jPFxd90',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'o7E9CdRMKug',
-		'code'    => '#20',
-		'concept' => 'O Rosário',
-		'title'   => '#20 - O Rosário: A Arma Espiritual dos Cristãos',
-		'desc'    => 'A origem, a meditação dos mistérios e a eficácia invencível do Santo Rosário para a salvação das almas.',
-		'youtube' => 'https://www.youtube.com/watch?v=o7E9CdRMKug',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-	array(
-		'id'      => 'iEJ5DV8o0y8',
-		'code'    => '#14',
-		'concept' => 'Fátima',
-		'title'   => '#14 - Fátima: Os Apelos e o Dogma da Fé',
-		'desc'    => 'As aparições de 1917, as mensagens proféticas e a promessa de preservação da Fé em Portugal.',
-		'youtube' => 'https://www.youtube.com/watch?v=iEJ5DV8o0y8',
-		'spotify' => 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
-	),
-);
+if ( ! empty( $all_episodes ) ) {
+	if ( $featured_episode && isset( $all_episodes[0]['id'], $featured_episode['id'] ) && $all_episodes[0]['id'] === $featured_episode['id'] ) {
+		$curated_episodes = array_slice( $all_episodes, 1 );
+	} else {
+		$curated_episodes = $all_episodes;
+	}
+}
 ?>
 <main id="primary" class="site-main">
 	<section class="page-hero page-hero--podcast">
@@ -135,7 +26,7 @@ $curated_episodes = array(
 		<div class="content-shell content-shell--wide page-hero__content">
 			<p class="eyebrow"><?php esc_html_e( 'Conversas & Transmissões', 'bronzepodcast' ); ?></p>
 			<h1><?php esc_html_e( 'O podcast em vídeo e áudio.', 'bronzepodcast' ); ?></h1>
-			<p class="page-hero__lede"><?php esc_html_e( 'Episódios completos sobre Fé Católica, tradição e Portugal. Para assistir na íntegra no YouTube ou acompanhar em formato áudio no Spotify.', 'bronzepodcast' ); ?></p>
+			<p class="page-hero__lede"><?php esc_html_e( 'Conversas sobre a Fé Católica, a vida em família e os problemas do nosso tempo. Para assistir na íntegra no YouTube ou acompanhar em formato áudio no Spotify.', 'bronzepodcast' ); ?></p>
 		</div>
 	</section>
 

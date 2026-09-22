@@ -23,6 +23,19 @@ get_header();
 	</section>
 
 	<!-- Episódio em Destaque & Conversas Recentes -->
+	<?php
+	$featured_episode = function_exists( 'bronzepodcast_get_featured_episode' ) ? bronzepodcast_get_featured_episode() : null;
+	$all_episodes     = function_exists( 'bronzepodcast_get_all_episodes' ) ? bronzepodcast_get_all_episodes( 4 ) : array();
+	$recent_highlights = array();
+	if ( ! empty( $all_episodes ) ) {
+		// Se o primeiro episódio for o mesmo do destaque, usamos os seguintes para a grelha
+		if ( $featured_episode && isset( $all_episodes[0]['id'], $featured_episode['id'] ) && $all_episodes[0]['id'] === $featured_episode['id'] ) {
+			$recent_highlights = array_slice( $all_episodes, 1, 3 );
+		} else {
+			$recent_highlights = array_slice( $all_episodes, 0, 3 );
+		}
+	}
+	?>
 	<section class="podcast-featured section-pad" aria-labelledby="home-featured-title">
 		<div class="content-shell content-shell--wide">
 			<div class="section-heading section-heading--split">
@@ -30,13 +43,14 @@ get_header();
 					<p class="eyebrow"><?php esc_html_e( 'Conversas & Transmissões', 'bronzepodcast' ); ?></p>
 					<h2 id="home-featured-title"><?php esc_html_e( 'Último Episódio', 'bronzepodcast' ); ?></h2>
 				</div>
-				<p class="section-heading__lede"><?php esc_html_e( 'Diálogos profundos sobre a Fé Católica, a moral e a história de Portugal.', 'bronzepodcast' ); ?></p>
+				<p class="section-heading__lede"><?php esc_html_e( 'Conversas sobre a Fé Católica, a vida em família e os problemas do nosso tempo.', 'bronzepodcast' ); ?></p>
 			</div>
 
+			<?php if ( ! empty( $featured_episode ) ) : ?>
 			<div class="podcast-featured__card">
 				<div class="podcast-featured__media">
-					<a class="video-frame podcast-featured__poster" href="https://www.youtube.com/watch?v=xsM6DrjWxM4" target="_blank" rel="noopener noreferrer" title="<?php esc_attr_e( 'Assistir no YouTube', 'bronzepodcast' ); ?>">
-						<img src="https://img.youtube.com/vi/xsM6DrjWxM4/maxresdefault.jpg" alt="<?php esc_attr_e( 'B07 - Mansidão, Coragem e a Verdadeira Fortaleza', 'bronzepodcast' ); ?>" loading="lazy" width="1280" height="720">
+					<a class="video-frame podcast-featured__poster" href="<?php echo esc_url( $featured_episode['youtube'] ); ?>" target="_blank" rel="noopener noreferrer" title="<?php esc_attr_e( 'Assistir no YouTube', 'bronzepodcast' ); ?>">
+						<img src="https://img.youtube.com/vi/<?php echo esc_attr( $featured_episode['id'] ); ?>/maxresdefault.jpg" alt="<?php echo esc_attr( $featured_episode['title'] ); ?>" loading="lazy" width="1280" height="720">
 						<span class="podcast-featured__play" aria-hidden="true">
 							<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
 						</span>
@@ -45,107 +59,64 @@ get_header();
 				</div>
 				<div class="podcast-featured__info">
 					<div class="podcast-badge-wrap">
-						<span class="podcast-badge">B07</span>
-						<span class="podcast-concept"><?php esc_html_e( 'A Fortaleza', 'bronzepodcast' ); ?></span>
+						<span class="podcast-badge"><?php echo esc_html( $featured_episode['code'] ); ?></span>
+						<span class="podcast-concept"><?php echo esc_html( $featured_episode['concept'] ); ?></span>
 					</div>
-					<h3><?php esc_html_e( 'A Violência: Mansidão, Coragem e a Verdadeira Fortaleza', 'bronzepodcast' ); ?></h3>
-					<p class="podcast-featured__desc"><?php esc_html_e( 'Sobre a imposição da violência pelos Estados modernos sobre os seus povos, os limites da autoridade e qual a verdadeira posição doutrinal e moral católica.', 'bronzepodcast' ); ?></p>
+					<h3><?php echo esc_html( $featured_episode['title'] ); ?></h3>
+					<p class="podcast-featured__desc"><?php echo esc_html( $featured_episode['desc'] ); ?></p>
 					<div class="podcast-featured__actions">
-						<a class="button button--accent" href="https://www.youtube.com/watch?v=xsM6DrjWxM4" target="_blank" rel="noopener noreferrer">
+						<a class="button button--accent" href="<?php echo esc_url( $featured_episode['youtube'] ); ?>" target="_blank" rel="noopener noreferrer">
 							<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
 							<span><?php esc_html_e( 'Ver no YouTube', 'bronzepodcast' ); ?> <span aria-hidden="true">↗</span></span>
 						</a>
-						<a class="button button--spotify" href="https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg" target="_blank" rel="noopener noreferrer">
+						<?php if ( ! empty( $featured_episode['spotify'] ) ) : ?>
+						<a class="button button--spotify" href="<?php echo esc_url( $featured_episode['spotify'] ); ?>" target="_blank" rel="noopener noreferrer">
 							<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
 							<span><?php esc_html_e( 'Ouvir no Spotify', 'bronzepodcast' ); ?> <span aria-hidden="true">↗</span></span>
 						</a>
+						<?php endif; ?>
 						<a class="button button--ghost" href="<?php echo esc_url( home_url( '/podcast/' ) ); ?>">
 							<span><?php esc_html_e( 'Ver todos os episódios', 'bronzepodcast' ); ?> →</span>
 						</a>
 					</div>
 				</div>
 			</div>
+			<?php endif; ?>
 
-			<!-- 3 Destaques Recentes -->
+			<!-- Destaques Recentes -->
+			<?php if ( ! empty( $recent_highlights ) ) : ?>
 			<div class="podcast-grid" style="margin-top: 40px;">
+				<?php foreach ( $recent_highlights as $highlight ) : ?>
 				<article class="podcast-card">
-					<a class="podcast-card__thumb-wrap" href="https://www.youtube.com/watch?v=S0EdIUdbcVE" target="_blank" rel="noopener noreferrer" title="<?php esc_attr_e( 'Assistir no YouTube', 'bronzepodcast' ); ?>">
-						<img src="https://img.youtube.com/vi/S0EdIUdbcVE/hqdefault.jpg" alt="<?php esc_attr_e( 'B06 - Justiça Original VS Pecado Original', 'bronzepodcast' ); ?>" loading="lazy" width="480" height="360">
-						<span class="podcast-card__tag">A QUEDA</span>
+					<a class="podcast-card__thumb-wrap" href="<?php echo esc_url( $highlight['youtube'] ); ?>" target="_blank" rel="noopener noreferrer" title="<?php esc_attr_e( 'Assistir no YouTube', 'bronzepodcast' ); ?>">
+						<img src="https://img.youtube.com/vi/<?php echo esc_attr( $highlight['id'] ); ?>/hqdefault.jpg" alt="<?php echo esc_attr( $highlight['title'] ); ?>" loading="lazy" width="480" height="360">
+						<span class="podcast-card__tag"><?php echo esc_html( mb_strtoupper( $highlight['concept'], 'UTF-8' ) ); ?></span>
 						<span class="podcast-card__play-badge" aria-hidden="true">
 							<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
 						</span>
 						<span class="podcast-card__thumb-label"><?php esc_html_e( 'Ver no YouTube', 'bronzepodcast' ); ?> ↗</span>
 					</a>
 					<div class="podcast-card__content">
-						<div class="podcast-card__meta"><span class="podcast-card__code">B06</span></div>
+						<div class="podcast-card__meta"><span class="podcast-card__code"><?php echo esc_html( $highlight['code'] ); ?></span></div>
 						<h3 class="podcast-card__title">
-							<a href="https://www.youtube.com/watch?v=S0EdIUdbcVE" target="_blank" rel="noopener noreferrer">B06 - Justiça Original VS Pecado Original</a>
+							<a href="<?php echo esc_url( $highlight['youtube'] ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $highlight['title'] ); ?></a>
 						</h3>
-						<p class="podcast-card__desc"><?php esc_html_e( 'Fundamentos na Sagrada Escritura, dogmas da Fé e a distinção fundamental entre o homem antes e após a Queda.', 'bronzepodcast' ); ?></p>
+						<p class="podcast-card__desc"><?php echo esc_html( $highlight['desc'] ); ?></p>
 						<div class="podcast-card__actions">
-							<a class="text-link" href="https://www.youtube.com/watch?v=S0EdIUdbcVE" target="_blank" rel="noopener noreferrer">
+							<a class="text-link" href="<?php echo esc_url( $highlight['youtube'] ); ?>" target="_blank" rel="noopener noreferrer">
 								<?php esc_html_e( 'YouTube', 'bronzepodcast' ); ?> <span>↗</span>
 							</a>
-							<a class="text-link" href="https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg" target="_blank" rel="noopener noreferrer" style="margin-left: auto; color: var(--paper-soft);">
+							<?php if ( ! empty( $highlight['spotify'] ) ) : ?>
+							<a class="text-link" href="<?php echo esc_url( $highlight['spotify'] ); ?>" target="_blank" rel="noopener noreferrer" style="margin-left: auto; color: var(--paper-soft);">
 								<?php esc_html_e( 'Spotify', 'bronzepodcast' ); ?> <span>↗</span>
 							</a>
+							<?php endif; ?>
 						</div>
 					</div>
 				</article>
-
-				<article class="podcast-card">
-					<a class="podcast-card__thumb-wrap" href="https://www.youtube.com/watch?v=P2J66t4AOTE" target="_blank" rel="noopener noreferrer" title="<?php esc_attr_e( 'Assistir no YouTube', 'bronzepodcast' ); ?>">
-						<img src="https://img.youtube.com/vi/P2J66t4AOTE/hqdefault.jpg" alt="<?php esc_attr_e( 'B05 - O Noivo, a Noiva e o Compromisso', 'bronzepodcast' ); ?>" loading="lazy" width="480" height="360">
-						<span class="podcast-card__tag">O COMPROMISSO</span>
-						<span class="podcast-card__play-badge" aria-hidden="true">
-							<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-						</span>
-						<span class="podcast-card__thumb-label"><?php esc_html_e( 'Ver no YouTube', 'bronzepodcast' ); ?> ↗</span>
-					</a>
-					<div class="podcast-card__content">
-						<div class="podcast-card__meta"><span class="podcast-card__code">B05</span></div>
-						<h3 class="podcast-card__title">
-							<a href="https://www.youtube.com/watch?v=P2J66t4AOTE" target="_blank" rel="noopener noreferrer">B05 - O Noivo, a Noiva e o Compromisso</a>
-						</h3>
-						<p class="podcast-card__desc"><?php esc_html_e( 'As virtudes do homem, da mulher e o valor do compromisso sagrado perante o sacramento do matrimónio.', 'bronzepodcast' ); ?></p>
-						<div class="podcast-card__actions">
-							<a class="text-link" href="https://www.youtube.com/watch?v=P2J66t4AOTE" target="_blank" rel="noopener noreferrer">
-								<?php esc_html_e( 'YouTube', 'bronzepodcast' ); ?> <span>↗</span>
-							</a>
-							<a class="text-link" href="https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg" target="_blank" rel="noopener noreferrer" style="margin-left: auto; color: var(--paper-soft);">
-								<?php esc_html_e( 'Spotify', 'bronzepodcast' ); ?> <span>↗</span>
-							</a>
-						</div>
-					</div>
-				</article>
-
-				<article class="podcast-card">
-					<a class="podcast-card__thumb-wrap" href="https://www.youtube.com/watch?v=sUDiI2dN6Rg" target="_blank" rel="noopener noreferrer" title="<?php esc_attr_e( 'Assistir no YouTube', 'bronzepodcast' ); ?>">
-						<img src="https://img.youtube.com/vi/sUDiI2dN6Rg/hqdefault.jpg" alt="<?php esc_attr_e( 'B04 - Tinha Tudo e Não Tinha Nada', 'bronzepodcast' ); ?>" loading="lazy" width="480" height="360">
-						<span class="podcast-card__tag">A RENÚNCIA</span>
-						<span class="podcast-card__play-badge" aria-hidden="true">
-							<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-						</span>
-						<span class="podcast-card__thumb-label"><?php esc_html_e( 'Ver no YouTube', 'bronzepodcast' ); ?> ↗</span>
-					</a>
-					<div class="podcast-card__content">
-						<div class="podcast-card__meta"><span class="podcast-card__code">B04</span></div>
-						<h3 class="podcast-card__title">
-							<a href="https://www.youtube.com/watch?v=sUDiI2dN6Rg" target="_blank" rel="noopener noreferrer">B04 - Tinha Tudo e Não Tinha Nada</a>
-						</h3>
-						<p class="podcast-card__desc"><?php esc_html_e( 'O vazio do sucesso material contemporâneo, a renúncia ao supérfluo e a redescoberta da graça divina.', 'bronzepodcast' ); ?></p>
-						<div class="podcast-card__actions">
-							<a class="text-link" href="https://www.youtube.com/watch?v=sUDiI2dN6Rg" target="_blank" rel="noopener noreferrer">
-								<?php esc_html_e( 'YouTube', 'bronzepodcast' ); ?> <span>↗</span>
-							</a>
-							<a class="text-link" href="https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg" target="_blank" rel="noopener noreferrer" style="margin-left: auto; color: var(--paper-soft);">
-								<?php esc_html_e( 'Spotify', 'bronzepodcast' ); ?> <span>↗</span>
-							</a>
-						</div>
-					</div>
-				</article>
+				<?php endforeach; ?>
 			</div>
+			<?php endif; ?>
 		</div>
 	</section>
 

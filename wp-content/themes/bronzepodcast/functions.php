@@ -9,11 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.1.5' );
+define( 'BRONZEPODCAST_VERSION', '1.3.0' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
 require_once get_template_directory() . '/inc/shipping.php';
+require_once get_template_directory() . '/inc/cpt-episodes.php';
 
 function bronzepodcast_setup() {
 	load_theme_textdomain( 'bronzepodcast', get_template_directory() . '/languages' );
@@ -65,7 +66,7 @@ add_action( 'after_setup_theme', 'bronzepodcast_setup' );
  */
 add_filter( 'get_custom_logo', 'bronzepodcast_force_official_logo', 999 );
 function bronzepodcast_force_official_logo( $html ) {
-	$logo_url = get_template_directory_uri() . '/assets/images/avatar_cruz_cristo.png?v=1.2.6';
+	$logo_url = get_template_directory_uri() . '/assets/images/avatar_cruz_cristo.png?v=1.3.0';
 	return sprintf(
 		'<a href="%1$s" class="custom-logo-link" rel="home" aria-label="%2$s"><img src="%3$s" class="custom-logo" alt="%2$s" width="72" height="72" /></a>',
 		esc_url( home_url( '/' ) ),
@@ -880,20 +881,50 @@ function bronzepodcast_custom_robots_txt( $output, $public ) {
 add_filter( 'robots_txt', 'bronzepodcast_custom_robots_txt', 10, 2 );
 
 /**
- * Redireciona 301 o endereço herdado /shop/ para a página oficial /loja/.
+ * Redirecionamentos 301 estruturados:
+ * - /shop -> /loja/
+ * - Artigos históricos do blog -> Notes de diogobronzesilva.com
+ * - URLs históricas de produtos na raiz sem /product/ -> /product/slug/
  */
-function bronzepodcast_redirect_old_shop() {
+function bronzepodcast_handle_legacy_redirects() {
 	if ( is_admin() || ! isset( $_SERVER['REQUEST_URI'] ) ) {
 		return;
 	}
 
 	$path = untrailingslashit( wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ) );
+
 	if ( '/shop' === $path ) {
 		wp_safe_redirect( home_url( '/loja/' ), 301 );
 		exit;
 	}
+
+	// Redirecionamento de artigos do blog antigo para o site pessoal
+	$legacy_blog_articles = array(
+		'/deus-e-o-belo',
+		'/a-impossibilidade-conservador-nos-costumes-e-liberal-na-economia',
+		'/rumo-ao-deserto',
+		'/blog-list',
+		'/blog',
+	);
+
+	if ( in_array( $path, $legacy_blog_articles, true ) ) {
+		wp_redirect( 'https://diogobronzesilva.com/notes/', 301 );
+		exit;
+	}
+
+	// Se a página atual for um 404 ou um caminho simples, verificar se existe produto com esse slug
+	if ( is_404() || ! empty( $path ) ) {
+		$slug = ltrim( $path, '/' );
+		if ( ! empty( $slug ) && strpos( $slug, '/' ) === false && class_exists( 'WooCommerce' ) ) {
+			$product = get_page_by_path( $slug, OBJECT, 'product' );
+			if ( $product instanceof WP_Post && 'publish' === $product->post_status ) {
+				wp_safe_redirect( get_permalink( $product ), 301 );
+				exit;
+			}
+		}
+	}
 }
-add_action( 'template_redirect', 'bronzepodcast_redirect_old_shop', 1 );
+add_action( 'template_redirect', 'bronzepodcast_handle_legacy_redirects', 1 );
 
 /**
  * Corrige a renderização do Checkout, garantindo que o formulário de finalização
@@ -991,6 +1022,59 @@ function bronzepodcast_woocommerce_product_tabs( $tabs ) {
 	return $tabs;
 }
 add_filter( 'woocommerce_product_tabs', 'bronzepodcast_woocommerce_product_tabs', 98 );
+
+/**
+ * Tradução de atributos na ficha de produto (ex: Weight -> Peso, Dimensions -> Dimensões).
+ */
+function bronzepodcast_translate_attribute_label( $label, $name, $product = null ) {
+	$clean_name  = strtolower( trim( $name ) );
+	$clean_label = strtolower( trim( $label ) );
+
+	if ( 'weight' === $clean_name || 'weight' === $clean_label ) {
+		return __( 'Peso', 'bronzepodcast' );
+	}
+	if ( 'dimensions' === $clean_name || 'dimensions' === $clean_label ) {
+		return __( 'Dimensões', 'bronzepodcast' );
+	}
+	return $label;
+}
+add_filter( 'woocommerce_attribute_label', 'bronzepodcast_translate_attribute_label', 10, 3 );
+
+/**
+ * Tradução integral das expressões da loja e separador de avaliações do WooCommerce.
+ */
+function bronzepodcast_translate_woocommerce_strings( $translated_text, $text, $domain ) {
+	if ( 'woocommerce' === $domain || 'bronzepodcast' === $domain ) {
+		switch ( $text ) {
+			case 'Weight':
+				return 'Peso';
+			case 'Dimensions':
+				return 'Dimensões';
+			case 'Reviews':
+				return 'Avaliações';
+			case 'Reviews (%d)':
+				return 'Avaliações (%d)';
+			case 'Add a review':
+				return 'Adicionar uma avaliação';
+			case 'Be the first to review &ldquo;%s&rdquo;':
+				return 'Sê o primeiro a avaliar &ldquo;%s&rdquo;';
+			case 'Your rating':
+				return 'A tua classificação';
+			case 'Your review':
+				return 'A tua avaliação';
+			case 'Submit':
+				return 'Submeter';
+			case 'Related products':
+				return 'Peças relacionadas';
+			case 'Description':
+				return 'Descrição';
+			case 'Additional information':
+				return 'Informação adicional';
+		}
+	}
+	return $translated_text;
+}
+add_filter( 'gettext', 'bronzepodcast_translate_woocommerce_strings', 20, 3 );
 
 /**
  * Tradução das mensagens de disponibilidade e stock.

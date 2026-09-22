@@ -1,80 +1,27 @@
-# Roadmap de lançamento
+# Roadmap e Estado Operacional do Bronze Podcast
 
-Este documento separa o que pode ser feito já do que exige decisões, credenciais ou alterações no site público.
+Este documento regista o histórico de lançamento e orienta o desenvolvimento e manutenção contínua de `bronzepodcast.com`.
 
-## Fase 0 — Base do projecto
+## Fases de Lançamento (Concluídas)
 
-**Estado: concluída no site temporário.**
+- **Fase 0 — Base do projeto [CONCLUÍDA]:** Tema personalizado WordPress/WooCommerce, tipografia institucional (Cinzel/Cormorant/Manrope) e selo numismático oficial.
+- **Fase 1 — Conteúdo Editorial [CONCLUÍDA]:** Episódios estruturados com CPT nativo (`podcast_episode`) e fallback transparente; migração dos artigos antigos para as Notes de `diogobronzesilva.com`.
+- **Fase 2 — Staging e Operação [CONCLUÍDA]:** Backups Hostinger, Stripe em produção com inputs dark luxury de alto contraste, notificações e emails transacionais.
+- **Fase 3 — Catálogo WooCommerce [CONCLUÍDA]:** 44+ produtos categorizados, inventário ativo, cupão oficial `YOUTUBE10` e tradução completa das fichas de produto ("Peso", "Dimensões", "Avaliações").
+- **Fase 4 — Legal, SEO & AEO [CONCLUÍDA]:** Termos, privacidade e envios; sitemap XML gerado pelo tema, mapa 301 para URLs históricas e framework AEO para motores de busca com IA.
+- **Fase 5 — Lançamento Público [CONCLUÍDA]:** Domínio oficial ativo e loja a processar encomendas.
 
-- Tema WordPress e WooCommerce criado.
-- Páginas principais publicadas; o Blog foi retirado por decisão editorial.
-- Revamp visual mobile-first concluído.
-- Copy 0.4.1 publicado.
-- Ramo local alinhado com o GitHub e validações automáticas activas.
+---
 
-**Para fechar a fase:** manter o GitHub e a instalação WordPress alinhados.
+## Fase 6 — Operação Contínua & Crescimento (Ativa)
 
-## Fase 1 — Conteúdo editorial
+### 1. Sincronização Editorial Automática
+- Registo de novos episódios do YouTube/Spotify diretamente em `wp-admin` no menu **Episódios**, sem necessidade de deploy de código.
+- Atualização e padronização automática das descrições dos vídeos no YouTube com rodapé oficial e cupão `YOUTUBE10`.
 
-**Objectivo:** o Podcast apresenta episódios reais; os artigos vivem nas Notes de diogobronzesilva.com.
+### 2. Gestão de Encomendas & Portes
+- Suporte aos escalões de peso CTT Expresso em Portugal e destinos internacionais europeus.
+- Preservação nativa de campanhas de portes grátis ou métodos de levantamento.
 
-1. Confirmar os episódios que devem estar na página inicial.
-2. Publicar os artigos existentes nas Notes de diogobronzesilva.com.
-3. Definir redireccionamentos para os URLs históricos quando a estrutura das Notes estiver confirmada.
-4. Definir uma rotina simples: episódio no Bronze Podcast e artigo complementar nas Notes quando fizer sentido.
-5. Ligar a newsletter a um serviço escolhido, apenas quando houver uma cadência editorial definida.
-
-**Concluído quando:** a página inicial mostra episódios reais, não há conteúdo provisório no Bronze Podcast e os artigos estão nas Notes.
-
-## Fase 2 — Staging e operação
-
-**Objectivo:** preparar a loja sem risco para o site público.
-
-1. Criar uma instalação de staging na Hostinger, protegida por acesso restrito.
-2. Criar e confirmar um backup completo antes de cada publicação.
-3. Instalar um serviço SMTP e testar a entrega do formulário de contacto.
-4. Configurar a loja em modo de teste: Stripe, emails, portes e impostos.
-5. Definir quem recebe emails de encomenda e de contacto.
-
-**Concluído quando:** uma encomenda de teste chega ao fim, os emails são entregues e o rollback foi testado uma vez.
-
-## Fase 3 — Catálogo WooCommerce
-
-**Objectivo:** migrar a loja com informação correcta e pronta a vender.
-
-1. Criar categorias: terços e devoções, livros e biografias, artigos religiosos.
-2. Importar cada produto com nome, preço, stock, fotografias, peso, dimensões e descrição.
-3. Preservar os URLs dos produtos quando possível; criar redireccionamentos 301 nos restantes.
-4. Configurar portes para Portugal e restantes destinos que pretendas servir.
-5. Testar produtos esgotados, cupões, reembolsos e taxas de envio.
-
-**Concluído quando:** catálogo, carrinho, checkout, emails e stock funcionam em staging.
-
-## Fase 4 — Legal, SEO e domínio
-
-**Objectivo:** abrir o site sem perder tráfego nem deixar falhas básicas.
-
-1. Criar páginas de privacidade, termos, envios e devoluções.
-2. Confirmar consentimento e política da newsletter.
-3. Comparar o inventário de URLs com o site actual e preparar redireccionamentos 301.
-4. Ligar Search Console, sitemap e analytics que escolhas.
-5. Apontar o domínio `bronzepodcast.com` apenas depois do checklist final.
-
-**Concluído quando:** não há URLs críticos em falta, as páginas legais estão prontas e a monitorização está activa.
-
-## Fase 5 — Lançamento
-
-1. Fazer backup final.
-2. Publicar a versão aprovada do tema.
-3. Remover o modo “Coming soon”.
-4. Testar em telemóvel e sem sessão iniciada.
-5. Fazer uma compra real de valor reduzido e validar emails, pagamento e stock.
-6. Monitorizar erros, encomendas e páginas 404 durante a primeira semana.
-
-## Decisões que dependem de ti
-
-- Aprovação do copy 0.4.1.
-- Serviço de newsletter.
-- Países de envio, preços de portes e política de devoluções.
-- Dados da empresa ou pessoa vendedora para páginas legais e Stripe.
-- Momento de troca para `bronzepodcast.com`.
+### 3. Campanhas de Email Marketing
+- Template oficial aprovado em `pipedrive-campaigns/campanha-bronze-podcast.html` pronto para novos episódios e lançamentos de livros/terços.
