@@ -1,0 +1,41 @@
+# bronzepodcast.com
+# Conteudo publico aberto para pessoas, motores de busca e crawlers de IA.
+
+User-agent: *
+Allow: /
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /carrinho/
+Disallow: /checkout/
+Disallow: /finalizar-compra/
+Disallow: /minha-conta/
+Disallow: /*?add-to-cart=*
+
+# Crawlers de IA (pesquisa em tempo real, grounding e treino)
+User-agent: Googlebot
+User-agent: Google-Extended
+User-agent: Bingbot
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: meta-externalagent
+User-agent: cohere-ai
+User-agent: Amazonbot
+User-agent: Bytespider
+User-agent: CCBot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /carrinho/
+Disallow: /checkout/
+Disallow: /finalizar-compra/
+Disallow: /minha-conta/
+Disallow: /*?add-to-cart=*
+
+Sitemap: https://bronzepodcast.com/sitemap.xml

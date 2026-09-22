@@ -23,11 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="site-footer__contact">
 			<p class="site-footer__label"><?php esc_html_e( 'Contacto', 'bronzepodcast' ); ?></p>
 			<a href="mailto:info@bronzepodcast.com">info@bronzepodcast.com</a>
-			<nav class="social-links" aria-label="<?php esc_attr_e( 'Redes e plataformas', 'bronzepodcast' ); ?>">
-				<a href="https://www.youtube.com/@bronzepodcast" target="_blank" rel="noopener noreferrer">YouTube</a>
-				<a href="https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg" target="_blank" rel="noopener noreferrer">Spotify</a>
+			<nav class="social-links" aria-label="<?php esc_attr_e( 'Redes sociais', 'bronzepodcast' ); ?>">
 				<a href="https://www.instagram.com/bronzepodcast/" target="_blank" rel="noopener noreferrer">Instagram</a>
-				<a href="https://x.com/bronzpodcast" target="_blank" rel="noopener noreferrer">X</a>
+				<a href="https://x.com/bronzpodcast" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
 			</nav>
 			<?php
 			wp_nav_menu(

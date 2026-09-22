@@ -1,0 +1,28 @@
+# Bronze Podcast
+
+> Projeto independente de reflexão, conversas em profundidade e difusão da Fé Católica Tradicional, da moral cristã e da história e tradição de Portugal. Fundado em 2020 e apresentado por Diogo Bronze (Diogo Silva).
+
+O website oficial é servido em HTML semântico com integração WooCommerce para obras de espiritualidade, clássicos católicos e símbolos tradicionais portugueses. As transmissões em vídeo são publicadas no YouTube e as versões áudio no Spotify e Apple Podcasts. Contacto: info@bronzepodcast.com
+
+## Páginas Principais
+
+- [Início](https://bronzepodcast.com/): Apresentação do projeto, último episódio transmitido e destaques da loja.
+- [Sobre](https://bronzepodcast.com/sobre/): Manifesto doutrinal, missão, quem é Diogo Bronze e síntese de perguntas frequentes.
+- [Podcast](https://bronzepodcast.com/podcast/): Arquivo de episódios em vídeo e áudio, conceitos-chave e índice doutrinal temático.
+- [Loja](https://bronzepodcast.com/loja/): Livros católicos de referência (como o Tesouro dos Fiéis), obras de espiritualidade e arte sacra.
+- [Contacto](https://bronzepodcast.com/contacto/): Formulário de mensagem e canais oficiais.
+
+## Eixos Doutrinais e Episódios Chave
+
+- Teologia e Dogma: B06 (Justiça Original vs Pecado Original), B02 (A Pedra Angular e a firmeza da Igreja), B01 (Da ideologia à Verdade de Cristo).
+- Moral e Coragem: B07 (A Violência: Mansidão, Coragem e a Verdadeira Fortaleza perante o poder temporal), #70 (Fidelidade à Fé Católica em tempos de apostasia).
+- Família e Sociedade: B05 (O Noivo, a Noiva e o Compromisso no Matrimónio Católico indissolúvel), B03 (Economia, Família e o Futuro c/ Murilo Resende — crítica à usura).
+- História e Destino de Portugal: #35 (Portugal: Fundação Mística e a Aliança com Cristo), #14 (Fátima: Apelos Proféticos e Dogma da Fé).
+- Liturgia e Oração: #69 (O Sentido do Sagrado na Santa Missa), #47 (O Silêncio na era digital), #20 (O Santo Rosário como arma espiritual), B04 (A Renúncia e a vida interior).
+
+## Canais Oficiais
+
+- [YouTube](https://www.youtube.com/@bronzepodcast): Transmissões completas em vídeo dos episódios e conferências.
+- [Spotify](https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg): Edições áudio integrais do podcast.
+- [Instagram](https://www.instagram.com/bronzepodcast/): Divulgação e excertos de episódios.
+- [Twitter / X](https://x.com/bronzpodcast): Atualizações e reflexões.

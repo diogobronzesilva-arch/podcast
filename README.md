@@ -2,30 +2,15 @@
 
 Tema personalizado para reconstruir `bronzepodcast.com` em código, com o catálogo, carrinho e checkout geridos pelo WooCommerce e pagamentos processados pelo Stripe.
 
-## Estado atual
+## Estado atual (Versão 1.3.0 em Produção)
 
-- Identidade visual, logótipo e imagens principais guardados no próprio tema.
-- Cabeçalho responsivo e navegação móvel.
-- Página inicial com os episódios atualmente destacados e produtos recentes.
-- Páginas próprias para `/sobre/`, `/podcast/`, `/loja/` e `/contacto/`.
-- Criação automática e não destrutiva das páginas e do menu ao ativar o tema.
-- Formulário de contacto com validação, proteção por nonce e campo anti-spam.
-- Templates de artigos, arquivo, pesquisa e erro 404.
-- Integração base com WooCommerce.
-- Guia de voz para manter o copy próximo da identidade de Diogo Bronze.
-- Processo documentado de validação, staging, publicação e rollback.
-- Preparado para traduções e para um tema-filho no futuro.
-
-## Instalação
-
-1. Criar um novo site WordPress na Hostinger.
-2. Instalar e ativar WooCommerce.
-3. Instalar o plugin oficial **WooCommerce Stripe Payment Gateway**.
-4. Copiar `wp-content/themes/bronzepodcast` para o WordPress.
-5. Ativar **Bronze Podcast** em `Aparência → Temas`.
-6. Ao ativar o tema, confirmar que as páginas e o menu foram criados. O tema não substitui páginas que já existam.
-7. Em `Definições → Ligações permanentes`, escolher **Nome do artigo** e guardar.
-8. Em `Definições → Geral`, confirmar que o endereço de administração recebe as mensagens do formulário.
+- **Website Oficial:** Ativo e público em `bronzepodcast.com`.
+- **Identidade e Tipografia:** Harmonização tipográfica completa com *Cinzel*, *Cormorant Garamond* e *Manrope*, com o Selo Numismático oficial da Ordem de Cristo em alta resolução.
+- **Episódios Dinâmicos:** Suporte nativo a Custom Post Type (`podcast_episode`) com painel de gestão para YouTube e Spotify, mantendo fallback de segurança automático.
+- **Loja WooCommerce:** Loja aberta com catálogo de 44+ produtos devocionais e literários, checkout integrado via Stripe Elements em dark mode.
+- **Portes e Envios:** Escalões por peso (CTT Expresso Portugal e Internacional) com suporte nativo a portes grátis e conversão automática de unidades.
+- **SEO & AEO:** Sitemap XML próprio, framework de Answer Engine Optimization (AEO/GEO), schema markup PodcastSeries/FAQPage e robots.txt otimizado para motores de IA.
+- **Redirecionamentos:** Mapeamento 301 estruturado para artigos históricos do blog antigo e produtos.
 
 ## Endereços preservados
 
@@ -35,22 +20,19 @@ Tema personalizado para reconstruir `bronzepodcast.com` em código, com o catál
 - `/loja/`
 - `/contacto/`
 
-O inventário completo dos endereços públicos já encontrados está em [`docs/inventario-site.md`](docs/inventario-site.md).
+O inventário completo dos endereços públicos encontra-se em [`docs/inventario-site.md`](docs/inventario-site.md).
 
 ## Publicação segura
 
 - [`docs/release-workflow.md`](docs/release-workflow.md): fonte oficial, testes, staging, backup, publicação e rollback.
 - [`docs/voz-e-copy.md`](docs/voz-e-copy.md): princípios de voz e decisões de copy para todas as páginas.
-- [`docs/roadmap.md`](docs/roadmap.md): sequência de trabalho e condições para a abertura pública.
+- [`docs/roadmap.md`](docs/roadmap.md): objetivos de evolução, campanhas e automação.
 
-## Próximas etapas
+## Próximas etapas operacionais
 
-- Exportar e importar os produtos, imagens e artigos do site atual.
-- Configurar portes, impostos, emails e Stripe em modo de teste.
-- Preservar os endereços dos produtos sem o prefixo `/product/` (requer configuração própria de ligações permanentes no WooCommerce).
-- Ligar o formulário da newsletter ao serviço escolhido.
-- Fazer validação visual em desktop e telemóvel.
-- Preparar a transição do domínio sem interromper a loja atual.
+- Manter o canal do YouTube sincronizado com as descrições padronizadas e o cupão oficial `YOUTUBE10`.
+- Monitorização de conversão no checkout e rotinas de backup na Hostinger.
+- Adicionar novos episódios diretamente no painel do WordPress através do menu Episódios.
 
 ## Estrutura
 

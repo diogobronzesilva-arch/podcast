@@ -17,7 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array
  */
 function bronzepodcast_calculate_weight_shipping( $rates, $package ) {
-	$destination_country = isset( $package['destination']['country'] ) ? strtoupper( trim( $package['destination']['country'] ) ) : 'PT';
+	$base_country        = function_exists( 'WC' ) && WC()->countries ? WC()->countries->get_base_country() : 'PT';
+	$destination_country = isset( $package['destination']['country'] ) && ! empty( $package['destination']['country'] )
+		? strtoupper( trim( $package['destination']['country'] ) )
+		: $base_country;
 
 	// Países europeus abrangidos historicamente.
 	$european_countries = array(
@@ -27,16 +30,22 @@ function bronzepodcast_calculate_weight_shipping( $rates, $package ) {
 		'VA', 'NL', 'IE', 'LU',
 	);
 
-	// Cálculo do peso total do carrinho em quilogramas (kg).
+	// Cálculo do peso total do carrinho convertido para quilogramas (kg).
 	$total_weight = 0;
 	if ( isset( $package['contents'] ) && is_array( $package['contents'] ) ) {
 		foreach ( $package['contents'] as $values ) {
 			if ( isset( $values['data'] ) && is_object( $values['data'] ) ) {
-				$item_weight = (float) $values['data']->get_weight();
-				// Se a peça ainda não tiver peso no catálogo, assumimos 150g como valor base de segurança.
-				if ( $item_weight <= 0 ) {
+				$raw_weight = (float) $values['data']->get_weight();
+				if ( $raw_weight <= 0 ) {
+					// Se a peça ainda não tiver peso no catálogo, assumimos 150g como valor base de segurança.
 					$item_weight = 0.15;
+				} elseif ( function_exists( 'wc_get_weight' ) ) {
+					$item_weight = (float) wc_get_weight( $raw_weight, 'kg' );
+				} else {
+					$unit = get_option( 'woocommerce_weight_unit', 'kg' );
+					$item_weight = ( 'g' === $unit ) ? ( $raw_weight / 1000 ) : $raw_weight;
 				}
+
 				$quantity      = isset( $values['quantity'] ) ? absint( $values['quantity'] ) : 1;
 				$total_weight += ( $item_weight * $quantity );
 			}
@@ -85,7 +94,7 @@ function bronzepodcast_calculate_weight_shipping( $rates, $package ) {
 	}
 
 	try {
-		$rate_id  = 'bronzepodcast_ctt_rate';
+		$rate_id    = 'bronzepodcast_ctt_rate';
 		$rate_label = sprintf( '%s (%s kg)', $label, number_format( $total_weight, 2, ',', '' ) );
 
 		$new_rate = new WC_Shipping_Rate(
@@ -96,7 +105,20 @@ function bronzepodcast_calculate_weight_shipping( $rates, $package ) {
 			'bronzepodcast_shipping'
 		);
 
-		return array( $rate_id => $new_rate );
+		// Preservar métodos especiais como Portes Grátis ou Levantamento se existirem
+		$output_rates = array();
+		if ( is_array( $rates ) ) {
+			foreach ( $rates as $key => $rate ) {
+				$method_id = ( is_object( $rate ) && method_exists( $rate, 'get_method_id' ) ) ? $rate->get_method_id() : '';
+				if ( in_array( $method_id, array( 'free_shipping', 'local_pickup' ), true ) || ( is_object( $rate ) && (float) $rate->get_cost() === 0.0 ) ) {
+					$output_rates[ $key ] = $rate;
+				}
+			}
+		}
+
+		$output_rates[ $rate_id ] = $new_rate;
+
+		return $output_rates;
 	} catch ( Throwable $e ) {
 		return $rates;
 	}

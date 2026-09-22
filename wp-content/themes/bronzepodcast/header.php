@@ -14,6 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="https://img.youtube.com">
+	<?php if ( ! function_exists( 'has_site_icon' ) || ! has_site_icon() ) : ?>
+		<link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/favicon-32x32.png' ); ?>">
+		<link rel="apple-touch-icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/apple-touch-icon.png' ); ?>">
+	<?php endif; ?>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -22,13 +29,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 <header class="site-header" data-site-header>
 	<div class="site-header__inner content-shell content-shell--wide">
 		<div class="site-brand">
-			<?php if ( has_custom_logo() ) : ?>
-				<?php the_custom_logo(); ?>
-			<?php else : ?>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="<?php esc_attr_e( 'Bronze Podcast — página inicial', 'bronzepodcast' ); ?>">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.png' ); ?>" alt="<?php esc_attr_e( 'Bronze Podcast', 'bronzepodcast' ); ?>" width="375" height="375">
-				</a>
-			<?php endif; ?>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="custom-logo-link" aria-label="<?php esc_attr_e( 'Bronze Podcast — página inicial', 'bronzepodcast' ); ?>">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/avatar_cruz_cristo.png?v=' . BRONZEPODCAST_VERSION ); ?>" alt="<?php esc_attr_e( 'Bronze Podcast', 'bronzepodcast' ); ?>" width="72" height="72" class="custom-logo">
+			</a>
 		</div>
 
 		<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" data-menu-toggle>
