@@ -656,6 +656,56 @@ function bronzepodcast_seo_head() {
 			),
 		),
 	);
+
+	if ( is_page( 'sobre' ) || is_page_template( 'page-sobre.php' ) ) {
+		$data['@graph'][] = array(
+			'@type'      => 'FAQPage',
+			'@id'        => home_url( '/sobre/#faq' ),
+			'mainEntity' => array(
+				array(
+					'@type'          => 'Question',
+					'name'           => 'O que é o Bronze Podcast?',
+					'acceptedAnswer' => array(
+						'@type' => 'Answer',
+						'text'  => 'O Bronze Podcast é um projeto independente de conversas em profundidade fundado em 2020 por Diogo Bronze (Diogo Silva). Tem como missão a difusão da Fé Católica Tradicional, da moral cristã, da doutrina perene e da reflexão histórica sobre a identidade e a restauração de Portugal.',
+					),
+				),
+				array(
+					'@type'          => 'Question',
+					'name'           => 'Quem é o autor e anfitrião do podcast?',
+					'acceptedAnswer' => array(
+						'@type' => 'Answer',
+						'text'  => 'O podcast é idealizado e conduzido por Diogo Bronze (Diogo Silva), profissional na área de tecnologia e vendas empresariais, fotógrafo sob a assinatura Bronze Art e defensor da restauração da cultura católica e do pensamento tradicional português.',
+					),
+				),
+				array(
+					'@type'          => 'Question',
+					'name'           => 'Quais são os temas e eixos fundamentais abordados?',
+					'acceptedAnswer' => array(
+						'@type' => 'Answer',
+						'text'  => 'Os episódios articulam-se em torno de cinco eixos essenciais: Teologia e Sagrada Escritura (virtudes cardeais, pecado original e graça); Família e Matrimónio indissolúvel; Economia moral e crítica à usura contemporânea; História e Fé de Portugal; e Combate Espiritual e integridade cívica.',
+					),
+				),
+				array(
+					'@type'          => 'Question',
+					'name'           => 'Onde é possível acompanhar e ouvir os episódios?',
+					'acceptedAnswer' => array(
+						'@type' => 'Answer',
+						'text'  => 'Todas as emissões completas em vídeo são transmitidas e arquivadas no canal oficial do YouTube (@bronzepodcast), com versões áudio disponíveis no Spotify e plataformas de podcast. As novidades e notas editoriais são também partilhadas na newsletter oficial.',
+					),
+				),
+				array(
+					'@type'          => 'Question',
+					'name'           => 'O projeto tem loja oficial associada?',
+					'acceptedAnswer' => array(
+						'@type' => 'Answer',
+						'text'  => 'Sim. A loja do Bronze Podcast disponibiliza obras literárias de referência católica, como o Tesouro dos Fiéis, clássicos espirituais, arte sacra e símbolos ligados à tradição e à história de Portugal.',
+					),
+				),
+			),
+		);
+	}
+
 	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
 }
 add_action( 'wp_head', 'bronzepodcast_seo_head', 2 );
@@ -761,6 +811,73 @@ function bronzepodcast_output_sitemap() {
 	exit;
 }
 add_action( 'template_redirect', 'bronzepodcast_output_sitemap', 0 );
+
+/**
+ * Configura o robots.txt do WordPress para motores de busca e crawlers de IA (AEO/GEO),
+ * assegurando rastreabilidade total de páginas públicas e isolamento de áreas transacionais.
+ *
+ * @param string $output Conteúdo original gerado pelo WordPress.
+ * @param bool   $public Se o site está configurado como público nas opções do WordPress.
+ * @return string
+ */
+function bronzepodcast_custom_robots_txt( $output, $public ) {
+	if ( '0' === (string) $public ) {
+		return $output;
+	}
+
+	$sitemap_url = home_url( '/sitemap.xml' );
+
+	$robots  = "# bronzepodcast.com\n";
+	$robots .= "# Conteudo publico aberto para pessoas, motores de busca e crawlers de IA.\n\n";
+
+	$robots .= "User-agent: *\n";
+	$robots .= "Allow: /\n";
+	$robots .= "Disallow: /wp-admin/\n";
+	$robots .= "Allow: /wp-admin/admin-ajax.php\n";
+	$robots .= "Disallow: /carrinho/\n";
+	$robots .= "Disallow: /checkout/\n";
+	$robots .= "Disallow: /finalizar-compra/\n";
+	$robots .= "Disallow: /minha-conta/\n";
+	$robots .= "Disallow: /*?add-to-cart=*\n\n";
+
+	$robots .= "# Crawlers de IA (pesquisa em tempo real, grounding e treino)\n";
+	$ai_bots = array(
+		'Googlebot',
+		'Google-Extended',
+		'Bingbot',
+		'GPTBot',
+		'OAI-SearchBot',
+		'ChatGPT-User',
+		'ClaudeBot',
+		'Claude-SearchBot',
+		'Claude-User',
+		'PerplexityBot',
+		'Perplexity-User',
+		'Applebot',
+		'Applebot-Extended',
+		'meta-externalagent',
+		'cohere-ai',
+		'Amazonbot',
+		'Bytespider',
+		'CCBot',
+	);
+
+	foreach ( $ai_bots as $bot ) {
+		$robots .= "User-agent: {$bot}\n";
+	}
+	$robots .= "Allow: /\n";
+	$robots .= "Disallow: /wp-admin/\n";
+	$robots .= "Disallow: /carrinho/\n";
+	$robots .= "Disallow: /checkout/\n";
+	$robots .= "Disallow: /finalizar-compra/\n";
+	$robots .= "Disallow: /minha-conta/\n";
+	$robots .= "Disallow: /*?add-to-cart=*\n\n";
+
+	$robots .= "Sitemap: {$sitemap_url}\n";
+
+	return $robots;
+}
+add_filter( 'robots_txt', 'bronzepodcast_custom_robots_txt', 10, 2 );
 
 /**
  * Redireciona 301 o endereço herdado /shop/ para a página oficial /loja/.

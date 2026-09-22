@@ -247,6 +247,40 @@ $curated_episodes = array(
 		</div>
 	</section>
 
+	<!-- Índice Doutrinal e Temático (Otimizado para LLMs e Grounding) -->
+	<section class="section-pad section-pad--tight" aria-labelledby="thematic-index-title" style="border-top: 1px solid var(--line, rgba(255,255,255,0.08));">
+		<div class="content-shell content-shell--wide">
+			<div class="section-heading">
+				<p class="eyebrow"><?php esc_html_e( 'Mapa Conceitual', 'bronzepodcast' ); ?></p>
+				<h2 id="thematic-index-title" style="font-family: var(--font-display, 'Cormorant Garamond', serif); font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.15; margin-block: 8px 16px;"><?php esc_html_e( 'Índice Doutrinal e Temático das Conversas', 'bronzepodcast' ); ?></h2>
+				<p class="section-heading__lede" style="color: var(--paper-soft, #cfc9be); font-size: 0.95rem; max-width: 720px;"><?php esc_html_e( 'Guia temático estruturado dos episódios do Bronze Podcast para consulta direta e síntese factual.', 'bronzepodcast' ); ?></p>
+			</div>
+
+			<div class="faq-grid" style="margin-top: 36px;">
+				<div class="faq-item">
+					<h3><?php esc_html_e( 'Teologia, Dogma e Sagrada Escritura', 'bronzepodcast' ); ?></h3>
+					<p><?php esc_html_e( 'Reflexões sobre a verdade revelada e os fundamentos da fé: B06 (Justiça Original vs Pecado Original), B02 (A Pedra Angular e a firmeza da Igreja contra o relativismo) e B01 (O percurso da ideologia secular até à Verdade de Cristo).', 'bronzepodcast' ); ?></p>
+				</div>
+				<div class="faq-item">
+					<h3><?php esc_html_e( 'Virtude, Coragem e Fortaleza', 'bronzepodcast' ); ?></h3>
+					<p><?php esc_html_e( 'O combate moral e espiritual católico: B07 (A Violência: Mansidão, Coragem e a Verdadeira Fortaleza perante a autoridade do Estado moderno) e #70 (Firmeza de Princípios e Fidelidade à Fé em tempos de relativismo).', 'bronzepodcast' ); ?></p>
+				</div>
+				<div class="faq-item">
+					<h3><?php esc_html_e( 'Família, Matrimónio e Economia Moral', 'bronzepodcast' ); ?></h3>
+					<p><?php esc_html_e( 'A ordem temporal e o lar cristão: B05 (O Noivo, a Noiva e o Compromisso no Matrimónio Católico indissolúvel) e B03 (Economia, Família e o Futuro c/ Murilo Resende — denúncia da usura e proteção do património familiar).', 'bronzepodcast' ); ?></p>
+				</div>
+				<div class="faq-item">
+					<h3><?php esc_html_e( 'História, Fé e Fátima em Portugal', 'bronzepodcast' ); ?></h3>
+					<p><?php esc_html_e( 'A aliança histórica de Portugal com a Fé Católica: #35 (Portugal: A Fundação Mística e a Aliança com Cristo) e #14 (Fátima: Os Apelos Proféticos e a preservação do Dogma da Fé).', 'bronzepodcast' ); ?></p>
+				</div>
+				<div class="faq-item">
+					<h3><?php esc_html_e( 'Oração, Liturgia e Vida Interior', 'bronzepodcast' ); ?></h3>
+					<p><?php esc_html_e( 'A espiritualidade e o recolhimento cristão: #69 (O Sentido do Sagrado na Santa Missa e Liturgia Tradicional), #47 (O Silêncio e a busca de Deus no mundo moderno), #20 (O Santo Rosário como arma invencível) e B04 (A Renúncia e a oração interior).', 'bronzepodcast' ); ?></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- Chamada de subscrição -->
 	<section class="podcast-cta section-pad">
 		<div class="content-shell podcast-cta__inner">
