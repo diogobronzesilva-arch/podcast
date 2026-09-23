@@ -320,39 +320,64 @@ function bronzepodcast_get_all_episodes( $limit = -1 ) {
 		array(
 			'post_type'      => 'podcast_episode',
 			'post_status'    => 'publish',
-			'posts_per_page' => $limit,
+			'posts_per_page' => -1,
 			'orderby'        => 'date',
 			'order'          => 'DESC',
 		)
 	);
 
+	$episodes = array();
+	$seen_ids = array();
+
 	if ( ! empty( $posts ) ) {
-		$episodes = array();
 		foreach ( $posts as $p ) {
 			$yt_url = get_post_meta( $p->ID, '_podcast_youtube', true );
 			$sp_url = get_post_meta( $p->ID, '_podcast_spotify', true );
 			$code   = get_post_meta( $p->ID, '_podcast_code', true );
 			$conc   = get_post_meta( $p->ID, '_podcast_concept', true );
 			$desc   = has_excerpt( $p ) ? get_the_excerpt( $p ) : wp_strip_all_tags( $p->post_content );
+			$yt_id  = bronzepodcast_extract_youtube_id( $yt_url );
+
+			if ( ! empty( $yt_id ) ) {
+				$seen_ids[ $yt_id ] = true;
+			}
+
+			// Validar se o URL do Spotify é para o episódio individual
+			$has_valid_spotify = ! empty( $sp_url ) && ( strpos( $sp_url, '/episode/' ) !== false || strpos( $sp_url, 'spotify:episode:' ) !== false );
 
 			$episodes[] = array(
-				'id'      => bronzepodcast_extract_youtube_id( $yt_url ),
+				'id'      => $yt_id,
 				'code'    => ! empty( $code ) ? $code : 'B' . str_pad( $p->ID, 2, '0', STR_PAD_LEFT ),
 				'concept' => ! empty( $conc ) ? $conc : 'Conversas',
 				'title'   => get_the_title( $p ),
 				'desc'    => $desc,
 				'youtube' => ! empty( $yt_url ) ? $yt_url : 'https://www.youtube.com/@bronzepodcast',
-				'spotify' => ! empty( $sp_url ) ? $sp_url : 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
+				'spotify' => $has_valid_spotify ? $sp_url : '',
+				'is_cpt'  => true,
 			);
 		}
-		return $episodes;
 	}
 
+	// Integrar catálogo curado histórico preservando episódios que ainda não foram migrados para o CPT
 	$defaults = bronzepodcast_get_curated_default_episodes();
-	if ( $limit > 0 && count( $defaults ) > $limit ) {
-		return array_slice( $defaults, 0, $limit );
+	foreach ( $defaults as $def ) {
+		$def_id = ! empty( $def['id'] ) ? $def['id'] : '';
+		if ( ! empty( $def_id ) && isset( $seen_ids[ $def_id ] ) ) {
+			continue;
+		}
+		// Se o link do Spotify for genérico do programa, não exibir no cartão individual para não induzir em erro
+		if ( ! empty( $def['spotify'] ) && strpos( $def['spotify'], '/show/' ) !== false ) {
+			$def['spotify'] = '';
+		}
+		$def['is_cpt'] = false;
+		$episodes[]    = $def;
 	}
-	return $defaults;
+
+	if ( $limit > 0 && count( $episodes ) > $limit ) {
+		return array_slice( $episodes, 0, $limit );
+	}
+
+	return $episodes;
 }
 
 /**
@@ -379,24 +404,36 @@ function bronzepodcast_get_featured_episode() {
 		$code   = get_post_meta( $p->ID, '_podcast_code', true );
 		$conc   = get_post_meta( $p->ID, '_podcast_concept', true );
 		$desc   = has_excerpt( $p ) ? get_the_excerpt( $p ) : wp_strip_all_tags( $p->post_content );
+		$has_valid_spotify = ! empty( $sp_url ) && ( strpos( $sp_url, '/episode/' ) !== false || strpos( $sp_url, 'spotify:episode:' ) !== false );
 
 		return array(
-			'id'      => bronzepodcast_extract_youtube_id( $yt_url ),
-			'code'    => ! empty( $code ) ? $code : 'Destaque',
-			'concept' => ! empty( $conc ) ? $conc : 'Em Destaque',
-			'title'   => get_the_title( $p ),
-			'desc'    => $desc,
-			'youtube' => ! empty( $yt_url ) ? $yt_url : 'https://www.youtube.com/@bronzepodcast',
-			'spotify' => ! empty( $sp_url ) ? $sp_url : 'https://open.spotify.com/show/5Tp4o8Jrggk4CpSwjiQSOg',
+			'id'          => bronzepodcast_extract_youtube_id( $yt_url ),
+			'code'        => ! empty( $code ) ? $code : 'Destaque',
+			'concept'     => ! empty( $conc ) ? $conc : 'Em Destaque',
+			'title'       => get_the_title( $p ),
+			'desc'        => $desc,
+			'youtube'     => ! empty( $yt_url ) ? $yt_url : 'https://www.youtube.com/@bronzepodcast',
+			'spotify'     => $has_valid_spotify ? $sp_url : '',
+			'badge_title' => __( 'Em Destaque', 'bronzepodcast' ),
+			'is_featured' => true,
 		);
 	}
 
-	// Se não houver explicitamente marcado, tentar o mais recente
-	$latest = bronzepodcast_get_all_episodes( 1 );
-	if ( ! empty( $latest ) ) {
-		return $latest[0];
+	// Se não houver explicitamente marcado, devolver o mais recente da lista unificada
+	$all = bronzepodcast_get_all_episodes( 1 );
+	if ( ! empty( $all ) ) {
+		$featured = $all[0];
+		$featured['badge_title'] = __( 'Último Episódio', 'bronzepodcast' );
+		$featured['is_featured'] = false;
+		return $featured;
 	}
 
 	$defaults = bronzepodcast_get_curated_default_episodes();
-	return $defaults[0];
+	$first    = $defaults[0];
+	$first['badge_title'] = __( 'Último Episódio', 'bronzepodcast' );
+	$first['is_featured'] = false;
+	if ( ! empty( $first['spotify'] ) && strpos( $first['spotify'], '/show/' ) !== false ) {
+		$first['spotify'] = '';
+	}
+	return $first;
 }

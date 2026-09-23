@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BRONZEPODCAST_VERSION', '1.3.0' );
+define( 'BRONZEPODCAST_VERSION', '1.3.1' );
 
 require_once get_template_directory() . '/inc/site-setup.php';
 require_once get_template_directory() . '/inc/contact-form.php';
@@ -747,7 +747,7 @@ function bronzepodcast_output_sitemap() {
 		),
 	);
 
-	foreach ( array( 'page', 'post', 'product' ) as $post_type ) {
+	foreach ( array( 'page', 'post', 'product', 'podcast_episode' ) as $post_type ) {
 		$posts = get_posts(
 			array(
 				'post_type'      => $post_type,
@@ -761,6 +761,21 @@ function bronzepodcast_output_sitemap() {
 		foreach ( $posts as $post ) {
 			if ( 'shop' === $post->post_name ) {
 				continue;
+			}
+			// Excluir páginas transacionais e de sistema do sitemap público
+			if ( 'page' === $post_type ) {
+				$excluded_slugs = array( 'carrinho', 'cart', 'checkout', 'finalizar-compra', 'minha-conta', 'my-account' );
+				if ( in_array( $post->post_name, $excluded_slugs, true ) ) {
+					continue;
+				}
+				if ( function_exists( 'wc_get_page_id' ) ) {
+					$wc_cart_id     = wc_get_page_id( 'cart' );
+					$wc_checkout_id = wc_get_page_id( 'checkout' );
+					$wc_myacct_id   = wc_get_page_id( 'myaccount' );
+					if ( in_array( $post->ID, array( $wc_cart_id, $wc_checkout_id, $wc_myacct_id ), true ) ) {
+						continue;
+					}
+				}
 			}
 			$items[] = array(
 				'loc'     => get_permalink( $post ),
@@ -812,6 +827,31 @@ function bronzepodcast_output_sitemap() {
 	exit;
 }
 add_action( 'template_redirect', 'bronzepodcast_output_sitemap', 0 );
+
+/**
+ * Endpoint nativo do tema para servir o /llms.txt com cabeçalhos adequados.
+ */
+function bronzepodcast_output_llms_txt() {
+	if ( is_admin() || ! isset( $_SERVER['REQUEST_URI'] ) ) {
+		return;
+	}
+
+	$path = wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH );
+	if ( '/llms.txt' !== untrailingslashit( $path ) ) {
+		return;
+	}
+
+	$file = get_template_directory() . '/llms.txt';
+	if ( file_exists( $file ) ) {
+		status_header( 200 );
+		header( 'Content-Type: text/plain; charset=UTF-8' );
+		header( 'X-Robots-Tag: all' );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo file_get_contents( $file );
+		exit;
+	}
+}
+add_action( 'template_redirect', 'bronzepodcast_output_llms_txt', 0 );
 
 /**
  * Configura o robots.txt do WordPress para motores de busca e crawlers de IA (AEO/GEO),
@@ -1047,13 +1087,18 @@ function bronzepodcast_translate_woocommerce_strings( $translated_text, $text, $
 	if ( 'woocommerce' === $domain || 'bronzepodcast' === $domain ) {
 		switch ( $text ) {
 			case 'Weight':
+			case 'weight':
 				return 'Peso';
 			case 'Dimensions':
+			case 'dimensions':
 				return 'Dimensões';
 			case 'Reviews':
 				return 'Avaliações';
 			case 'Reviews (%d)':
 				return 'Avaliações (%d)';
+			case 'There are no reviews yet.':
+			case 'There are no reviews yet':
+				return 'Ainda não existem avaliações.';
 			case 'Add a review':
 				return 'Adicionar uma avaliação';
 			case 'Be the first to review &ldquo;%s&rdquo;':
@@ -1064,6 +1109,10 @@ function bronzepodcast_translate_woocommerce_strings( $translated_text, $text, $
 				return 'A tua avaliação';
 			case 'Submit':
 				return 'Submeter';
+			case 'Name':
+				return 'Nome';
+			case 'Email':
+				return 'E-mail';
 			case 'Related products':
 				return 'Peças relacionadas';
 			case 'Description':

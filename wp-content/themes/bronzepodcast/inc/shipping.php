@@ -30,6 +30,17 @@ function bronzepodcast_calculate_weight_shipping( $rates, $package ) {
 		'VA', 'NL', 'IE', 'LU',
 	);
 
+	$postcode = isset( $package['destination']['postcode'] ) ? trim( (string) $package['destination']['postcode'] ) : '';
+	$state    = isset( $package['destination']['state'] ) ? trim( (string) $package['destination']['state'] ) : '';
+	$is_portugal_islands = false;
+
+	if ( 'PT' === $destination_country ) {
+		// Açores e Madeira: códigos postais iniciados por 9 ou códigos de distrito específicos
+		if ( preg_match( '/^9\d{3}/', $postcode ) || in_array( strtoupper( $state ), array( '20', '30', 'AC', 'MA', 'ACORES', 'MADEIRA' ), true ) ) {
+			$is_portugal_islands = true;
+		}
+	}
+
 	// Cálculo do peso total do carrinho convertido para quilogramas (kg).
 	$total_weight = 0;
 	if ( isset( $package['contents'] ) && is_array( $package['contents'] ) ) {
@@ -37,12 +48,16 @@ function bronzepodcast_calculate_weight_shipping( $rates, $package ) {
 			if ( isset( $values['data'] ) && is_object( $values['data'] ) ) {
 				$raw_weight = (float) $values['data']->get_weight();
 				if ( $raw_weight <= 0 ) {
-					// Se a peça ainda não tiver peso no catálogo, assumimos 150g como valor base de segurança.
-					$item_weight = 0.15;
+					// Fallback seguro: se a peça não tiver peso configurado, assumimos 300g como base de segurança
+					$item_weight = 0.30;
+					$product_id  = isset( $values['product_id'] ) ? absint( $values['product_id'] ) : 0;
+					if ( defined( 'WP_DEBUG' ) && WP_DEBUG && function_exists( 'error_log' ) ) {
+						error_log( sprintf( 'BronzePodcast Shipping: Produto ID %d sem peso registado. Usado fallback de 0.30 kg.', $product_id ) );
+					}
 				} elseif ( function_exists( 'wc_get_weight' ) ) {
 					$item_weight = (float) wc_get_weight( $raw_weight, 'kg' );
 				} else {
-					$unit = get_option( 'woocommerce_weight_unit', 'kg' );
+					$unit        = get_option( 'woocommerce_weight_unit', 'kg' );
 					$item_weight = ( 'g' === $unit ) ? ( $raw_weight / 1000 ) : $raw_weight;
 				}
 
@@ -53,14 +68,19 @@ function bronzepodcast_calculate_weight_shipping( $rates, $package ) {
 	}
 
 	if ( $total_weight <= 0 ) {
-		$total_weight = 0.2;
+		$total_weight = 0.3;
 	}
 
 	$cost  = 0;
 	$label = '';
 
 	if ( 'PT' === $destination_country ) {
-		$label = __( 'CTT Expresso (Portugal)', 'bronzepodcast' );
+		if ( $is_portugal_islands ) {
+			$label = __( 'CTT Expresso (Açores e Madeira)', 'bronzepodcast' );
+		} else {
+			$label = __( 'CTT Expresso (Portugal Continental)', 'bronzepodcast' );
+		}
+
 		if ( $total_weight <= 1.0 ) {
 			$cost = 3.99;
 		} elseif ( $total_weight <= 5.0 ) {
@@ -105,12 +125,15 @@ function bronzepodcast_calculate_weight_shipping( $rates, $package ) {
 			'bronzepodcast_shipping'
 		);
 
-		// Preservar métodos especiais como Portes Grátis ou Levantamento se existirem
+		// Preservar métodos especiais (portes grátis, levantamento) ou transportadoras especializadas
 		$output_rates = array();
 		if ( is_array( $rates ) ) {
 			foreach ( $rates as $key => $rate ) {
 				$method_id = ( is_object( $rate ) && method_exists( $rate, 'get_method_id' ) ) ? $rate->get_method_id() : '';
 				if ( in_array( $method_id, array( 'free_shipping', 'local_pickup' ), true ) || ( is_object( $rate ) && (float) $rate->get_cost() === 0.0 ) ) {
+					$output_rates[ $key ] = $rate;
+				} elseif ( ! empty( $method_id ) && ! in_array( $method_id, array( 'flat_rate' ), true ) ) {
+					// Preservar transportadoras ou métodos de plugins externos se configurados
 					$output_rates[ $key ] = $rate;
 				}
 			}
@@ -120,6 +143,9 @@ function bronzepodcast_calculate_weight_shipping( $rates, $package ) {
 
 		return $output_rates;
 	} catch ( Throwable $e ) {
+		if ( function_exists( 'error_log' ) ) {
+			error_log( 'BronzePodcast shipping calculation error: ' . $e->getMessage() );
+		}
 		return $rates;
 	}
 }

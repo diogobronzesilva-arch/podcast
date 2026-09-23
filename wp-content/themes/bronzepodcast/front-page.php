@@ -41,9 +41,9 @@ get_header();
 			<div class="section-heading section-heading--split">
 				<div>
 					<p class="eyebrow"><?php esc_html_e( 'Conversas & Transmissões', 'bronzepodcast' ); ?></p>
-					<h2 id="home-featured-title"><?php esc_html_e( 'Último Episódio', 'bronzepodcast' ); ?></h2>
+					<h2 id="home-featured-title"><?php echo esc_html( ! empty( $featured_episode['badge_title'] ) ? $featured_episode['badge_title'] : __( 'Último Episódio', 'bronzepodcast' ) ); ?></h2>
 				</div>
-				<p class="section-heading__lede"><?php esc_html_e( 'Conversas sobre a Fé Católica, a vida em família e os problemas do nosso tempo.', 'bronzepodcast' ); ?></p>
+				<p class="section-heading__lede"><?php esc_html_e( 'Conversas sobre a Fé Católica Tradicional, a família e Portugal. Episódios completos no YouTube e Spotify.', 'bronzepodcast' ); ?></p>
 			</div>
 
 			<?php if ( ! empty( $featured_episode ) ) : ?>

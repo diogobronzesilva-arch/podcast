@@ -54,7 +54,7 @@ if ( ! empty( $all_episodes ) ) {
 		<div class="content-shell content-shell--wide">
 			<div class="section-heading">
 				<p class="eyebrow"><?php esc_html_e( 'Em Destaque', 'bronzepodcast' ); ?></p>
-				<h2 id="featured-episode-title"><?php esc_html_e( 'Último Episódio', 'bronzepodcast' ); ?></h2>
+				<h2 id="featured-episode-title"><?php echo esc_html( ! empty( $featured_episode['badge_title'] ) ? $featured_episode['badge_title'] : __( 'Último Episódio', 'bronzepodcast' ) ); ?></h2>
 			</div>
 
 			<div class="podcast-featured__card">

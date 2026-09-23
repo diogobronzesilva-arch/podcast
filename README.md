@@ -2,14 +2,14 @@
 
 Tema personalizado para reconstruir `bronzepodcast.com` em código, com o catálogo, carrinho e checkout geridos pelo WooCommerce e pagamentos processados pelo Stripe.
 
-## Estado atual (Versão 1.3.0 em Produção)
+## Estado atual (Versão 1.3.1 — Pronta para Publicação em Produção)
 
-- **Website Oficial:** Ativo e público em `bronzepodcast.com`.
-- **Identidade e Tipografia:** Harmonização tipográfica completa com *Cinzel*, *Cormorant Garamond* e *Manrope*, com o Selo Numismático oficial da Ordem de Cristo em alta resolução.
-- **Episódios Dinâmicos:** Suporte nativo a Custom Post Type (`podcast_episode`) com painel de gestão para YouTube e Spotify, mantendo fallback de segurança automático.
-- **Loja WooCommerce:** Loja aberta com catálogo de 44+ produtos devocionais e literários, checkout integrado via Stripe Elements em dark mode.
-- **Portes e Envios:** Escalões por peso (CTT Expresso Portugal e Internacional) com suporte nativo a portes grátis e conversão automática de unidades.
-- **SEO & AEO:** Sitemap XML próprio, framework de Answer Engine Optimization (AEO/GEO), schema markup PodcastSeries/FAQPage e robots.txt otimizado para motores de IA.
+- **Website Oficial:** Ativo e público em `bronzepodcast.com` (servidor requer upload do pacote v1.3.1).
+- **Identidade e Tipografia:** Harmonização tipográfica completa com *Cinzel*, *Cormorant Garamond* e *Manrope*, com logótipo oficial otimizado em alta definição e suporte a WebP prioritário.
+- **Episódios Dinâmicos:** Suporte a Custom Post Type (`podcast_episode`) com união automática e deduplicação do catálogo histórico de 13 episódios, links individuais do Spotify e diferenciação entre "Último Episódio" e "Em Destaque".
+- **Loja WooCommerce:** Loja aberta com catálogo de 44+ produtos devocionais e literários, checkout integrado via Stripe Elements em dark mode e traduções completas de avaliações/atributos.
+- **Portes e Envios:** Escalões por peso (CTT Expresso Portugal Continental, Açores/Madeira e Internacional) com fallback avisado de peso, preservação de transportadoras e registo de diagnósticos.
+- **SEO & AEO:** Sitemap XML com inclusão de episódios e exclusão de checkout, endpoint nativo para `/llms.txt` e robots.txt configurado para motores de busca e crawlers de IA.
 - **Redirecionamentos:** Mapeamento 301 estruturado para artigos históricos do blog antigo e produtos.
 
 ## Endereços preservados

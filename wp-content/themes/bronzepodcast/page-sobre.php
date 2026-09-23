@@ -51,11 +51,11 @@ get_header();
 			<div class="faq-grid">
 				<div class="faq-item">
 					<h3><?php esc_html_e( 'O que é o Bronze Podcast?', 'bronzepodcast' ); ?></h3>
-					<p><?php esc_html_e( 'O Bronze Podcast é um projeto independente de conversas em profundidade fundado em 2020 por Diogo Bronze (Diogo Silva). Tem como missão a difusão da Fé Católica Tradicional, da moral cristã, da doutrina perene e da reflexão histórica sobre a identidade e a restauração de Portugal.', 'bronzepodcast' ); ?></p>
+					<p><?php esc_html_e( 'O Bronze Podcast é um projeto independente de conversas em profundidade fundado em 2020 por Diogo Bronze. Tem como missão a difusão da Fé Católica Tradicional, da moral cristã, da doutrina perene e da reflexão histórica sobre a identidade e a restauração de Portugal.', 'bronzepodcast' ); ?></p>
 				</div>
 				<div class="faq-item">
 					<h3><?php esc_html_e( 'Quem é o autor e anfitrião do podcast?', 'bronzepodcast' ); ?></h3>
-					<p><?php esc_html_e( 'O podcast é idealizado e conduzido por Diogo Bronze (Diogo Silva), profissional na área de tecnologia e vendas empresariais, fotógrafo sob a assinatura Bronze Art e defensor da restauração da cultura católica e do pensamento tradicional português.', 'bronzepodcast' ); ?></p>
+					<p><?php esc_html_e( 'O podcast é idealizado e conduzido por Diogo Bronze, com foco na defesa da verdade doutrinal, na fidelidade à Tradição da Igreja e na restauração da cultura católica e do pensamento tradicional português.', 'bronzepodcast' ); ?></p>
 				</div>
 				<div class="faq-item">
 					<h3><?php esc_html_e( 'Quais são os temas e eixos fundamentais abordados?', 'bronzepodcast' ); ?></h3>
@@ -63,7 +63,7 @@ get_header();
 				</div>
 				<div class="faq-item">
 					<h3><?php esc_html_e( 'Onde é possível acompanhar e ouvir os episódios?', 'bronzepodcast' ); ?></h3>
-					<p><?php esc_html_e( 'Todas as emissões completas em vídeo são transmitidas e arquivadas no canal oficial do YouTube (@bronzepodcast), com versões áudio disponíveis no Spotify e plataformas de podcast. As novidades e notas editoriais são também partilhadas na newsletter oficial.', 'bronzepodcast' ); ?></p>
+					<p><?php esc_html_e( 'Todas as transmissões completas em vídeo são disponibilizadas no canal oficial do YouTube (@bronzepodcast), com versões áudio disponíveis no Spotify e plataformas de podcast.', 'bronzepodcast' ); ?></p>
 				</div>
 				<div class="faq-item">
 					<h3><?php esc_html_e( 'O projeto tem loja oficial associada?', 'bronzepodcast' ); ?></h3>
