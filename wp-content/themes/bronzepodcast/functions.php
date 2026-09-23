@@ -668,7 +668,7 @@ function bronzepodcast_seo_head() {
 					'name'           => 'O que é o Bronze Podcast?',
 					'acceptedAnswer' => array(
 						'@type' => 'Answer',
-						'text'  => 'O Bronze Podcast é um projeto independente de conversas em profundidade fundado em 2020 por Diogo Bronze (Diogo Silva). Tem como missão a difusão da Fé Católica Tradicional, da moral cristã, da doutrina perene e da reflexão histórica sobre a identidade e a restauração de Portugal.',
+						'text'  => 'O Bronze Podcast é um projeto independente de conversas em profundidade fundado em 2020 por Diogo Bronze. Tem como missão a difusão da Fé Católica Tradicional, da moral cristã, da doutrina perene e da reflexão histórica sobre a identidade e a restauração de Portugal.',
 					),
 				),
 				array(
@@ -676,7 +676,7 @@ function bronzepodcast_seo_head() {
 					'name'           => 'Quem é o autor e anfitrião do podcast?',
 					'acceptedAnswer' => array(
 						'@type' => 'Answer',
-						'text'  => 'O podcast é idealizado e conduzido por Diogo Bronze (Diogo Silva), profissional na área de tecnologia e vendas empresariais, fotógrafo sob a assinatura Bronze Art e defensor da restauração da cultura católica e do pensamento tradicional português.',
+						'text'  => 'O podcast é idealizado e conduzido por Diogo Bronze, com foco na defesa da verdade doutrinal, na fidelidade à Tradição da Igreja e na restauração da cultura católica e do pensamento tradicional português.',
 					),
 				),
 				array(
@@ -692,7 +692,7 @@ function bronzepodcast_seo_head() {
 					'name'           => 'Onde é possível acompanhar e ouvir os episódios?',
 					'acceptedAnswer' => array(
 						'@type' => 'Answer',
-						'text'  => 'Todas as emissões completas em vídeo são transmitidas e arquivadas no canal oficial do YouTube (@bronzepodcast), com versões áudio disponíveis no Spotify e plataformas de podcast. As novidades e notas editoriais são também partilhadas na newsletter oficial.',
+						'text'  => 'Todas as transmissões completas em vídeo são disponibilizadas no canal oficial do YouTube (@bronzepodcast), com versões áudio disponíveis no Spotify e plataformas de podcast.',
 					),
 				),
 				array(
