@@ -11,6 +11,7 @@ Tema personalizado para reconstruir `bronzepodcast.com` em código, com o catál
 - **Portes e Envios:** Escalões por peso (CTT Expresso Portugal Continental, Açores/Madeira e Internacional) com fallback avisado de peso, preservação de transportadoras e registo de diagnósticos.
 - **SEO & AEO:** Sitemap XML com inclusão de episódios e exclusão de checkout, endpoint nativo para `/llms.txt` e robots.txt configurado para motores de busca e crawlers de IA.
 - **Redirecionamentos:** Mapeamento 301 estruturado para artigos históricos do blog antigo e produtos.
+- Email do domínio atual encaminhado pelo Cloudflare e enviado pelo Resend; detalhes em [`docs/email-e-dns.md`](docs/email-e-dns.md).
 
 ## Endereços preservados
 
@@ -27,6 +28,7 @@ O inventário completo dos endereços públicos encontra-se em [`docs/inventario
 - [`docs/release-workflow.md`](docs/release-workflow.md): fonte oficial, testes, staging, backup, publicação e rollback.
 - [`docs/voz-e-copy.md`](docs/voz-e-copy.md): princípios de voz e decisões de copy para todas as páginas.
 - [`docs/roadmap.md`](docs/roadmap.md): objetivos de evolução, campanhas e automação.
+- [`docs/email-e-dns.md`](docs/email-e-dns.md): encaminhamento Cloudflare, envio WordPress/Resend e dependência da Titan.
 
 ## Próximas etapas operacionais
 
