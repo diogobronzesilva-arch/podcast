@@ -2,9 +2,10 @@
 
 Tema personalizado para reconstruir `bronzepodcast.com` em código, com o catálogo, carrinho e checkout geridos pelo WooCommerce e pagamentos processados pelo Stripe.
 
-## Estado atual (Versão 1.3.1 — Pronta para Publicação em Produção)
+## Estado atual
 
-- **Website Oficial:** Ativo e público em `bronzepodcast.com` (servidor requer upload do pacote v1.3.1).
+- **Website público:** `bronzepodcast.com` está ativo.
+- **Tema 1.3.1:** implementação pronta no GitHub; a instalação de produção ainda requer a atualização do pacote e a respetiva validação.
 - **Identidade e Tipografia:** Harmonização tipográfica completa com *Cinzel*, *Cormorant Garamond* e *Manrope*, com logótipo oficial otimizado em alta definição e suporte a WebP prioritário.
 - **Episódios Dinâmicos:** Suporte a Custom Post Type (`podcast_episode`) com união automática e deduplicação do catálogo histórico de 13 episódios, links individuais do Spotify e diferenciação entre "Último Episódio" e "Em Destaque".
 - **Loja WooCommerce:** Loja aberta com catálogo de 44+ produtos devocionais e literários, checkout integrado via Stripe Elements em dark mode e traduções completas de avaliações/atributos.
