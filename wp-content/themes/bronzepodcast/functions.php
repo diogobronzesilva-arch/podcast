@@ -938,17 +938,17 @@ function bronzepodcast_handle_legacy_redirects() {
 		exit;
 	}
 
-	// Redirecionamento de artigos do blog antigo para o site pessoal
-	$legacy_blog_articles = array(
-		'/deus-e-o-belo',
-		'/a-impossibilidade-conservador-nos-costumes-e-liberal-na-economia',
-		'/rumo-ao-deserto',
-		'/blog-list',
-		'/blog',
+	// Redirecionamento de artigos do blog antigo para as notas correspondentes no site pessoal
+	$legacy_blog_redirects = array(
+		'/deus-e-o-belo'                                                    => 'https://diogobronzesilva.com/notes/deus-e-o-belo/',
+		'/a-impossibilidade-conservador-nos-costumes-e-liberal-na-economia' => 'https://diogobronzesilva.com/notes/a-impossibilidade-de-separar-costumes-e-economia/',
+		'/rumo-ao-deserto'                                                  => 'https://diogobronzesilva.com/notes/rumo-ao-deserto/',
+		'/blog-list'                                                        => 'https://diogobronzesilva.com/notes/',
+		'/blog'                                                             => 'https://diogobronzesilva.com/notes/',
 	);
 
-	if ( in_array( $path, $legacy_blog_articles, true ) ) {
-		wp_redirect( 'https://diogobronzesilva.com/notes/', 301 );
+	if ( isset( $legacy_blog_redirects[ $path ] ) ) {
+		wp_redirect( $legacy_blog_redirects[ $path ], 301 );
 		exit;
 	}
 
@@ -1704,7 +1704,12 @@ function bronzepodcast_external_menu_links( $atts, $item, $args ) {
 	}
 	return $atts;
 }
-add_filter( 'nav_menu_link_attributes', 'bronzepodcast_external_menu_links', 10, 3 );
-
-
-
+/**
+ * Traduz os atributos aria-label e mensagens de sucesso dos botoes da loja para portugues.
+ */
+function bronzepodcast_filter_loop_add_to_cart_link( $html, $product, $args ) {
+	$html = str_replace( 'Add to cart:', 'Comprar:', $html );
+	$html = str_replace( 'has been added to your cart', 'foi adicionado ao seu carrinho', $html );
+	return $html;
+}
+add_filter( 'woocommerce_loop_add_to_cart_link', 'bronzepodcast_filter_loop_add_to_cart_link', 10, 3 );
